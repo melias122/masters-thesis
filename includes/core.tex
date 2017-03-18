@@ -1,105 +1,75 @@
-\section{Úkážka glossaries}
-\noindent Verzia FEIstyle 1.5 používa glossary\footnote{\url{https://www.ctan.org/pkg/glossaries?lang=en}} balík.
-\acrfull{cdma} je dlhá skratka naopak \acrshort{gsm} je skratka v krátkej forme.
-\section{Recitácia}
-Citujem všetky zdroje v \textbf{bibliography.bib}, \cite{t00, t01, t02, t03, kniha, kniha2, kniha3, small, big, cs, koll, kap, tug, knuth, zbornik, prispevok}. \newline Good luck.
-\section{Možnosti anonymizácie}
-\noindent Anonymizácia znamená zmena alebo úprava údajov tak, aby sa podľa nich nedala jednoznačne určiť osoba, ktorej tieto údaje patria \cite{t01}. Existuje niekoľko spôsobov, ktorými môžeme dosiahnuť rôznu úroveň anonymizácie na internete: od mazania cookies súborov po ukončení prehliadania webových stránok až po používanie operačných systémov, ktoré sú na anonymite založené; od bezplatných možností až po komerčné verzie.  
-\newline Nasleduje priblíženie niektorých možnosti anonymizácie.
+\section{Klasické šifry}
+V tejto kapitole sa budeme zaoberať históriou a stručným prehľadom klasických šifier.
+Spomenieme si aj niektoré základné útoky na klasické šifry. 
 
-\subsection{Súkromné prehliadanie}
-\noindent Najpoužívanejšie internetové prehliadače súčasnosti majú v sebe zabudovanú funkcionalitu, ktorá dokáže čiastočne anonymizovať prístup na internet. Táto funkcionalita blokuje ukladanie navštívených stránok do histórie a nezaznamenáva súbory, ktoré sa stiahnu z~internetu. \acrshort{sw} a \acrlong{hw} sú skratky.
+\subsection{História}
+História klasických šifier a utajovania písomného textu je pravdepodobne tak stará ako samotné písmo.
+Písmo, v podobe akej ho poznáme a používame dnes, pravdepobne pochádza asi spred 3000 rokov pred Kristom a za jeho objaviteľov sa považujú
+Féničania.
+V niektorých prípadoch predstavovalo už použitie písma utajenie samotného textu.
+Príkladom môžu byť Egypstké hieroglyfy alebo klinové písmo používané v Mezopotámii.
+Iným príkladom môžu byť semitské jazyky, ktoré sú charekteristické používaním iba spoluhlások bez použítia samohlások,
+pretože tie zaviedli až Aremejci a po nich následné Gréci aby pomocou nich boli schopný rozlíšiť jazyky \cite{ks}.
+Aj diakritika ako taká má schopnosť rozlišovať významy slov, čo si ale až do 15.storočia nikto nevšímal,
+až pokiaľ ju Arabi nezačali používať pri kryptoanalýze rôznych šifier.
 
-\begin{table}[!htbp]
-\caption{Moduly a ich funkcie pri anonymizácii}
-\label{modulyVlastnosti}
-\begin{center}
-\begin{tabular}{p{4cm}|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
-& \multicolumn{14}{c}%
-	 {\textbf{Funkcia}}\\ \hline
-&&&& & &\multicolumn{8}{c}%
-	 {Modifikácia}\\ 
-\textbf{Modul} &\begin{sideways} zobrazenie hlavičky \end{sideways} &\begin{sideways} blokovanie skriptov \end{sideways} &\begin{sideways} zmena IP \end{sideways} & \begin{sideways} zmena lokalizácie \end{sideways} & \begin{sideways} zmazanie/blokovanie cookies \end{sideways} & \begin{sideways} blokovanie trackerov \end{sideways}  & \begin{sideways} popis \end{sideways} & \begin{sideways}používateľský agent\end{sideways} & \begin{sideways} kódové označenie prehliadača \end{sideways} & \begin{sideways} názov prehliadača \end{sideways} & \begin{sideways} verzia prehliadača \end{sideways} & \begin{sideways} platforma \end{sideways} & \begin{sideways} výrobca prehliadača \end{sideways} & \begin{sideways} označenie výrobcu prehliadača \end{sideways} \\ \hline
-User agent switcher & & & & & &  & X & X & X & X & X & X & X & X  \\ \hline
-Ghostery &  && & & X & X &  &  & & & & & & \\  \hline
-Better privacy && &  & & X &  &  &  & & & & & & \\  \hline
-Anonymox &  && X & X & X &  & X & X & & & & & & \\  \hline
-Modify headers & & &  &  & X &  &  & X &  &  &  & & &  \\  \hline
-Request policy & & &  &  & & X  &  &  &  &  &  & & &   \\  \hline
-Live HTTP headers & X& &  &  & &  &  &  &  &  &  & & &   \\  \hline
-User agent awitcher for chrome & & &  &  & &  & X & X &  &  &  & & &   \\  \hline
-Header hacker & & &  &  & &  & X & X & X & X & X & X & X & X    \\  \hline
-Mod header & & &  &  & &  & X & X & X & X & X & X & X & X    \\  \hline
-Script no & &X &  &  & &  &  &  &  &  &  &  &  &     \\  \hline
-No script & &X &  &  & &  &  &  &  &  &  &  &  &     \\  \hline
-Proxify it & & &X  & X & &  &  &  &  &  &  &  &  &     \\  \hline
-I'm not here & & &  & X & &  &  &  &  &  &  &  &  &     \\  \hline
-Get anonymous personal edition & &X &X &X &X&X &  &  &  &  &  &  &  &     \\  \hline
-Anonymous browsing toolbar & & & X & X & &  &  &  &  &  &  &  &  &     \\  \hline
-Easy hide your IP and surf anonymously & & & X & X& &  &  & X & X & X & X &  &  &     \\  \hline
-\end{tabular}
-\end{center}
-\end{table}
+Z historického hľadiska nie je možné presne zoradiť ako jednotlivé šifry vznikali, pretože súčasne vznikali na viacerých miestach sveta.
+Komunikácia a s ňou spojené sírenie informácii nebolo také rýchle ako dnes, až do roku 1440 keď Johan Guttenberg vynašiel kníhtlač,
+čo zjednodušilo výmenu a uchovávanie informácii. (TODO: pridat utajovanie informacie)
 
-\subsection{Anonymná sieť}
-\noindent Anonymná sieť je sieť serverov, medzi ktorými dáta prechádzajú šifrované. V anonymných sieťach dáta prechádzajú z počítača používateľa, odkiaľ bola požiadavka poslaná, cez viaceré proxy smerovače, z ktorých každý správu doplní o smerovanie a zašifruje vlastným kľúčom. Cesta od ...
+Ku kryptografii ako aj k rôznym iným vedným disciplínam prispelo v minulosti staré Grécko.
+Jedným z najvýznamnejsích príspevkov starých Grékov bolo široké rozšírenie abecedy a písomného prejavu.
+Gréci písmo prebrali od Feníčanov, ktorí na rozdiel od Egypťanov používali jednoduchšie písmo.
 
+V Európe vďaka rozšíreniu abecedy začali vznikať aj prvé šifry, medzi ktoré patrí napríklad Cézarova šifra, ktorá vznikla v Rímskej ríši.
+Iným príkladom môže byť transpozičná šifra skytalé, ktorá bola používaná v Sparte.
 
-\subsection{Funkcionalita}
-\noindent  Rozšírenie tiež okrem splnenia špecifikácie malo pre prehľadnosť a overenie funkčnosti zobrazovať údaje, ktoré boli na server odoslané. Zoznam údajov odoslaných na server, sa mal ukladať do krátkodobej histórie, aby nemal používateľ k dispozícií len najnovšie údaje, ale aj údaje odoslané v nejakom časovom období. Nejaky listing z priloh \ref{lst:sublime}.
+Pád Rímskej ríše spôsobil úpadok kryptografie, ktorý trval až do obdobia stredoveku. Typickým znakom kryptografie v tomto období bolo
+napríklad písanie odzadu, alebo vertikalne, používanie cudzích jazykov, alebo vynechávanie samohlások \cite{ks}.
 
-\subsubsection{Funkcionalita2}
-\noindent Samozrejmosťou bolo nastavenie zapnutia rozšírenia pri štarte, prípadne interval zmeny odosielaných údajov.
+V stredoveku, kvôli bojom medzi pápežmi Ríma a Avignonu, bola kryptografia zdokolanená a začali sa používať rôzne kódy a nomenklátory.
+Ich charakteristickým znakom bolo zamienanie písmien alebo nahradzovanie mien a titulov osôb v správach.
+V tomto období zabezpečovanie utajenia správ pokročilo až na takú úroveň, že na doručovanie správ boli použitý špeciálne vycvičení kurieri.
 
-\subsection{Vzhľad}
-\noindent Dôležitou požiadavkou kladenou na rozšírenie bolo príjemné používateľské rozhranie. Z~tohto dôvodu malo rozšírenie obsahovať zoznam modifikovaných vlastností a tlačidlo pre prístup k nastaveniam rozšírenia v jednoduchej a praktickej forme. Predpokladaný vzhľad je zobrazený na obrázku č. \ref{vzhladobr}.
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=8cm]{img/vzhlad.png}
-  \caption{Predpokladaný vzhľad rozšírenia.}
-  \label{vzhladobr}
-\end{figure}	 
-\noindent Dôležitou požiadavkou kladenou na rozšírenie bolo príjemné používateľské rozhranie.\cite{t00} Z~tohto dôvodu malo rozšírenie obsahovať zoznam modifikovaných vlastností a tlačidlo pre prístup k nastaveniam rozšírenia v jednoduchej a praktickej forme. Predpokladaný vzhľad je zobrazený na obrázku č. \ref{vzhladobr}.
+V prvej polovici 20. storočia ľudia, ktorí pracovali v oblasti utajovanej komunikácie verili, že na to aby bola zabezpečená utajovaná komunikácia musí byť utajený kľúč a okrem neho aj šifrovací algoritmus. Toto ale odporovalo Kerckhoffovmu princípu, ktorý hovorí že: \textquote{Bezpečnosť šifrovacieho algoritmu musí závisieť výlučne na utajení kľúča a nie algoritmu}. Okrem toho sformuloval aj niekoľko požiadaviek na kryptografický systém, medzi ktoré patria:
+\begin{enumerate}
+\item systém musí byť teoreticky, alebo aspoň prakticky bezpečný
+\item narušenie systému nesmie priniesť tažkosti odosielatelovi a adresátovi
+\item kľúč musí byť ľahko zapametateľný a ľahko vymeniteľný
+\item zašifrovaná správa musí byť prenášateľná telegrafom
+\item šifrovacia pomôcka musí byť ľahko prenosná a ovládateľná jedinou osobou
+\item systém musí byť jednoduchý, bez dlhého zoznamu pravidiel, nevyžadujúci nadmerné sústredenie
+\end{enumerate}
+Tieto princípy sú popísané v pôvodnej publikácii od Kerckhoffa \cite{kerckhoff}.
 
-\begin{algorithm}
-\scriptsize
-\begin{algorithmic}
- \STATE <text>
- \IF{<condition>} \STATE {<text>} \ELSE \STATE{<text>} \ENDIF
- \IF{<condition>} \STATE {<text>} \ELSIF{<condition>} \STATE{<text>} \ENDIF
- \FOR{<condition>} \STATE {<text>} \ENDFOR
- \FOR{<condition> \TO <condition> } \STATE {<text>} \ENDFOR
- \FORALL{<condition>} \STATE{<text>} \ENDFOR
- \WHILE{<condition>} \STATE{<text>} \ENDWHILE
- \REPEAT \STATE{<text>} \UNTIL{<condition>}
- \LOOP \STATE{<text>} \ENDLOOP
- \REQUIRE <text>
- \ENSURE <text>
- \RETURN <text>
- \PRINT <text>
- \COMMENT{<text>}
- \AND, \OR, \XOR, \NOT, \TO, \TRUE, \FALSE
-\end{algorithmic}
-\caption{Ukážka príkazov pre algorithmic}  
-\label{alg:preview}  
-\end{algorithm}
+Existovala ale aj iná skupina vedcov, medzi ktorých patril aj Lester S. Hill, ktorý si uvedomoval že kryptológia je úzko spätá z matematikou.
+V roku 1941 si na Hillových prácach zakladal A. Adrian Albert, ktorý pochopil, že v šifrovaní je možné použiť viacero algebraických štruktúr.
+Neskôr toto všetko usporiadal a zdokonalil Claude E. Shannon, čo možno považovať za ukončenie éry klasických šifier \cite{ks}.
 
-\begin{lstlisting}[
-  caption={Ukážka algoritmu},
-  label={lst:main-c},
-  language=c
-]
-/* Hello World program */
+TODO: Mozno pridat/spomenut steganografiu.
 
-#include<stdio.h>
+\subsection{Charakteristika}
+Na rozdiel od moderných šifier, ktoré sa používajú dnes, sú tie klasické rozdielne v niektorých hlavných črtách.
+Môžeme spomenúť niekoľko:
+\begin{itemize}
+\item Šifrovanie a dešifrovanie klasickej šifry možno realizovať zväčša pomocou papiera a ceruzky alebo nejakej mechanickej pomôcky.
+\item V dnešnej dobe aj vďaka rozšírenému použitiu počítačov stratila väčšina týchto algoritmov svoj význam.
+\item Utajuje sa algoritmus a aj kľúč a neuplatňuje sa Kerckhoffov princíp.
+\item Na rozdiel od moderných šifier sa používajú malé abecedy.
+\item V klasických šifrách je otvorený text, zašifrovaný text a kľúč v abecede reálneho jazyka, pričom v moderných šifrách sa používa binárne kódovanie.
+\item Na klasické šifry sa zväčša dá použiť štatistická analýza. 
+\end{itemize}
+Z spomenutých charekteristík existujú aj výnimky. Napríklad pri Vigenerovej šifre sa algoritmus neutajoval. To platí aj pre Vernamovu šifru, ktorá okrem toho používa navyše binárne znaky. Vernamova šifra je perfektne bezpečná v podľa Shannonovej teórie \cite{ks}.
 
-struct cpu_info {
-    long unsigned utime, ntime, stime, itime;
-    long unsigned iowtime, irqtime, sirqtime;
-};
+Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
+\begin{itemize}
+\item Substitučné šifry
+\item Transpozičné šifry
+\item Homofónne šifry
+\item Sustitučno-permutačné šifry
+\end{itemize}
 
-main()
-{
-    printf("Hello World");
-}
-\end{lstlisting}
+\subsection{Útoky}
+TODO: ks 2.3
+\subsubsection{Bruteforce}
+b

@@ -1,10 +1,10 @@
-FILE = example
+FILE = diplomovka
 BUILD_DIR = .build
 
 LATEXMK_OPTIONS = -pdf -synctex=1 -output-directory=$(BUILD_DIR) -interaction=nonstopmode -silent
 LINE_WIDTH = error_line=240 half_error_line=160 max_print_line=240
 
-all: pdf
+all: clean pdf
 
 pdf:
 	$(LINE_WIDTH) latexmk $(LATEXMK_OPTIONS) $(FILE).tex

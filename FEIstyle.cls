@@ -53,9 +53,7 @@
 
 \usepackage[english,slovak]{babel}
 \usepackage[utf8]{inputenc}
-
-% you may use style=slovak in case you have up-to-date packages
-\usepackage[style=german]{csquotes}
+\usepackage[style=slovak]{csquotes}
 \usepackage[T1]{fontenc}
 
 % we should use ISO 690 & 690-2 http://www.fei.stuba.sk/sk/kniznica-fei/vzory-bibliografickych-odkazov-a-citovanie.html?page_id=1756 
@@ -82,12 +80,12 @@
 \usepackage{xstring}
 \usepackage{url}
 \usepackage{enumitem}
-\usepackage{caption}
-\usepackage{subcaption}
 \usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,hypertexnames=false,unicode]{hyperref}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[acronym,nopostdot,nogroupskip,nonumberlist]{glossaries}
+
+\addbibresource{includes/bibliography.bib}
 
 \newboolean{isThesis}
 
@@ -230,6 +228,7 @@
   captionpos=b % caption below text
 }
 
+% TODO: clean me up!!!!
 \IfEqCase*{\FEIenglish}{
     {0}{
         \addto\captionsslovak{\renewcommand{\figurename}{Obr\a'azok}}
@@ -616,17 +615,8 @@
 
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 
-% https://tex.stackexchange.com/questions/266591/printing-glossaries-with-long-styles-adds-to-the-tables-counter
-\newglossarystyle{FEIlong}{
-    \setglossarystyle{long}
-    \renewenvironment{theglossary}{
-      \begin{longtable*}{lp{\glsdescwidth}}
-    }
-    {\end{longtable*}}%
-}
-
 \newcommand\FEIglossaries[1]{
-    \setglossarystyle{FEIlong}
+    \setglossarystyle{long}
     \makeglossaries
     \input{#1}
     % \glsaddall
