@@ -15,7 +15,8 @@ až pokiaľ ju Arabi nezačali používať pri kryptoanalýze rôznych šifier.
 
 Z historického hľadiska nie je možné presne zoradiť ako jednotlivé šifry vznikali, pretože súčasne vznikali na viacerých miestach sveta.
 Komunikácia a s ňou spojené sírenie informácii nebolo také rýchle ako dnes, až do roku 1440 keď Johan Guttenberg vynašiel kníhtlač,
-čo zjednodušilo výmenu a uchovávanie informácii. (TODO: pridať utajovanie informácie)
+čo zjednodušilo výmenu a uchovávanie informácii.
+% (TODO: pridať utajovanie informácie)
 
 Ku kryptografii ako aj k rôznym iným vedným disciplínam prispelo v minulosti staré Grécko.
 Jedným z najvýznamnejších príspevkov starých Grékov bolo široké rozšírenie abecedy a písomného prejavu.
@@ -46,7 +47,7 @@ Existovala ale aj iná skupina vedcov, medzi ktorých patril aj Lester S. Hill, 
 V roku 1941 si na Hillových prácach zakladal A. Adrian Albert, ktorý pochopil, že v šifrovaní je možné použiť viacero algebraických štruktúr.
 Neskôr toto všetko usporiadal a zdokonalil Claude E. Shannon, čo možno považovať za ukončenie éry klasických šifier \cite{ks}.
 
-\todo{Možno pridať/spomenúť steganografiu.}
+% \todo{Možno pridať/spomenúť steganografiu.}
 
 \subsection{Charakteristika}
 Na rozdiel od moderných šifier, ktoré sa používajú dnes, sú tie klasické rozdielne v niektorých hlavných črtách.
@@ -63,18 +64,36 @@ Z spomenutých charakteristík existujú aj výnimky. Napríklad pri Vigenerovej
 
 Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
 \begin{itemize}
-\item Substitučné šifry
-\item Transpozičné šifry
-\item Homofónne šifry
-\item Substitučno-permutačné šifry
+
+\item \textbf{Substitučné šifry.}
+  V prípade že šifra permutuje znaky zdrojovej abecedy, hovoríme o monoalfabetickej šifre.
+  Ako príklad možeme uviesť šifru Atbaš prípadne Cézarovu šifru, alebo iné.
+  V inom prípade ak sa aplikuje viacero permutácii podľa polohy znaku v otvorenom texte, tak hovoríme o polyalfabetickej šifre.
+  Príkladom je Vigenerova šifra. Daľsím prípadom je polygramová šifra, kde sa z otvoreného textu najprv vytvoria bloky,
+  na ktoré sa potom aplikuje nejaká permutácia.
+
+\item \textbf{Transpozičné šifry.}
+  Transpozičné šifry sú vlastne blokové šifry, ktoré pri šifrovaní a dešifrovaní aplikujú pevne zvolenú permutáciu na každý blok
+  otvoreného/zašifrovaného textu. Od polyalfabetickej šifry sa líši v poradí vykonávania operácii.
+  
+\item \textbf{Homofónne šifry.}
+  Homofónne šifry sú šifry, ktoré majú znáhodnený zašifrovaný text. Tieto šifry sa snažia zabrániť frekvenčnej analýze textu. 
+  
+\item \textbf{Substitučno-permutačné šifry.}
+  Ak aplikujeme viacero substitučný a permutačných šifier na otvorený text tak hovoríme o substitučno-permutačných šífrách.
+  Šifrovanie prebieha tak, že blok otvoreného textu sa rozdelí na menšie bloky, na ktoré je potom aplikovaná substitúcia, a permutácia,
+  ktorá sa aplikuje na celý blok. Substitúcia zabezpečuje konfúziu a permutácia difúziu.
+  
 \end{itemize}
 
 \subsection{Útoky}
-\todo{ks 2.3}
+% \todo{ks 2.3}
 \subsubsection{Hrubou silou}
-Útok hrubou silou (bruteforce) je typ útoku, ktorý sa snaží zlomiť kľúč vyskúšaním každej možnej kombinácie znakov z abecedy.
+Útok hrubou silou (bruteforce) je typ útoku, ktorý sa snaží zlomiť kľúč tak, že sa prehľadáva celý priestor kľúčov.
+Aby bol takýto útok možný a prakticky realizovateľný, priestor prehľadávaných kľúčov nesmie byť vačší ako hranica daná dostupnými
+prostriedkami alebo časom potrebným na riešenie.
 
-Pre ilustráciu si uveďme jednoduchý príklad. Máme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme že bol zašifrovaný šifrou podobnou Cézarovej šifre.
+Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme že bol zašifrovaný šifrou podobnou Cézarovej šifre.
 Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností posunov, čo je v tomto prípade kľúč, tak aby sme dostali zmysluplný text.
 
 \begin{verbatim}
@@ -90,12 +109,35 @@ kľúč 3
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 YHFGRAVRUVFGBEVPXLPUFVSVREANTEVQR
 
-...
+... // ďaľšie klúče 4..26
 \end{verbatim}
 
 Po prezretí všetkých možností by sme zistili že kľúč 16 sa dešifruje na \textquote{LUSTENIEHISTORICKYCHSIFIERNAGRIDE}.
 
-\todo{praktickosť útoku}
+% \todo{praktickosť útoku}
 
-\subsection{Slovníkový útok}
+\subsubsection{Slovníkový útok}
 Slovníkový útok narozdiel od útoku hrubou silou skúša iba niektoré možnosti z vopred pripraveného slovníka kľúčov.
+
+Ukážme si ako by v príncípe mohol fungovať slovníkový útok na šifru Vigenere.
+Nech zašifrovaný text je \textquote{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textquote{ABC, SOMAR, HESLO, ...}.
+
+\begin{verbatim}
+kľúč JANO
+SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
+JYXQJUZIJWMJXCJVFQAHQMKFJYEEIFCTN
+
+kľúč SOMAR
+SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
+AKYEBCYKSFHJUCFRAENEHYLTBGDGROXTK
+
+klúč HESLO
+SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
+LUSTENIEHISTORICKYCHSIFIERNAGRIDE
+\end{verbatim}
+
+\subsubsection{Genetické a evolučné algoritmy}
+
+
+\subsubsection{Iné}
+
