@@ -1,0 +1,26 @@
+\begin{figure}
+\centering
+\begin{gnuplot}[terminal=pdf,terminaloptions=color]
+set terminal pdf enhanced size 14.5cm, 12cm
+set xrange [0:2000]
+set yrange [0:1]
+
+set key samplen 3 spacing 1 font ',10' left
+
+set xlabel "Počet znakov zašifrovaného textu"
+set ylabel "Úspešnosť schémy (%)"
+
+plot "data/10000_100_A" smooth csplines title 'A', \
+     "data/10000_100_B" smooth csplines title 'B', \
+     "data/10000_100_C" smooth csplines title 'C', \
+     "data/10000_100_D" smooth csplines title 'D', \
+     "data/10000_100_E" smooth csplines title 'E', \
+     "data/10000_100_F" smooth csplines title 'F', \
+     "data/10000_100_G" smooth csplines title 'G', \
+     "data/10000_100_H" smooth csplines title 'H', \
+     "data/10000_100_I" smooth csplines title 'I', \
+     "data/10000_100_J" smooth csplines title 'J'
+
+\end{gnuplot}
+\caption{Počet iterácii: 10000, počiatočná populácia: 100}
+\end{figure}
