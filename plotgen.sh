@@ -18,21 +18,21 @@ set terminal pdf enhanced size 14.5cm, 12cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left
+set key samplen 3 spacing 1 font ',10' left title 'Schema'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť schémy (%)"
 
-plot "${data}_A" $lines title 'A', \\
-     "${data}_B" $lines title 'B', \\
-     "${data}_C" $lines title 'C', \\
-     "${data}_D" $lines title 'D', \\
-     "${data}_E" $lines title 'E', \\
-     "${data}_F" $lines title 'F', \\
-     "${data}_G" $lines title 'G', \\
-     "${data}_H" $lines title 'H', \\
-     "${data}_I" $lines title 'I', \\
-     "${data}_J" $lines title 'J'
+plot "${data}_A" $lines dt 1 title 'A', \\
+     "${data}_B" $lines dt 2 title 'B', \\
+     "${data}_C" $lines dt 3 title 'C', \\
+     "${data}_D" $lines dt 4 title 'D', \\
+     "${data}_E" $lines dt 5 title 'E', \\
+     "${data}_F" $lines dt 1 title 'F', \\
+     "${data}_G" $lines dt 2 title 'G', \\
+     "${data}_H" $lines dt 3 title 'H', \\
+     "${data}_I" $lines dt 4 title 'I', \\
+     "${data}_J" $lines dt 5 title 'J'
 
 \end{gnuplot}
 \caption{Počet iterácii: ${i}, počiatočná populácia: ${j}}

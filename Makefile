@@ -4,7 +4,7 @@ BUILD_DIR = .
 LATEXMK_OPTIONS = -pdf -synctex=1 -output-directory=$(BUILD_DIR) -interaction=nonstopmode --shell-escape -silent
 LINE_WIDTH = error_line=240 half_error_line=160 max_print_line=240
 
-all: clean pdf
+all: pdf #clean
 
 pdf:
 	./plotgen.sh
@@ -15,6 +15,6 @@ clean:
 	git clean -f
 	rm -fr $(FILE).pdf
 
-refresh: clean pdf
+rebuild: clean pdf
 
-.PHONY: all pdf clean refresh
+.PHONY: all pdf clean rebuild
