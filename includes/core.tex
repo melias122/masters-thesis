@@ -139,8 +139,34 @@ LUSTENIEHISTORICKYCHSIFIERNAGRIDE
 \subsubsection{Genetické a evolučné algoritmy}
 
 % Grid/kluster hpc.stuba.sk
-% definicia grid vs cluster?
+Jedným z cieľov práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
+Grid možeme chápať ako skupinu počítačov, uzlov, spojenú pomocou siete LAN, prípadne inou sieťovou technológiou,
+ktoré môžu ale nemusia byť geograficky oddelené.
+Účelom takýchto počítačov je poskytnúť veľký výpočtový výkon, ktorý je použitý na riešenie špecifických úloh.
+
 % hpc.stuba.sk (popis, pouzivanie)
+V rámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
+Každý výpočtový uzol má nasledovnú konfiguráciu:
+\begin{itemize}
+\item \gls{CPU}: 2 x 6 jadrový Intel Xeon X5670 2.93 GHz
+\item \gls{RAM}: 48GB (24GB na procesor)
+\item \gls{HDD}: 2TB 7200 RPM SATA
+\item \gls{GPU}: 2 x NVIDIA Tesla M2050 448 cuda jadier, 3GB ECC RAM
+\item Operačný systém: Scientific Linux 6.4
+\item Sieťové pripojenie: 2 x 10Gb/s Ethernet
+\end{itemize}
+Spolu máme k dispozícii 624 \gls{cpu}, 3584 cuda jadier, 2,5TB \gls{ram}, 104TB lokálneho úložného priestoru a daľších 115TB zdielaného úložiska.
+Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj vrátane chladenia je 40kW ref{hpc.stuba.sk}.
+
+Aby sme boli schopný grid používať musíme si najprv zaregistrovať projekt a požiadať o vytvorenie
+používatelského účtu na stránke výpočtového strediska \url{hpc.stuba.sk}.
+Po registracii a ziskaní prihlasovacích udajov sa môžeme prihlásiť do webového rozhrania, cez ktoré možeme spravovať projekt,
+pridávať daľsích riešitelov, prezerať si štatistiky a grafy.
+Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie SSH verejného klúča, pomocou ktorého sa možeme prihlasovať bez zadávania hesla.
+
+Do gridu sa možeme prihlasiť cez \textit{ssh} zadaním príkazu \textquote{\textit{ssh pouzivatelske_meno@hpc.stuba.sk}} a následne zadaním hesla.
+Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použit VPN.
+
 % podporovane technologie (MPI)
 % Komunikacia procesov
 
