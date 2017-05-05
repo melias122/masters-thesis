@@ -159,7 +159,7 @@ Každý výpočtový uzol má nasledovnú konfiguráciu:
 \item Sieťové pripojenie: 2 x 10Gb/s Ethernet
 \end{itemize}
 Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{ram} , 104TB lokálneho úložného priestoru a ďalších 115TB zdielaného úložiska.
-Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW. % ref hpc.stuba.sk
+Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
 Aby sme boli schopný grid používať musíme si najprv zaregistrovať projekt a požiadať o vytvorenie
 používateľského účtu na stránke výpočtového strediska \url{hpc.stuba.sk}.
@@ -167,66 +167,204 @@ Po registrácii a získaní prihlasovacích údajov sa môžeme prihlásiť do w
 pridávať Ďaľších riešiteľov, prezerať si štatistiky a grafy.
 Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie \acrshort{ssh} verejného kľúča, pomocou ktorého sa môžeme prihlasovať bez zadávania hesla.
 
-Do gridu sa môžeme prihlásiť cez \textit{ssh} zadaním príkazu \textit{ssh login@hpc.stuba.sk} a následným zadaním hesla.
+Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \textit{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade ak nepoužívame prihlasovanie pomocou verejného kľúča.
 Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použiť \acrshort{vpn}.
 Po pripojení máme k dispozícií štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
-Zaujímať nás budú príkazy: \textit{module, qstat, qfree, qsub, qsig}.
+Zaujímať nás budú príkazy: \textit{module, qstat, qfree, qsub, qsig}. Niektoré výstupy sú pre svoju obsiahlosť skrátené.
 
-Príkaz module slúži na rýchle nastavenie ciest k vybraným knižniciam. Existujúce moduly môžeme vypísať pomocou \textit{module avail}
-\begin{verbatim}
-[3xelias@one ~]$ module avail
------ /apps/modulefiles -----
-abyss/1.3.7  fftw3/3.3.3   intel/composer_xe_2013 openmpi/1.10.2
-cmake/3.1.0  gcc/5.4       matlab/R2015b          orca/2.9.1
-cp2k/2.5.1   gcc/6.3       cuda/6.5               pgi/libs
-devel        dirac/13.3    dirac/14               quantum_espresso
-...
-\end{verbatim}
+Príkaz \textit{module} slúži na rýchle nastavenie ciest k vybraným knižniciam. Existujúce moduly môžeme vypísať pomocou \textit{module avail}
+
+\begin{lstlisting}[caption={module avail}]
+  --------------------------- /apps/modulefiles ---------------------------
+  abyss/1.3.7                 gaussian/g03                mvapich2/2.1
+  ansys/15.0                  gaussian/g09                mvapich2/2.2
+  cmake/2.8.10.2              gcc/4.7.4(default)          nwchem/6.1.1(default)
+  cmake/3.1.0                 gcc/4.8.4                   nwchem/6.6
+  cp2k/2.5.1                  gcc/4.9.3                   openblas/0.2.18
+  cuda/6.5                    gcc/5.4                     openmpi/1.10.2
+  devel                       gcc/6.3                     openmpi/1.10.4
+  dirac/13.3                  gridMathematica/9.0         openmpi/1.10.5
+  dirac/14                    intel/composer_xe_2011      openmpi/1.4.5
+  esi/pamstamp                intel/composer_xe_2013      openmpi/1.6.5(default)
+  esi/pamstamp-platform       intel/libs_2011             openmpi/1.6.5-int8
+  esi/procast                 intel/libs_2013             openmpi/1.7.2
+  esi/sysweld                 matlab/R2015b               openmpi/1.7.5
+  fftw3/3.3.3                 molcas/8.0                  openmpi/1.8.8
+  fftw3/3.3.5                 mvapich2/1.8a2              openmpi/1.8.8-int8
+  fftw3/intel-3.3.3           mvapich2/1.9(default)       openmpi/2.1.0
+  fluent/15.0.7               mvapich2/2.0                openmpi/intel-1.10.4
+\end{lstlisting}
+
 Pre načítanie modulov zadáme \textit{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
 \textit{module list} a odstrániť ich môžeme príkazom \textit{module purge}.
 Podrobnejšie voľby príkazu \textit{module} sa môžeme dozvedieť z manuálových stránok.
 
 Ďalším dôležitým príkazom je \textit{qstat}, ktorý zobrazuje status aktuálne bežiacich úloh.
 Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \textit{qstat -u \$USER} alebo \textit{qstat -a}
-\begin{verbatim}
-[3xelias@one ~]$ qstat
-Job ID          Name             User          Time Use S Queue
---------------- ---------------- ------------- -------- - -----
-114557.one      halogen          3xjakubecj    1499:03: R parallel
-114640.one      JerMnchexFq5     3breza        1218:35: R parallel
-114663.one      Job4             3xrasova      78:07:20 R parallel
-114668.one      run.opt          3antusek      674:08:1 R parallel
-114692.one      Job5             3xbuchab      43:39:43 R parallel
-114710.one      PGA              3xelias       226:46:1 R parallel
 
-[3xelias@one ~]$ qstat -u $USER
-Job ID           Queue    Jobname        NDS TSK Time      S Time
----------------- -------- -------------- --- --- --------- - -----
-114710.one       parallel PGA         8   96  120:00:00 R 19:08:38
-\end{verbatim}
-Z tabuľky príkazu \textit{qstat -u \$USER} nás zaujíma posledný riadok, ktorý popisuje nami spustenú úlohu.
+\begin{lstlisting}[caption={qstat}]
+  Job ID          Name             User          Time Use   S Queue
+  --------------- ---------------- ------------- ---------  - --------
+  114557.one      halogen          3xjakubecj    499:03:0   R parallel
+  114640.one      JerMnchexFq5     3breza        218:35:9   R parallel
+  114663.one      Job4             3xrasova      78:07:20   R parallel
+  114668.one      run.opt          3antusek      674:08:1   R parallel
+  114692.one      Job5             3xbuchab      43:39:43   R parallel
+  114710.one      PGA              3xelias       226:46:1   R parallel
+\end{lstlisting}
+
+\begin{lstlisting}[caption={qstat -u 3xelias}]
+  Job ID      Queue    Jobname       SessID   TSK  Time    S   Time
+  ----------  -------- ------------  ------  ----- ------ --------- - 
+  114710.one  parallel PGA             3418   96   120:00:00 R 19:08:38
+  115265.one  parallel PGA_Mpi_3_b    24619    4   120:00:00 R 31:17:51
+  115266.one  parallel PGA_Mpi_3_d    14748    4   120:00:00 R 31:17:51
+  115267.one  parallel PGA_Mpi_3_e    14780    4   120:00:00 R 31:17:51
+  115268.one  parallel PGA_Mpi_5_b    16429    6   120:00:00 R 31:17:50
+  115269.one  parallel PGA_Mpi_5_d    16471    6   120:00:00 R 31:17:49
+  115270.one  parallel PGA_Mpi_5_e    22492    6   120:00:00 R 31:15:43
+  115271.one  parallel PGA_Mpi_5_f    22450    6   120:00:00 R 31:15:45
+  115272.one  parallel PGA_Mpi_11_b    4254   12   120:00:00 R 31:12:39
+  115273.one  parallel PGA_Mpi_11_d     --    12   120:00:00 Q    -- 
+  115274.one  parallel PGA_Mpi_11_e    1647   12   120:00:00 R 31:12:08
+  115275.one  parallel PGA_Mpi_11_f   22605   12   120:00:00 R 31:11:37
+\end{lstlisting}
+
+Posledný riadok tabuľky príkazu \textit{qstat -u 3xelias} popisuje nami spustenú úlohu.
 Dôležité sú pre nás predovšetkým stĺpce \textbf{Time}, \textbf{Job ID}.
 Posledný stĺpec \textbf{Time} hovorí o tom ako dlho je už naša úloha spustená, druhý stĺpec \textbf{Time} nám deklaruje maximálny možný čas,
-ktorý má úloha FitnessLandscape vyhradený. Hodnotu 114710 zo stĺpca \textbf{Job ID} môžeme použiť do príkazu \textit{qsig} pre vynútené ukončenie úlohy.
+ktorý má úloha PGA vyhradený. Hodnotu 114710 zo stĺpca \textbf{Job ID} môžeme použiť do príkazu \textit{qsig} pre vynútené ukončenie úlohy.
 
-%qfree, qsub, ukazky skriptov
+Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \textit{qfree}.
 
+\begin{lstlisting}[caption={qfree}]
+  CLUSTER STATE SUMMARY                   Local    GPFS Storage
+  
+  Core        1  ...  12  load  FreeMem  Scratch  Read   Write  State
+  Node  Queue                    [GB]     [GB]   [MB/s] [MB/s]
+  
+  comp01  S  [ ] ... [ ]  0.00  44.44   0 (0.0%)  0.00   0.00   free
+  comp02  T  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+  ...
+  comp44  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+  comp45  P  [O] ... [O]  12.0  44.40   0 (0.0%)  0.00   0.00   job-exclusive
+  comp46  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+  comp47  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+  comp48  P  [X] ... [X]  1.25  22.76   0 (0.0%) 45.50   2.83   job-exclusive
+  gpu1    G  [X] ... [X]  7.98  38.33   0 (0.0%) 42.13   0.92   job-exclusive
+  gpu2    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+  gpu3    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+  gpu4    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+\end{lstlisting}
+
+Prvý stĺpec popisuje názov výpočtového uzlu. Druhý stĺpec označuje druh fronty. S je pre sériové úlohy, T pre interaktívne úlohy, podobne P pre paralelné výpočty
+a G pre grafické výpočty. Stĺpce 1 až 12 značia procesory \acrshort{cpu} respektíve \acrshort{gpu} pre grafické výpočty.
+Zvyšné stĺpce ako už možno vyčítať z názvu popisujú celkové zaťaženie výpočtového uzla, volnú pamäť a využitie diskov.
+Posledný stĺpec \textbf{State} popisuje či je daný uzol volný alebo na vyťažený.
+Procesory na ktorých prebieha výpočet našej úlohy sú označené ako \textquote{[O]}, zvyšné vyťažené \acrshort{cpu} sú označené ako \textquote{[X]},
+naopak voľné \acrshort{cpu} sú označené medzerou \textquote{[ ]} a v prípade že uzol nie je dostupný budú \acrshort{cpu} označené ako \textquote{[-]}.
+
+Posledný a najdôležitejší príkaz je \textit{qsub}, ktorý slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
+
+\subsection{skripty PBS}
+Aby sme boli schopný spustiť akúkoľvek výpočtovú úlohu na gride, potrebujeme k tomu \acrfull{pbs} súbor.
+\acrshort{pbs} súbor je v skutočnosti iba jednoduchý textový súbor, ktorý definuje požiadavky na výpočtové zdroje a príkazy pre grid.
+
+\subsubsection{Sériová úloha}
+
+\begin{lstlisting}[language=bash, caption={uloha1.pbs}, label={pbs:1}, numbers=left]
+#!/bin/bash
+
+#PBS -N uloha1
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:01:00  
+#PBS -A 3ANTAL-2016
+#PBS -q serial
+
+cd /work/3xelias/uloha1
+./seriova_uloha
+\end{lstlisting}
+
+Vo výpise \ref{pbs:1} môžeme vidieť príklad jednoduchého skriptu ktorý sériovej úlohy.
+Popíšme si jednotlivé riadky skriptu:
+\begin{itemize}
+\item
+  Prvý riadok v súbore definuje aký shell sa má použiť pre spustenie skriptu.
+  V našom prípade sme použili \acrshort{bash}, ale mohli by sme použiť aj iný shell alebo skriptovací jazyk.
+\item
+  Tretí riadok určuje názov úlohy.
+\item
+  Štvrtý riadok vymedzuje koľko uzlov a procesorov si žiadame od gridu.
+  V tomto prípade si žiadame jeden výpočtový uzol a jeden procesor.
+\item
+  Piaty riadok v \acrshort{pbs} skripte vymedzuje aké časové rozpätie potrebujeme pre úlohu.
+  V tomto príklade si žiadame jednu minútu.
+\item
+  V šiestom riadku sa nachádza identifikátor podľa ktorého sa identifikujú úlohy s jednotlivými projektami.
+  Tento parameter je povinný a možno ho získať po prihlásení na webový portál \url{https://www.hpc.stuba.sk/index.php?l=sk&page=login}.
+\item
+  Parameter -q v siedmom riadku definuje typ výpočtovej fronty do akej bude úloha zaradená.
+  V tomto príklade chceme úlohu zaradiť do fronty \textquote{serial}.
+\item
+  V deviatom riadku sa presunieme do priečinku v ktorom sú uložené všetky potrebné dáta pre túto úlohu vrátane programu \textquote{seriova\_uloha}.
+\item
+  Posledný riadok spustí program \textquote{seriova\_uloha}.
+\end{itemize}
+Úlohu môže zaradiť do fronty príkazom \texttt{qsub uloha1.pbs}.
+
+\subsubsection{Paralelná úloha}
+\begin{lstlisting}[language=bash, caption={uloha2.pbs}, label={pbs:2}, numbers=left]
+#!/bin/bash
+
+#PBS -N paralelna_uloha
+#PBS -l nodes=5:ppn=12
+#PBS -l walltime=48:00:00  
+#PBS -A 3ANTAL-2016
+#PBS -q parallel
+#PBS -m ea
+#PBS -M xelias@stuba.sk
+
+. /etc/profile.d/modules.sh
+module purge
+module load gcc/5.4 openmpi/1.10.2
+
+cd /work/3xelias/parallel
+mpirun ./parallel
+\end{lstlisting}
+
+Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektoré riadky príkladu \texttt{uloha2.pbs}:
+\begin{itemize}
+\item
+  Na rozdiel od predchádzajúcej úlohy si v tomto príklade na riadku číslo štyri žiadame päť výpočtových uzlov a na každom uzle dvanásť \acrshort{cpu}.
+  Dokopy si žiadame šesťdesiat procesorov.
+\item
+  V piatom riadku požadujeme časové rozpätie štyridsitich ôsmich hodín.
+\item
+  Siedmy riadok definuje paralelnú frontu.
+\item
+  Parametre \texttt{e} a \texttt{a} na riadku osem hovoria kedy sa má poslať email o zmene stavu úlohy.
+  Parameter \texttt{e} znamená po skončení úlohy.
+  Parameter \texttt{a} znamená pri zrušení úlohy.
+  Ďalšie parametre môžu byť \texttt{b} (štart úlohy) a \texttt{n} (neposielať žiadny e-mail).
+\item
+  V deviatom riadku definujeme e-mailovú adresu, na ktorú bude zaslaný mail v prípade ak úloha skončí alebo bude prerušená.
+\end{itemize}
 % podporovane technologie (MPI)
 % Komunikacia procesov
 
-% Navrh aplikacie, c++, mpi, boost, cmake, serializacia
-\subsection{Genetické algoritmy}
+% Navrh aplikacie, poziadavky, c++, mpi, boost, cmake, serializacia, build.sh, run.sh
+% \subsection{Genetické algoritmy}
 %% Geneticke algoritmy
 %% Schemy GA
 %% Vysledky GA
-\input{includes/plot/10000_10}
-\input{includes/plot/10000_20}
-\input{includes/plot/10000_50}
-\input{includes/plot/10000_100}
-\input{includes/plot/50000_10}
-\input{includes/plot/50000_20}
-\input{includes/plot/50000_50}
-\input{includes/plot/50000_100}
+%\input{includes/plot/10000_10}
+%\input{includes/plot/10000_20}
+%\input{includes/plot/10000_50}
+%\input{includes/plot/10000_100}
+%\input{includes/plot/50000_10}
+%\input{includes/plot/50000_20}
+%\input{includes/plot/50000_50}
+%\input{includes/plot/50000_100}
 
 %% Paralelene Geneticke algoritmy
 %% Trieda Migrator
