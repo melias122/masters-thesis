@@ -1,7 +1,7 @@
 FILE = diplomovka
 BUILD_DIR = .
 
-LATEXMK_OPTIONS = -pdf -synctex=1 -output-directory=$(BUILD_DIR) -interaction=nonstopmode --shell-escape -silent
+LATEXMK_OPTIONS = -pdf -synctex=1 -output-directory=$(BUILD_DIR) -interaction=nonstopmode --shell-escape
 LINE_WIDTH = error_line=240 half_error_line=160 max_print_line=240
 
 all: pdf #clean
@@ -17,4 +17,7 @@ clean:
 
 rebuild: clean pdf
 
-.PHONY: all pdf clean rebuild
+open:
+	xdg-open $(FILE).pdf
+
+.PHONY: all pdf clean rebuild open
