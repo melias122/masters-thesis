@@ -348,7 +348,22 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
   Ďalšie parametre môžu byť \texttt{b} (štart úlohy) a \texttt{n} (neposielať žiadny e-mail).
 \item
   V deviatom riadku definujeme e-mailovú adresu, na ktorú bude zaslaný mail v prípade ak úloha skončí alebo bude prerušená.
+\item
+  V jedenástom riadku načítame všetky potrebné premenné prostredia pre moduly.
+\item
+  V dvanástom riadku odstránime všetky načítané moduly ak boli nejaké dostupné v premmenných prostredia.
+\item
+  V riadku číslo dvanásť tohto súboru načítame knižnicu gcc verzie 5.4 a knižnicu openmpi verzie 1.10.2.
+  Pre správny beh programu by sa všetky načítané knižnice mali zhodovať stými, s ktorými bola aplikácia spúštaná v tomto skripte skompilovaná.
+\item
+  Podobne ako v ukázke \ref{pbs:1} sa prepneme do priečinku \texttt{/work/3xelias/parallel}, ktorý musí obsahovať vsetky potrebné dáta
+  pre samotný program \texttt{parallel}.
+\item
+  Posledný riadok spustí program mpirun, ktorý potom spustí program parallel. Tento krok je vysvetlený v kapitole mpi. .Pridat odkaz.
 \end{itemize}
+
+% fronty debug, interaktiv
+
 % podporovane technologie (MPI)
 % Komunikacia procesov
 
