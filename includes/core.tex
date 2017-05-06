@@ -140,14 +140,12 @@ LUSTENIEHISTORICKYCHSIFIERNAGRIDE
 todo
 
 \section{Grid}
-% Grid/kluster hpc.stuba.sk
 Jedným z cieľov práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
 Grid môžeme chápať ako skupinu počítačov, uzlov, spojenú pomocou siete \acrfull{lan}, prípadne inou sieťovou technológiou,
 ktoré môžu ale nemusia byť geograficky oddelené.
 Účelom takýchto počítačov je poskytnúť veľký výpočtový výkon, ktorý je použitý na riešenie špecifických úloh.
 
 \subsection{hpc.stuba.sk}
-% (popis, pouzivanie)
 V rámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
 Každý výpočtový uzol má nasledovnú konfiguráciu:
 \begin{itemize}
@@ -161,18 +159,45 @@ Každý výpočtový uzol má nasledovnú konfiguráciu:
 Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{ram} , 104TB lokálneho úložného priestoru a ďalších 115TB zdielaného úložiska.
 Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
+V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne úlohu.
+Umiestnenie \texttt{/home\$USER} je domovským priečinkom každého používateľa.
+Jedno z obmedzení tohoto umiestnenia je že môže obsahovať maximálne osemdesiaťtisíc súborov a priečinkov.
+Taktiež ma značne obmezdenú kapacitu čo sa nemusí hodiť pre každý typ úlohy.
+Ďaľším umiestnením, ktoré ma používateľ k dispozícii je \texttt{/work/\$USER}.
+Toto umiestnenie nemá žiadne väčšie odmedzenia slúži ako zdieľaný disk pre výpočty.
+Môžeme tu vytvárať ľubovolný počet súborov a priečinkov, avšak podľa \cite{hpc} by sa tento disk mal využívať hlavne na prenos objemnejších dát v blokoch väčších ako 16kB. Obe spomenuté umiestnenia sú sieťové disky \acrshort{gpfs}.
+Posledným umiestnením je \texttt{/scratch/\$PBS\_JOBID} alebo tiež aj \texttt{\$TMPDIR} v prípade \acrshort{pbs} skriptu.
+Tento priestor je unikátny pre každú úlohu a je vhodný na spracovanie veľkého počtu malých súborov.
+V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dáť, ktoré sa mažú ihneď po skončení úlohy.
+
+\begin{table}[!h]
+\centering
+\label{tab:filesystem}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Filesystem}   & \textbf{Zálohovanie} & \textbf{Mazanie} & \textbf{Kapacita} & \textbf{Obmedzenia} \\ \midrule
+\texttt{/home/\$USER}          & áno                  & nie              & 32GB              & 80k inodes          \\
+\texttt{/scratch/\$PBS\_JOBID} & nie                  & ihneď            & 1.6TB             & nie                 \\
+\texttt{/work/\$USER}          & nie                  & áno              & 56TB              & nie                 \\ \bottomrule
+\end{tabular}
+\caption{Disky}
+\end{table}
+
 Aby sme boli schopný grid používať musíme si najprv zaregistrovať projekt a požiadať o vytvorenie
 používateľského účtu na stránke výpočtového strediska \url{hpc.stuba.sk}.
 Po registrácii a získaní prihlasovacích údajov sa môžeme prihlásiť do webového rozhrania, cez ktoré môžeme spravovať projekt,
 pridávať Ďaľších riešiteľov, prezerať si štatistiky a grafy.
 Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie \acrshort{ssh} verejného kľúča, pomocou ktorého sa môžeme prihlasovať bez zadávania hesla.
 
-Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \textit{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade ak nepoužívame prihlasovanie pomocou verejného kľúča.
+\subsection{Príkazy}
+Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \texttt{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade ak nepoužívame prihlasovanie pomocou verejného kľúča.
 Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použiť \acrshort{vpn}.
 Po pripojení máme k dispozícií štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
-Zaujímať nás budú príkazy: \textit{module, qstat, qfree, qsub, qsig}. Niektoré výstupy sú pre svoju obsiahlosť skrátené.
+Zaujímať nás budú príkazy: \texttt{module, qstat, qfree, qsub, qsig}.
+Niektoré výstupy sú pre svoju obsiahlosť skrátené.
 
-Príkaz \textit{module} slúži na rýchle nastavenie ciest k vybraným knižniciam. Existujúce moduly môžeme vypísať pomocou \textit{module avail}
+\subsubsection{module}
+Príkaz \texttt{module} slúži na rýchle nastavenie ciest k vybraným knižniciam. Existujúce moduly môžeme vypísať pomocou \texttt{module avail}
 
 \begin{lstlisting}[caption={module avail}]
   --------------------------- /apps/modulefiles ---------------------------
@@ -195,12 +220,13 @@ Príkaz \textit{module} slúži na rýchle nastavenie ciest k vybraným knižnic
   fluent/15.0.7               mvapich2/2.0                openmpi/intel-1.10.4
 \end{lstlisting}
 
-Pre načítanie modulov zadáme \textit{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
-\textit{module list} a odstrániť ich môžeme príkazom \textit{module purge}.
-Podrobnejšie voľby príkazu \textit{module} sa môžeme dozvedieť z manuálových stránok.
+Pre načítanie modulov zadáme \texttt{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
+\texttt{module list} a odstrániť ich môžeme príkazom \texttt{module purge}.
+Podrobnejšie voľby príkazu \texttt{module} sa môžeme dozvedieť z manuálových stránok.
 
-Ďalším dôležitým príkazom je \textit{qstat}, ktorý zobrazuje status aktuálne bežiacich úloh.
-Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \textit{qstat -u \$USER} alebo \textit{qstat -a}
+\subsubsection{qstat}
+Ďalším dôležitým príkazom je \texttt{qstat}, ktorý zobrazuje status aktuálne bežiacich úloh.
+Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \texttt{qstat -u \$USER} alebo \texttt{qstat -a}
 
 \begin{lstlisting}[caption={qstat}]
   Job ID          Name             User          Time Use   S Queue
@@ -230,12 +256,13 @@ Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \textit
   115275.one  parallel PGA_Mpi_11_f   22605   12   120:00:00 R 31:11:37
 \end{lstlisting}
 
-Posledný riadok tabuľky príkazu \textit{qstat -u 3xelias} popisuje nami spustenú úlohu.
-Dôležité sú pre nás predovšetkým stĺpce \textbf{Time}, \textbf{Job ID}.
-Posledný stĺpec \textbf{Time} hovorí o tom ako dlho je už naša úloha spustená, druhý stĺpec \textbf{Time} nám deklaruje maximálny možný čas,
-ktorý má úloha PGA vyhradený. Hodnotu 114710 zo stĺpca \textbf{Job ID} môžeme použiť do príkazu \textit{qsig} pre vynútené ukončenie úlohy.
+Posledný riadok tabuľky príkazu \texttt{qstat -u 3xelias} popisuje nami spustenú úlohu.
+Dôležité sú pre nás predovšetkým stĺpce \texttt{Time}, \texttt{Job ID}.
+Posledný stĺpec \texttt{Time} hovorí o tom ako dlho je už naša úloha spustená, druhý stĺpec \texttt{Time} nám deklaruje maximálny možný čas,
+ktorý má úloha PGA vyhradený. Hodnoty zo stĺpca \texttt{Job ID} môžeme použiť do príkazu \texttt{qsig} pre vynútené ukončenie úlohy.
 
-Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \textit{qfree}.
+\subsubsection{qfree}
+Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \texttt{qfree}.
 
 \begin{lstlisting}[caption={qfree}]
   CLUSTER STATE SUMMARY                   Local    GPFS Storage
@@ -257,20 +284,43 @@ Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkaz
   gpu4    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
 \end{lstlisting}
 
-Prvý stĺpec popisuje názov výpočtového uzlu. Druhý stĺpec označuje druh fronty. S je pre sériové úlohy, T pre interaktívne úlohy, podobne P pre paralelné výpočty
-a G pre grafické výpočty. Stĺpce 1 až 12 značia procesory \acrshort{cpu} respektíve \acrshort{gpu} pre grafické výpočty.
+Prvý stĺpec popisuje názov výpočtového uzlu. Druhý stĺpec označuje druh fronty. S je pre sériové úlohy, \texttt{T} pre interaktívne úlohy,
+podobne \texttt{P} pre paralelné výpočty a \texttt{G} pre grafické výpočty.
+Stĺpce jeden až dvanásť označujú procesory \acrshort{cpu} respektíve \acrshort{gpu} pre grafické výpočty.
 Zvyšné stĺpce ako už možno vyčítať z názvu popisujú celkové zaťaženie výpočtového uzla, volnú pamäť a využitie diskov.
-Posledný stĺpec \textbf{State} popisuje či je daný uzol volný alebo na vyťažený.
-Procesory na ktorých prebieha výpočet našej úlohy sú označené ako \textquote{[O]}, zvyšné vyťažené \acrshort{cpu} sú označené ako \textquote{[X]},
-naopak voľné \acrshort{cpu} sú označené medzerou \textquote{[ ]} a v prípade že uzol nie je dostupný budú \acrshort{cpu} označené ako \textquote{[-]}.
+Posledný stĺpec \texttt{State} popisuje stav uzlu. Uzol môže byť volný alebo na vyťažený ak vykonáva nejakú úlohu.
+Procesory na ktorých prebieha výpočet našej úlohy sú označené ako \texttt{[O]}, zvyšné vyťažené \acrshort{cpu} sú označené ako \texttt{[X]},
+naopak voľné \acrshort{cpu} sú označené medzerou \texttt{[ ]} a v prípade že uzol nie je dostupný budú \acrshort{cpu} označené ako \texttt{[-]}.
 
-Posledný a najdôležitejší príkaz je \textit{qsub}, ktorý slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
+Posledný a najdôležitejší príkaz je \texttt{qsub}, ktorý slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
 
-\subsection{skripty PBS}
+\subsection{Výpočtové fronty}
 Aby sme boli schopný spustiť akúkoľvek výpočtovú úlohu na gride, potrebujeme k tomu \acrfull{pbs} súbor.
 \acrshort{pbs} súbor je v skutočnosti iba jednoduchý textový súbor, ktorý definuje požiadavky na výpočtové zdroje a príkazy pre grid.
 
-\subsubsection{Sériová úloha}
+V tabuľke \ref{tab:fronty} sa nachádzajú všetky výpočtové fronty, ktoré sú dostupné na gride \url{hpc.stuba.sk}.
+Fronta debug slúži na rýchle odľadenie úloh. Úlohy v tejto fronte majú vysokú prioritu preto sú spustené takmer okamžite.
+Debug fronta je obmedzená na maximálne dve súčasne spustené úlohy. Fronta gpu je ďalším typom fronty pre úlohy, ktoré využívajú grafický akcelerátor.
+Pre úlohy, ktoré využívajú \acrshort{mpi}, \acrshort{omp} a iné knižnice na paralelné programovanie slúži fronta parallel.
+Úlohy takého typu musia použiť minimálne štyry a maximálne deväťdesiatšesť \acrshort{cpu}.
+Poslednou výpočtovou frontou je serial, na ktorej môžeme spúštať jednoprocesorové úlohy. 
+
+% todo: check mmlsquota
+\begin{table}[!h]
+\centering
+\label{tab:fronty}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Názov fronty} & \multicolumn{1}{l}{\textbf{walltime (max)}} & \multicolumn{1}{l}{\textbf{nodes}} & \multicolumn{1}{l}{\textbf{ppn}} \\ \midrule
+debug                 & 30 minút                                    & -                                  & -                                      \\
+gpu                   & 24 hodín                                    & -                                  & -                                      \\
+parallel              & 240 hodín                                   & 1 - 8                              & 4 - 12                                 \\
+serial                & 240 hodín                                   & 1                                  & 1                                      \\ \bottomrule
+\end{tabular}
+\caption{Výpočtové fronty a ich obmedzenia}
+\end{table}
+
+\subsection{Príklad sériovej úlohy}
 
 \begin{lstlisting}[language=bash, caption={uloha1.pbs}, label={pbs:1}, numbers=left]
 #!/bin/bash
@@ -312,7 +362,7 @@ Popíšme si jednotlivé riadky skriptu:
 \end{itemize}
 Úlohu môže zaradiť do fronty príkazom \texttt{qsub uloha1.pbs}.
 
-\subsubsection{Paralelná úloha}
+\subsection{Príklad paralelnej úlohy}
 \begin{lstlisting}[language=bash, caption={uloha2.pbs}, label={pbs:2}, numbers=left]
 #!/bin/bash
 
@@ -362,7 +412,8 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
   Posledný riadok spustí program mpirun, ktorý potom spustí program parallel. Tento krok je vysvetlený v kapitole mpi. .Pridat odkaz.
 \end{itemize}
 
-% fronty debug, interaktiv
+
+
 
 % podporovane technologie (MPI)
 % Komunikacia procesov
