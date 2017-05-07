@@ -85,6 +85,14 @@
 \usepackage{algorithmic}
 \usepackage[acronym,nopostdot,nogroupskip,nonumberlist]{glossaries}
 
+% my packages
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{gnuplottex}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
 \addbibresource{includes/bibliography.bib}
 
 \newboolean{isThesis}
