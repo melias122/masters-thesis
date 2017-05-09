@@ -412,17 +412,309 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
   Posledný riadok spustí program mpirun, ktorý potom spustí program parallel. Tento krok je vysvetlený v kapitole mpi. .Pridat odkaz.
 \end{itemize}
 
+\section{MPI}
+Message passing je forma programovania, ktorá sa používa pri paralelnom programovaní či už na viacjadrových procesoroch, alebo v gridovom prostredí.
+V takejto forme programovania môže byť program rozdelený na viacero logických blokov alebo procesov,
+ktorých môže byť viacej ako počet dostupných \acrshort{cpu}, avšak zvyčajne by mal byť tento počet rovnaký.
+Procesy môžu vykonávať rozlicné úlohy a môžu bežať na rozlicných, geograficky odelených \acrshort{cpu}.
+
+Procesy medzi sebou komunikujú posielaním správ.
+Správy zyčajne reprezentujú nejaké dáta, ale môžu slúžiť aj na sychronizáciu.
+
+Táto forma programovania zaznamenala velký rozmach hlavne v devädesiatich rokoch minulého storočia,
+keď takmer každý predajca paralelných systémov ponúkal vlastnú implemetáciu message passing prostredia.
+
+Následkom týchto udalostí vznilko \acrfull{mpi} Forum, čo bola skupina viac ako osemdesiať ľudí zo štyridsaťich rôznych organizácii,
+ktoré predstavovali predajcov paralelných systémov, používateľov ale aj výskumné laboratória a univerzity \cite{mpibook}.
+
+Úloha \acrshort{mpi} fóra bola bola zjednotiť message passing systémy a navrhnúť nový systém.
+Systém by mal podporovť komplexné dátové štruktúry, bezpečnú komunikáciu a byť dostatočne modulárny.
+
+Výsledkom práce \acrshort{mpi} fóra vznikol v júni roku 1994 štandard \acrshort{mpi}-1.0,
+ktorý je dodnes akceptovaný a má mnoho používateľov aj napriek tomu, že už existujú novšie verziu štandardu.
+\acrshort{mpi} štadard nie je knižnica. Je to špecifikácia toho ako by mala konkrétna implementácia knižnice vyzerať.
+Existuje viacero implementácii. Medzi najznámejšie patria \acrshort{ompi}, MVAPICH, IBM MPI.
+% mozno ciele MPI
+
+Aj napriek tomu, že \acrshort{mpi} štandard je veľmi rozsiahly, obsahuje stovky funkcii, zaujímať sa však budeme len o niektoré znich.
+
+\subsection{Point-to-point komunikácia}
+Odosielanie a prímanie správ je kľúcovým stavebným mechanizmom \acrshort{mpi} komunikácie.
+Základoné operácie sú \textbf{send} (posielanie) a \textbf{receive} (prímanie).
+Výmene správ medzi dvoma procesmi hovoríme \textit{point-to-point} komunikácia.
+Takmer všetky \acrshort{mpi} konštrukcie sú založené na point-to-point komunukácii \cite{mpi3-1}.
+Pre ilustraciu si uveďme jednoduchý príklad:
+
+\begin{lstlisting}[language=c, caption={Point-to-point komunikácia}, label={mpi:1}, numbers=left]
+#include <stdio.h>
+#include <mpi.h>
+int main(int argc, char **argv) {
+    char msg[20];
+    int rank;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    if (rank == 0) {
+        strncpy(msg, "Hello, MPI", 20);
+        MPI_Send(msg, strlen(msg) + 1, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
+    } else if (rank == 1) {
+        MPI_Recv(msg, sizeof(msg), MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("%s\n", msg);
+    }
+    MPI_Finalize();
+    return 0;
+}
+\end{lstlisting}
+
+V tomto príklade proces nula \texttt{(rank == 0)} pošle správu procesu prostredníctvom \textbf{send} operácie \texttt{MPI\_SEND}.
+Táto operácia definuje tazkvaný \texttt{send buffer}. Send buffer je miesto v pamäti
+odosielateľa, v ktorom sa nachádzajú dáta na odoslanie.
+V tomto príklade send buffer premmenná \texttt{msg} nachádzajúca sa v pamati procesu nula.
+Prvé tri argumenty send operacie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
+Ďaľsie tri paramtre send operacie sú definujú príjmatela správy.
+Proces jedna \texttt{(rank == 1)}, príjme správu s \textbf{receive} operáciou \texttt{MPI\_Recv}.
+Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \texttt{receive buffera}.
+V tomto príklade je receive buffer premmenná msg v pamäťovom priestore procesu jedna.
+Prvé tri parametre definujú dáta, ktoré chce príjemca prijať. Ďaľsie tri parametre slúžia na zvolenie správy od odosieľateľa.
+Posledný parameter sa používa na získanie informácií o prijateje správe. V tomto príklade tento parameter ignorujeme.
+
+Program z výpisu \ref{mpi:1} môžeme skompilovať a následne spustiť v dvoch krokoch:
+\begin{lstlisting}
+mpicc main.c -o p2p
+mpirun -n 2 ./p2p
+\end{lstlisting}
+Výsledkom programu a komunikácie týchto dvoch procesov bude ze proces jedna vypíše \texttt{Hello, MPI}.
+
+\subsection{Blokujúca komunikácia}
+Obe \acrshort{mpi} volania v príklade \ref{mpi:1} boli obe blokujúce.
+To znamena, že odsielateľ čaká na volaní \texttt{MPI\_Send} dovtedy až kým príjemca správu príjme.
+To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \texttt{MPI\_Recv}  až kým nedostane správu od odosielateľa.
+
+\begin{lstlisting}[language=c, caption={MPI\_Send}, label={mpi:send}]
+  MPI_Send(
+  const void* buf,
+  int count,
+  MPI_Datatype datatype,
+  int dest,
+  int tag,
+  MPI_Comm comm)
+\end{lstlisting}
+
+Vo výpise \ref{mpi:send} vidíme definíciu volania MPI\_Send. Prvý argumentom funkcie je adresa receive buffera, ďaľší argument je dĺžka buffera (count), ktorá musí byť celé kladné číslo.
+V prípade, že táto podmienka nie je splnená MPI volanie vráti chybu. Typ buffera špecifikujeme pomocou argumentu datatype.
+Niektoré základné dátové typy môžeme vidieť v tabuľke \ref{tab:mpi-datatypes}.
+Daľšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra dest môžeme zvoliť komu je správa adresovaná.
+V prípade, že si odosielateľ a príjemca vymienajú viacej správ s rôznym typom alebo rôzneho obsahu potrebujeme tieto správy nejako odlíšiť.
+Na odlíšenie správ slúži argument tag. Tag musí byť kladné celé číslo. V príklade \ref{mpi:1} sme ako tag použili nulu,
+avšak mohli sme použiť aj inú hodnotu. Posledným argumentom je comm, ktorý slúži na definovanie komunikačnej skupiny.
+Základná komunikacná skupina je svet (\texttt{MPI\_COMM\_WORLD}), kde si všetci môžu vymienať správy.
+\acrshort{mpi} štandard zahŕňa aj vytváranie vlastných podskupín komunikátorov, napríklad pomocou volania \texttt{MPI\_Comm\_create\_group} \cite{mpi3-1}.
+
+\begin{lstlisting}[language=c, caption={MPI\_Recv}, label={mpi:recv}]
+  MPI_Recv(
+  const void* buf,
+  int count,
+  MPI_Datatype datatype,
+  int source,
+  int tag,
+  MPI_Comm comm,
+  MPI_Status *status)
+\end{lstlisting}
+
+\acrshort{mpi} volanie \texttt{MPI\_Recv} používa veľmi podobnú syntax ako \texttt{MPI\_Send}. Prvé tri argumenty sú indentické.
+Argument source v prípade funkcie \texttt{MPI\_Recv} definuje rank odosielateľa. Daľším rozdielom je argument status,
+ktorý sa používa na získanie informácii o prijatej správe, alebo môže byť aj ingnorovaný ako v príklade \ref{mpi:1}.
+Štruktúra \texttt{MPI\_Status} obsahuje 3 hlavné informácie: rank odosielateľa, tag správy a dĺžku správy.
+
+\begin{table}[!h]
+\centering
+\label{tab:mpi-datatypes}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{MPI\_Datatype}    & \textbf{C ekvivalent}  \\ \midrule
+MPI\_SHORT                & short int              \\
+MPI\_INT                  & int                    \\
+MPI\_LONG                 & long int               \\
+MPI\_LONG\_LONG           & long long int          \\
+MPI\_UNSIGNED\_CHAR       & unsigned char          \\
+MPI\_UNSIGNED\_SHORT      & unsigned short int     \\
+MPI\_UNSIGNED             & unsigned int           \\
+MPI\_UNSIGNED\_LONG       & unsigned long int      \\
+MPI\_UNSIGNED\_LONG\_LONG & unsigned long long int \\
+MPI\_FLOAT                & float                  \\
+MPI\_DOUBLE               & double                 \\
+MPI\_LONG\_DOUBLE         & long double            \\
+MPI\_BYTE                 & char                   \\ \bottomrule
+\end{tabular}
+\caption{Dátové typy v MPI a ich C ekvivalenty}
+\end{table}
+
+\subsection{Neblokujúca komunikácia}
+Výkonnosť programov môže byť v mnohých prípadoch vylepšná prekrívaním blokujúcich volaní.
+Jedným z možných spôsobov ako toto dosianuť je použitie threadov \cite{mpi3-1}.
+Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcech komunikácie.
+
+Pri neblokujúcej komunikácii si môžeme zadefinovať štyry rôzne neblokujúce operácie: \texttt{send} pre posielanie,
+\texttt{recv} pre prímanie, \texttt{send complete} pre dokončenie posielania a \texttt{recv complete} pre dokončenie prijatia.
+Neblokujúce volanie \texttt{send} spustí send operáciu, ale nedokončí jú.
+Toto volanie inicializuje skopírovanie do send buffera ale samotné kopírovanie nedokončí.
+Na dokončenie operácie send je potrebná dalšie volanie \texttt{send complete},
+ktorá overí že dáta boli skutočne skopírované a prenesené príjemcovi.
+Neblokujúca send operácia zvyčajne beží paralelne s vykonávaným programom.
+Podobne aj nebolokujúce volanie \texttt{recv} inicializuje recv operáciu, ale nedokoncí ju. Na dokončenie potrebuje separátne volanie \texttt{recv complete},
+ktoré zaručí že dáta boli prenesené do recv buffera. Neblokujúca recv operácia podobne ako send pokračuje paralelne so zvyškom programu.
+
+\begin{lstlisting}[language=c, caption={Neblokujúca komunikácia}, label={mpi:2}]
+MPI_Request request[2];
+if (rank == 0) {
+    char msg1[] = "Hello, ", msg2[] = "MPI";
+    MPI_Isend(msg1, strlen(msg1) + 1, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &request[0]);
+    MPI_Isend(msg2, strlen(msg2) + 1, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &request[1]);
+    zlozity_vypocet();
+    MPI_Waitall(2, request, MPI_STATUSES_IGNORE);
+
+} else if (rank == 1) {
+    char msg1[20], msg2[20];
+    MPI_Irecv(msg1, 20, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &request[0]);
+    MPI_Irecv(msg2, 20, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &request[1]);
+    iny_vypocet();
+    MPI_Waitall(2, request, MPI_STATUSES_IGNORE);
+    printf("%s%s\n", msg1, msg2);
+}
+\end{lstlisting}
+
+Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcech komunikácie. V tomto príklade ako send operácia slúži funkcia \texttt{MPI\_Isend}.
+Proces nula \texttt{(rank == 0)} pošle najprv správu \texttt{msg1} a následne správu \texttt{msg2}.
+Obe volania sú neblokujúce, to znamená, že program nečaká
+a pokračuje funkciou \texttt{zlozity\_vypocet}. Po dokončení výpočtu čaká kým správy neboli prenesené.
+Tento krok je dôležitý pretože ak by sme nečakali na dokončenie prenosu správy premmenné msg1 a msg2 by už viacej nemuseli byť validné,
+za prepokladu ze vídeme z if konštrukcie.
+V prípade procesu jedna \texttt{(rank == 1)}, príjemca inicializuje neblokujúce volanie \texttt{MPI\_Irecv} a pokračuje funkciou \texttt{iny\_vypocet}.
+Po dokončení výpočtu skontroluje či už boli dáta prijaté volaním \texttt{MPI\_Waitall}.
+Na tomto volaní čaká, v prípade ak dáta ešte neboli prijaté.
+Tento krok je pre príjemncu dôležitý pretože mu zaručuje že dáta boli prijaté a môže ich použiť.
+
+Výstupom tohto programu môže \textquote{\texttt{Hello, MPI}} alebo aj \textquote{\texttt{MPIHello, }}, pretože poradie vykonania operácii nie je zaručené.
+Správneme poradie správ by sme dosielili rôznymi tagmi pre správy msg1 a msg2.
+% \subsection{Kolektívna komunikácia}
+% \subsection{Dynamicka alokacia}
+% \subsection{Serializacia dat}
+\section{Navrh}
+Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie programové prostredie pre ďalších lúštitelov alebo programátorov,
+ktorý budú pri svojej práci využívať gridové prostredie.
+Ako sme ukázali v predchádzajúcich kapitolách, ...
+% vyvoj na lokale, spustenie na gride, struktura projektu
+
+% \subsection{Požiadavky}
+
+\subsection{Technológie}
+% zvolene technologie: c++, mpi, boost, cmake, boost serializacia, build.sh
+Dôležitou voľbou sú použité technológie.
+V tejto práci sme si zvolili ako programovací jazyk \texttt{c++11},
+ktorý je dostatočne rýchly a zároveň poskytuje bohatú štandartnú knižnicu. 
+
+\subsection{Boost MPI}
+V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo vačšine prípadov nepraktické a často môže viesť k chybám.
+Ak by v tomto prípade odosielatel poslal dlhšiu správu ako je príjemca schopný prijať tak by tento program zlyhal.
+Riešením tohto problému je dynamická alokácia pamäte pomocou štruktúry \texttt{MPI\_Status}.
+
+\begin{lstlisting}[language=c]
+MPI_Status status;
+int msg_size;
+MPI_Probe(0, 0, MPI_COMM_WORLD, &status);
+MPI_Get_count(&status, MPI_CHAR, &msg_size);
+char *buf = (char *)malloc(msg_size);
+MPI_Recv(buf, msg_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+printf("%s\n", buf);
+free(buf);
+\end{lstlisting}
+
+\begin{lstlisting}[language=c++]
+#include "MpiApp.h"
+int main(int argc, char **argv) {
+    MpiApp app(argc, argv);
+    if (app.rank() == 0) {
+        app.send(1, 0, std::string("Hello MPI"));
+    } else if (app.rank() == 1) {
+        std::string msg;
+        app.recv(0, 0, msg);
+        std::cout << msg << std::endl;
+    }
+    return 0;
+}
+\end{lstlisting}
+
+Na správu zdrojových kódov sme použili systém \texttt{git}. co je to, preco sme to pouzili?
+
+Ako buildovací systém sme použilii cmake
+
+\subsection{Príklad použitia}
+Táto kapitola by mala slúžiť ako manuál pre daľších používateľov.
+Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru.
+
+\subsubsection{Lokálny vývoj}
+Na lokálny vývoj sme použili linuxový operačný systém Ubuntu 16.04 LTS.
+Prvým krokom je nainštalovanie potrebných balíčkov príkazom \texttt{apt}.
+\begin{lstlisting}
+  sudo apt install build-essential libmpich-dev git cmake clang-format
+\end{lstlisting}
+Druhý krok je naklonovanie git repozitára.
+\begin{lstlisting}
+  git clone git@github.com:melias122/grid.git
+\end{lstlisting}
+V tretom kroku sa prepneme do repozitára a skompilujeme celý projekt.
+Ešte pred kompiláciou musíme vytvoriť súbor .project-id, ktorý by mal obsahovať
+identifikátor pre náš projekt.
+Prvý krát môže byť kompilovanie časovo náročnejšie,
+pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modulmi. 
+\begin{lstlisting}[language=sh, ]
+  # prepnutie sa do repozitara
+  cd grid/
+
+  # vytvorenie id projektu
+  echo 3ANTAL-2016 > .project-id
+
+  # kompilacia
+  ./build.sh -b  
+\end{lstlisting}
+V tomto kroku by sme mali mat projekt úspešne skompilovaný a môžeme založiť nový projekt.
+V prípade že niečo neprebehlo dobre môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}.
+V použitia tohto príkazu musíme pokračovať od kroku tri.
+Na vytvorenie noveho projektu nam staci zadať:
+\begin{lstlisting}
+  # vytvorenie noveho projektu s nazvom enigma
+  ./build.sh -n enigma
+\end{lstlisting}
+Čo vytvorí nasledovnú štruktúru v priečinku projekt:
+\begin{lstlisting}
+  # vylistovanie projektu pomocou prikazu find aj s vystupom
+  find project/enigma
+  project/enigma/
+  project/enigma/CMakeLists.txt
+  project/enigma/enigma.pbs
+  project/enigma/.gitignore
+  project/enigma/src/
+  project/enigma/src/main.cpp
+\end{lstlisting}
+
+\begin{lstlisting}
+\end{lstlisting}
+
+\begin{lstlisting}
+\end{lstlisting}
+
+\begin{lstlisting}
+\end{lstlisting}
+
+\subsubsection{Použitie na gride hpc.stuba.sk}
 
 
+% priklad pouzitia: zalozenie projektu, kompilacia, spustenie na gride
 
-% podporovane technologie (MPI)
-% Komunikacia procesov
-
-% Navrh aplikacie, poziadavky, c++, mpi, boost, cmake, serializacia, build.sh, run.sh
 % \subsection{Genetické algoritmy}
-%% Geneticke algoritmy
-%% Schemy GA
-%% Vysledky GA
+%% teoria GA
+%% Experiment s genetickymi algoritmami
+%% zvolene schemy GA
+%% vysledky GA a ich interpretacia
 %\input{includes/plot/10000_10}
 %\input{includes/plot/10000_20}
 %\input{includes/plot/10000_50}
@@ -432,10 +724,14 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
 %\input{includes/plot/50000_50}
 %\input{includes/plot/50000_100}
 
-%% Paralelene Geneticke algoritmy
-%% Trieda Migrator
+%% Experiment s PGA
+%% teoria PGA
+%% Komunikacia cez triedu Migrator
 %% Schemy PGA
-%% Vysledky PGA
+%% Vysledky PGA a ich interpretacia
+
+%% Zaver
+%%
 %% Spolupraca s Petrom Javorkom
 %% Spotrebovany cas/peniaze
 
