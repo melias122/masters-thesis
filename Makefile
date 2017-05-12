@@ -13,7 +13,7 @@ pdf:
 
 clean:
 	git clean -f
-	rm -fr $(FILE).pdf
+#	rm -fr $(FILE).pdf
 
 rebuild: clean pdf
 
