@@ -59,8 +59,8 @@
 % we should use ISO 690 & 690-2 http://www.fei.stuba.sk/sk/kniznica-fei/vzory-bibliografickych-odkazov-a-citovanie.html?page_id=1756 
 % package for biblatex https://github.com/michal-h21/biblatex-iso690
 % if you have newer version use commented out usepackage command
-%\usepackage[backend=biber,style=iso-numeric,autolang=other,bibencoding=utf8,seconds=true]{biblatex}
-\usepackage[backend=biber,style=iso-numeric,autolang=other,bibencoding=utf8]{biblatex}
+\usepackage[backend=biber,style=iso-numeric,autolang=other,bibencoding=utf8,seconds=true]{biblatex}
+%\usepackage[backend=biber,style=iso-numeric,autolang=other,bibencoding=utf8]{biblatex}
 \usepackage[overload]{textcase}
 \usepackage{chngcntr}  
 \usepackage{tocloft}
@@ -81,7 +81,7 @@
 \usepackage{url}
 \usepackage{enumitem}
 \usepackage{caption}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \usepackage[bookmarksopen,colorlinks,plainpages=false,urlcolor=blue,hypertexnames=false,unicode]{hyperref}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -230,7 +230,7 @@
 \titlespacing\subsubsection{12pt}{10pt}{0pt}
 
 \lstset{
-  basicstyle=\scriptsize\ttfamily,
+  basicstyle=\footnotesize\ttfamily,
   columns=flexible, % removes spaces
   breaklines=true,
   breakatwhitespace=true,
