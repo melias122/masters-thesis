@@ -11,7 +11,7 @@ plot() {
     data="data/${i}_$j"
 
     cat <<EOF > includes/plot/${i}_${j}.tex
-\begin{figure}
+\begin{figure}[!ht]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
 set terminal pdf enhanced size 14.5cm, 12cm
