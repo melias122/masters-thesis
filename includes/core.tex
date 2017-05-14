@@ -86,8 +86,9 @@ Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
   
 \end{itemize}
 
-\subsection{Útoky}
-% \todo{ks 2.3}
+\subsection{Počítačové lúštenie klasických šifier}
+% \todo{ks 2.3}, ks 8.2.
+
 \subsubsection{Hrubou silou}
 Útok hrubou silou (bruteforce) je typ útoku, ktorý sa snaží zlomiť kľúč tak, že sa prehľadáva celý priestor kľúčov.
 Aby bol takýto útok možný a prakticky realizovateľný, priestor prehľadávaných kľúčov nesmie byť väčší ako hranica daná dostupnými
@@ -96,21 +97,21 @@ prostriedkami alebo časom potrebným na riešenie.
 Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme že bol zašifrovaný šifrou podobnou Cézarovej šifre.
 Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností posunov, čo je v tomto prípade kľúč, tak aby sme dostali zmysluplný text.
 
-\begin{verbatim}
-klúč 1
+\begin{lstlisting}
+kluc 1
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 WFDEPYTPSTDEZCTNVJNSDTQTPCYLRCTOP
 
-klúč 2
+kluc 2
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 XGEFQZUQTUEFADUOWKOTEURUQDZMSDUPQ
 
-kľúč 3
+kluc 3
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 YHFGRAVRUVFGBEVPXLPUFVSVREANTEVQR
 
-... // ďaľšie klúče 4..26
-\end{verbatim}
+... // dalsie kluce 4..26
+\end{lstlisting}
 
 Po prezretí všetkých možností by sme zistili že kľúč 16 sa dešifruje na \textquote{LUSTENIEHISTORICKYCHSIFIERNAGRIDE}.
 
@@ -122,19 +123,19 @@ Slovníkový útok narozdiel od útoku hrubou silou skúša iba niektoré možno
 Ukážme si ako by v princípe mohol fungovať slovníkový útok na šifru Vigenere.
 Nech zašifrovaný text je \textquote{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textquote{ABC, SOMAR, HESLO, ...}.
 
-\begin{verbatim}
-kľúč JANO
+\begin{lstlisting}
+kluc: JANO
 SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 JYXQJUZIJWMJXCJVFQAHQMKFJYEEIFCTN
 
-kľúč SOMAR
+kluc: SOMAR
 SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 AKYEBCYKSFHJUCFRAENEHYLTBGDGROXTK
 
-klúč HESLO
+kluc: HESLO
 SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 LUSTENIEHISTORICKYCHSIFIERNAGRIDE
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Genetické a evolučné algoritmy}
 todo
@@ -599,7 +600,8 @@ Správneme poradie správ by sme dosielili rôznymi tagmi pre správy msg1 a msg
 \subsection{Dynamicka alokácia}
 V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo vačšine prípadov nepraktické a často môže viesť k chybám.
 Ak by v tomto príklade odosielatel poslal dlhšiu správu ako je príjemca schopný prijať tak by tento program zlyhal.
-Riešením tohto problému je dynamická alokácia pamäte. Aby sme mohli dynamicky alokovať pamäť potrebujeme vedieť
+
+Riešením tohto problému je dynamická alokácia pamäte pre prijaté správy. Aby sme mohli pamäť dynamicky alokovať potrebujeme vedieť
 koľko dát sa nám snaží odosielatel poslať. To môžeme zistiť pomocou štruktúry \texttt{MPI\_Status} a volaní \texttt{MPI\_Probe, MPI\_Get\_count}.
 Kód procesu jedna z príkladu \ref{mpi:1} by sme mohli nahradiť nasledovne:
 \begin{lstlisting}[language=c]
@@ -639,25 +641,36 @@ int main(int argc, char **argv) {
 
 \section{Návrh}
 Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie programové prostredie pre ďalších lúštitelov a programátorov,
-ktorý budú pri svojej práci využívať grid. Takéto prostredie by malo poskytnúť spoločné stavebné bloky, ktoré
-by si riešitelia medzi sebou mohli navzájom zdielať.
-% vyvoj na lokale, spustenie na gride, struktura projektu, flow diagram?
-% \subsection{Technológie}
-% zvolene technologie: c++, mpi, boost, cmake, boost serializacia, build.sh
+ktorý budú pri svojej práci využívať grid.
 
-V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandartnú knižnicu.
-Keďže \acrshort{mpi} štandard od verzie tri priamo nepodporuje C++ volania \cite{mpi3-1}, budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu.
-Z Boost knižnice využijeme aj module serialization pre dátovú serializáciu.
+Takéto prostredie by malo poskytnúť spoločné stavebné bloky, ktoré by si riešitelia medzi sebou mohli navzájom zdielať.
+Stavebné bloky by mohli zahŕňať napríklad implementácie šifier, ohodnocovacích funkcii alebo prácu zo súbormi.
+Ďalším spoločným črtom je vytváranie projektov, ktoré by malo byť čo najviac automatické a malo by generovať štruktúru priečinkov a základných súborov.
 
-Na správu zdrojových kódov sme použili systém \texttt{git}. co je to, preco sme to pouzili?
-Ako buildovací systém sme použilii cmake.
+Keďže vývoj priamo na gride v konzolovom prostredí je nepraktický. Vývoj v nami navrhovanom prostredí by mal o
 
+Základné požiadavky by mali spĺnať nasledovné kritéria:
+\begin{itemize}
+\item
+  Automatické vytvorenie projektu.
+\item
+  Lokálny vývoj a testovnie
+\item
+  Zdieľanie modulov medzi projektami
+\item
+  Automatické generovanie a úprava skriptov pre gridové prostredie
+\item
+  Jednoduchá synchronizácia s gridom hpc.stuba.sk
+\end{itemize}
+
+% flow diagram?
 \subsection{Štruktúra prostredia}
 V tejto kapitole popíšeme štruktúru prostredia a význam jednotlivých priečinkov a súborov.
 
 Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
 % tree -L 3 | sed "s/├/|/g" | sed 's/│/|/g' | sed 's/└/|/g' | sed 's/──/-/g'
 \begin{lstlisting}[caption={Štruktúra prostredia}, label={prop:struktura}]
+.
 |- build.sh
 |- CMakeLists.txt
 |- module/
@@ -695,6 +708,22 @@ Do priečinku \texttt{src} by sa mali umiestovať zdrojové súbory špecifické
 Ostatné zdrojové kódy, ktoré nesúvisia s daným projektom by mali ísť do modulov (priečinok \texttt{module}).
 Priečinok \texttt{module} slúži na zdielanie zdrojových kódov (modulov) medzi projektami.
 Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižníc od tretích strán.
+\subsection{Implementácia}
+% zvolene technologie:
+% linux
+% c++(gcc 5.4)
+Ako programovací jazyk sme si zvolili C++, s kompilátorom gcc5.4. 
+% cmake
+% boost(serializacia, mpi(mvapich, openmpi), automaticke stiahnutie a buildovanie)
+% build.sh
+% git
+V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandartnú knižnicu.
+Keďže \acrshort{mpi} štandard od verzie tri priamo nepodporuje C++ volania \cite{mpi3-1}, budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu.
+Z Boost knižnice využijeme aj module serialization pre dátovú serializáciu.
+Ako buildovací systém sme použilii cmake.
+
+Na správu zdrojových kódov sme použili systém \texttt{git}. co je to, preco sme to pouzili?
+
 \subsection{Príklad použitia}
 Táto kapitola by mala slúžiť ako manuál pre daľších používateľov.
 Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru.
@@ -796,7 +825,7 @@ Teraz môžeme projekt HelloGrid skompilovať a následne spustiť pomocou prík
 \end{lstlisting}
 Výstup programu nemusí vyzerať presne takto.
 
-\subsubsection{Použitie na gride hpc.stuba.sk}
+\subsubsection{Spustenie na gride hpc.stuba.sk}
 Aby sme boli schopný použiť program vytvorený v kapitole \ref{subsec:local-dev}. Musíme najprv celý projekt skopírovať na grid hpc.stuba.sk.
 Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne napríklad pomocou programu \texttt{rsync}, \texttt{scp}
 alebo môžeme použiť systém git, prípadne iný program.
@@ -807,7 +836,7 @@ Nachadzame sa v priecinku \texttt{~/grid} a repozitáre môžeme zosynchronizova
   ./build.sh --sync
 \end{lstlisting}
 Príkaz \texttt{./build.sh --sync} skopíruje cely projekt \texttt{~/grid} na server hpc.stuba.sk do priečinku \texttt{/work/3xelias/grid}.
-Taktiež skopíruje \texttt{.project-id} a vynechá všetky nechcené súbory.
+Taktiež skopíruje \texttt{.project-id} a vynechá všetky súbory viazané na lokálne prostredie.
 Po skopírovaní súborov sa môžeme prihlásiť pomocou \texttt{ssh}.
 \begin{lstlisting}
   # prihlasenie do gridu
@@ -830,22 +859,109 @@ Výstupy si môžeme stiahnuť na lokálny počítač pomocou:
   # na lokalnom pocitaci v priecinku ~/grid
   ./build.sh --sync
 \end{lstlisting}
-Tentokrát ak sme nespravili žiadnu zmenu na lokalnom pc, tak sa neskopiruje nič, ale stiahnu sa výstupy s programu HelloGrid.
+Tentokrát ak sme nespravili žiadnu zmenu na lokalnom pc, tak sa neskopiruje nič,
+ale stiahnu sa výstupy s programu HelloGrid do priečinku \texttt{project/HelloGrid}.
 
-% \begin{lstlisting}
-% \end{lstlisting}
+\section{Genetické algoritmy}
+\acrfull{ga} patria medzi patria medzi najčastejšie používaných predstaviteľov evolučných výpočtových techník.
+V tejto práci sme si ich zvolili pretože sú výpočtovo náročné a dajú sa paralelizovať.
+Tieto vlastnoti ich určujú ako vhodných kandidátov na nasadenie do gridového prostredia.
+Na vykonanie exprerimentu sme si zvolili monoalfabetikú substitúciu.
 
-% \subsection{Genetické algoritmy}
-%% teoria GA
-%% Experiment s genetickymi algoritmami, distrubucia parametrov
-%% zvolene schemy GA
-%% vysledky GA a ich interpretacia
+\subsection{Terminológia}
+Genetické algoritmy sa snažia napodobniť biologické procesy v prírode.
+Základnými objektami sú gén, reťazec a populácia. Nad týmito objektami sa výkonávajú operácie.
+Medzi základné operácie patria výber, mutácia a kríženie.
 
-%% Experiment s PGA
-%% teoria PGA
-%% Komunikacia cez triedu Migrator
-%% Schemy PGA
-%% Vysledky PGA a ich interpretacia
+Gén je základnou stavebnou jednotkou reaťazca a predstavuje elementárne vlastnosti jedinca.
+Gén je zvyčajne reprezentovaný číselne, alebo nejakým symbolom z abecedy.
+V tomto experimente je gén reprezentovaný ako jeden znak z abecedy.
+
+Reťazec (chromozóm) je postupnosť génov, respektíve znakov, ktoré predstavujú zvolené parametre alebo vlastnosti jedinca
+z problémovej oblasti. V tomto prípade reťazec predstavuje dešifrovací klúč. 
+
+Populácia je skupina reťazcov zvoleného počtu. Veľkosť populácie sa počas riešenia genetického algoritmu môže meniť.
+
+Generácia predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne môže reprezentovať poradové číslo cyklu.
+
+Účelová funkcia vypočítava skóre každého jedinca v populácii a je mierou toho čo chceme maximalizovať, prípadne minimalizovať.
+Úlohou účelovej funkcie je nájsť globálny extrém.
+
+Fitness je v evolučných výpočtoch pojem predstavujúci mieru úspešnosti jedincov.
+V prípade maximalizačnej úlohy je to najväčšia hodnota účelovej funkcie. Naopak v prípade minimalizačnej úlohy je to najmenšia hodnota.
+
+Mutácia 
+
+\begin{figure}[!h]
+  \centering
+  \def\svgwidth{\columnwidth}
+  \input{ga.pdf_tex}
+  \caption{Štruktúra GA}
+  \label{img:ga}
+\end{figure}
+
+
+% teoria GA
+% spolupraca s eugenom?
+\subsection{Schémy}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\textbf{Schéma} & \textbf{Výber}            & \textbf{Mutácia} & \textbf{Kríženie} & \textbf{Suboperácia} \\ \midrule
+\textbf{A}      & Tournament(n)             & Swap(1)          & -                 & -                    \\ \midrule
+\textbf{B}      & Random(n)                 & Swap(1)          & -                 & -                    \\ \midrule
+\textbf{C}      & Tournament(n/2)           & Swap(1)          & -                 & -                    \\
+                & Tournament(n/2)           & -                & -                 & -                    \\ \midrule
+\textbf{D}      & Tournament(n/2)           & Swap(1)          & -                 & -                    \\
+                & Random(n/2)               & -                & -                 & -                    \\ \midrule
+\textbf{E}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & (n-2) * Tournament(2)     & -                & Singlepoint(2)    &                      \\ \midrule
+\textbf{F}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & (n-2)*Tournament(2)       & -                & Singlepoint(1)    & -                    \\ \midrule
+\textbf{G}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & ((n-2)/2) * Tournament(2) & -                & Singlepoint(2)    & Swap(1)              \\ \midrule
+\textbf{H}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & (n-2)*Random(2)           & -                & Singlepoint(1)    & -                    \\ \midrule
+\textbf{I}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & (n-2)/2 * Random(2)       & -                & Singlepoint(2)    &                      \\ \midrule
+\textbf{J}      & Elite(1)                  & -                & -                 & -                    \\
+                & Elite(1)                  & Swap(1)          & -                 & -                    \\
+                & ((n-2)/2) * Random(2)     &                  & Singlepoint(2)    & Swap(1)              \\ \bottomrule
+\end{tabular}
+\caption{schemy}
+\label{tab:schemy}
+\end{table}
+
+tabulka schem GA
+\subsection{Distribúcia parametrov}
+implementácia pomocou distrubucie parametrov
+\subsection{Výsledky experimentu}
+vysledky GA a ich interpretacia
+
+\section{Paralelné genetické algoritmy}
+% uvod a teoria
+% optimalizaci pomocou cache, 
+\subsection{Trieda Migrator}
+Komunikacia cez triedu Migrator
+\subsection{Topológie}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{img/topology.png}
+  \caption{Topológie paralelných genetických algoritmov \cite{pea}.}
+  \label{img:topology}
+\end{figure}
+
+Schemy PGA
+\subsection{Výsledky experimentu}
+Vysledky PGA a ich interpretacia
 
 %% Zaver
 %%
