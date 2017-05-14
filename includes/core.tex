@@ -87,8 +87,7 @@ Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
 \end{itemize}
 
 \subsection{Počítačové lúštenie klasických šifier}
-% \todo{ks 2.3}, ks 8.2.
-
+Počítače a lúštenie šifier sú v dnešnej dobe neoddelitelnou súčasťou.
 \subsubsection{Hrubou silou}
 Útok hrubou silou (bruteforce) je typ útoku, ktorý sa snaží zlomiť kľúč tak, že sa prehľadáva celý priestor kľúčov.
 Aby bol takýto útok možný a prakticky realizovateľný, priestor prehľadávaných kľúčov nesmie byť väčší ako hranica daná dostupnými
@@ -700,8 +699,6 @@ Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
     |- ...
 \end{lstlisting}
   
-Základom celého prostredia je skript \texttt{build.sh} v kombinácii s buildovacím nástrojom cmake. Skript \texttt{build.sh} sa používa na vytváranie nových projektov, kompilovanie, synchonizáciu s gridom a na spúštanie projektov v lokálnom prostredí ale aj na gride.
-
 Skript \texttt{build.sh} vytvára projeky do podpriečinku \texttt{project}. Každý projekt po vytvorení obsahuje automaticky generované súbory:
 \texttt{CMakeLists.txt}, binárny spustitelný súbor, (po kompilácii), \texttt{.pbs} súbor a \texttt{main.cpp} v priečinku \texttt{src}.
 Do priečinku \texttt{src} by sa mali umiestovať zdrojové súbory špecifické pre daný projekt.
@@ -712,17 +709,52 @@ Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižn
 % zvolene technologie:
 % linux
 % c++(gcc 5.4)
-Ako programovací jazyk sme si zvolili C++, s kompilátorom gcc5.4. 
+% Ako programovací jazyk sme si zvolili C++, s kompilátorom gcc5.4. 
 % cmake
 % boost(serializacia, mpi(mvapich, openmpi), automaticke stiahnutie a buildovanie)
 % build.sh
 % git
 V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandartnú knižnicu.
-Keďže \acrshort{mpi} štandard od verzie tri priamo nepodporuje C++ volania \cite{mpi3-1}, budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu.
-Z Boost knižnice využijeme aj module serialization pre dátovú serializáciu.
-Ako buildovací systém sme použilii cmake.
+Teto programovací jazyk sa taktiež vyučuje na Fakulte elektrotechniky a informatiky a je veľmi rozšírený v industriálnej sfére.
 
-Na správu zdrojových kódov sme použili systém \texttt{git}. co je to, preco sme to pouzili?
+Keďže \acrshort{mpi} štandard od verzie tri priamo nepodporuje C++ volania \cite{mpi3-1},
+budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu. Z Boost knižnice tiež využijeme modul serialization pre dátovú serializáciu.
+Vrámci gridu hpc.stuba.sk nemáme k dispozícii knižnicu boost. Tiež nemáme možnosť inštalovať žiadne dalšie knižnice
+a preto sa pred prvou kompiláciou knižnica Boost stiahne a automacike skompiluje pre dané prostredie.
+Kompilácia prebieha iba jeden krát a knižnica sa uloží do priečinku vendor/boost\_<verzia>.
+
+Ako buildovací systém sme použilii cmake.
+Cmake je multiplatformový, opensource nástroj, ktorý sa používa na buildovanie a testovanie softvéru.
+\begin{lstlisting}
+  
+\end{lstlisting}
+
+Na správu zdrojových kódov sme použili systém \texttt{git} pretože archiváciu správu zdrojových kódov považujeme za veľmi dôležitú.
+Zdrojvé kódy tohto projektu sú dostupné na githube \url{https://github.com/melias122/grid}.
+
+Základným príkazom celého prostredia je skript \texttt{build.sh} v kombinácii s buildovacím nástrojom cmake.
+Skript \texttt{build.sh} sa používa na vytváranie nových projektov, kompilovanie,
+synchonizáciu s gridom a na spúštanie projektov v lokálnom prostredí ale aj na gride.
+Základné oprácie tohto príkazu \texttt{build.sh} sú:
+\begin{itemize}
+\item
+  \texttt{-b, --build}, tento argument skompiluje všetky projekty a moduly nachádzajúce sa v priečinkoch project, module. Taktiež skompiluje
+  všetky potrebné závislosti. Kombinuje príkaz module z kapitoly (kap), a buildovací nástroj cmake.
+\item
+  \texttt{-h, --help} argument vypíše ako návod ako pracovať stýmto príkazom.
+\item
+  \texttt{-r, --run [projekt]} spustí projekt, ktorý je zadaný ako další argument tohto príkazu.
+  Hlavou myšlienkou tohto príkazu je že by sa mal správať podobne v lokánom prostredí ale aj na gride.
+  Príkaz parsuje main.cpp v priečinku projektu a podľa nastavenia nodes, ppn, walltime a queue dynamicky upravuje .pbs súbor pre grid,
+  alebo tieto nastavenia použije do príkazu mpirun na simulovanie gridu.
+\item
+  \texttt{-n, --new-project [nazov\_projektu]} vytvorí projekt v priecinku project.
+  Tento príkaz automaticky vytvára niektoré základné súbory ako main.cpp, a .pbs súbor.
+\item
+  \texttt{--sync} zosynchronizuje lokálny projekt na grid do priečinku \texttt{/work/\$USER/grid}.
+  Priečinok work bol zvolený narozdiel od home, pretože nekladie žiadne obmedzenia na počet súborov.
+  Tento príkaz nemá deštruktívny charakter, nemaže žiadne súbory.
+\end{itemize}
 
 \subsection{Príklad použitia}
 Táto kapitola by mala slúžiť ako manuál pre daľších používateľov.
@@ -738,7 +770,7 @@ Prvým krokom je nainštalovanie potrebných balíčkov príkazom \texttt{apt}.
 \begin{lstlisting}
   sudo apt install build-essential libmpich-dev git cmake clang-format
 \end{lstlisting}
-Druhý krok je naklonovanie git repozitára.
+Druhý krok je naklonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojvé súbory priložené k tejto práci.
 \begin{lstlisting}
   git clone git@github.com:melias122/grid.git
 \end{lstlisting}
@@ -758,8 +790,7 @@ pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modu
   ./build.sh -b
 \end{lstlisting}
 V štvrtom kroku by sme mali mať celý repozitár úspešne skompilovaný a môžeme založiť nový projekt.
-V prípade že niečo neprebehlo dobre môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}.
-V použitia tohto príkazu musíme pokračovať od kroku tri.
+V prípade že niečo neprebehlo dobre môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}, alebo projekt zmazať a začať od kroku jedna.
 Na vytvorenie noveho projektu nam staci zadať:
 \begin{lstlisting}
   # vytvorenie noveho projektu s nazvom HelloGrid
@@ -775,7 +806,7 @@ Na vytvorenie noveho projektu nam staci zadať:
   project/HelloGrid/src/main.cpp
 \end{lstlisting}
 Dôležité súbory pre kompilačný systém sú všetky CMakeLists.txt súbory bez ktorých sa projekt neskomkpiluje.
-V prípade že by sme cheli pridať ďalší .cpp súbor, môžeme ho pridat priečinku \texttt{HelloGrid/CMakeLists.txt} a následne ho pridať do
+V prípade že by sme cheli pridať ďalší .cpp súbor, môžeme ho pridat do priečinku \texttt{HelloGrid/src} a následne ho musíme pridať do
 súboru \texttt{HelloGrid/CMakeLists.txt}.
 
 \begin{lstlisting}[language=c++, caption={HelloGrid/src/main.cpp}, numbers=left]
@@ -866,9 +897,8 @@ ale stiahnu sa výstupy s programu HelloGrid do priečinku \texttt{project/Hello
 \acrfull{ga} patria medzi patria medzi najčastejšie používaných predstaviteľov evolučných výpočtových techník.
 V tejto práci sme si ich zvolili pretože sú výpočtovo náročné a dajú sa paralelizovať.
 Tieto vlastnoti ich určujú ako vhodných kandidátov na nasadenie do gridového prostredia.
-Na vykonanie exprerimentu sme si zvolili monoalfabetikú substitúciu.
 
-\subsection{Terminológia}
+\subsection{Základná terminológia}
 Genetické algoritmy sa snažia napodobniť biologické procesy v prírode.
 Základnými objektami sú gén, reťazec a populácia. Nad týmito objektami sa výkonávajú operácie.
 Medzi základné operácie patria výber, mutácia a kríženie.
@@ -890,21 +920,28 @@ Generácia predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne m
 Fitness je v evolučných výpočtoch pojem predstavujúci mieru úspešnosti jedincov.
 V prípade maximalizačnej úlohy je to najväčšia hodnota účelovej funkcie. Naopak v prípade minimalizačnej úlohy je to najmenšia hodnota.
 
-Mutácia 
+Výber je process, ktorý vyberie niektorých jedincov z populácie na základe zvolenej stratégie.
+Vybraný jedinci potom vstupujú do operácii kríženia, mutácie alebo bez zmeny pokračujú do ďalšej generácie.
+Existuje viacero stratégii výberu jedincov, avšak základnou ideou je aby lepší jedinci prežili a postupne vytlačili horších jedincov z populácie.
 
-\begin{figure}[!h]
-  \centering
-  \def\svgwidth{\columnwidth}
-  \input{ga.pdf_tex}
-  \caption{Štruktúra GA}
-  \label{img:ga}
-\end{figure}
+Mutácia znamená náhodnú zmenu génu v reťazci, prípadne viac zmien v celej populácii.
+Gén zmení svoju hodnotu na inú náhodne zvolenú hodnotu z prehladávného priestoru.
+Mutácia je základnou hybnou silou genetických algoritmov. Umožnuje nachádzať nové riešenia, ktoré sa v populácii ešte neobjavili.
 
+Kríženie je operácia, pri ktorej si dva náhodne zvolené rodičovské jedince rozdelia v nejakom bode a vymenia si svoje gény.
+Krížením vznikajú nový, odlisný potomkovia, ktorý nesú niektoré znaky oboch rodičov.
 
-% teoria GA
-% spolupraca s eugenom?
-\subsection{Schémy}
+%\subsection{Štruktúra GA}
 
+%\begin{figure}[!h]
+%  \centering
+%  \def\svgwidth{\columnwidth}
+%  \input{ga.pdf_tex}
+%  \caption{Štruktúra GA}
+%  \label{img:ga}
+%\end{figure}
+
+\subsection{Experiment}
 \begin{table}[!h]
 \centering
 \begin{tabular}{@{}lllll@{}}
@@ -921,7 +958,7 @@ Mutácia
                 & (n-2) * Tournament(2)     & -                & Singlepoint(2)    &                      \\ \midrule
 \textbf{F}      & Elite(1)                  & -                & -                 & -                    \\
                 & Elite(1)                  & Swap(1)          & -                 & -                    \\
-                & (n-2)*Tournament(2)       & -                & Singlepoint(1)    & -                    \\ \midrule
+                & (n-2) * Tournament(2)     & -                & Singlepoint(1)    & -                    \\ \midrule
 \textbf{G}      & Elite(1)                  & -                & -                 & -                    \\
                 & Elite(1)                  & Swap(1)          & -                 & -                    \\
                 & ((n-2)/2) * Tournament(2) & -                & Singlepoint(2)    & Swap(1)              \\ \midrule
@@ -930,18 +967,91 @@ Mutácia
                 & (n-2)*Random(2)           & -                & Singlepoint(1)    & -                    \\ \midrule
 \textbf{I}      & Elite(1)                  & -                & -                 & -                    \\
                 & Elite(1)                  & Swap(1)          & -                 & -                    \\
-                & (n-2)/2 * Random(2)       & -                & Singlepoint(2)    &                      \\ \midrule
+                & (n-2)/2 * Random(2)       & -                & Singlepoint(2)    & -                    \\ \midrule
 \textbf{J}      & Elite(1)                  & -                & -                 & -                    \\
                 & Elite(1)                  & Swap(1)          & -                 & -                    \\
-                & ((n-2)/2) * Random(2)     &                  & Singlepoint(2)    & Swap(1)              \\ \bottomrule
+                & ((n-2)/2) * Random(2)     & -                & Singlepoint(2)    & Swap(1)              \\ \bottomrule
 \end{tabular}
 \caption{schemy}
 \label{tab:schemy}
 \end{table}
 
-tabulka schem GA
+V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré budú lúštiť monoalfabetickú substitúciu.
+Dôležitosť tohto experimentu spočívala v nájdení vhodných parametrov, pri ktorých bude najvyššia úspešnosť rozlúštenia zašifrovaného textu.
+
+Prvým krokom bolo nasadenie vlastnej implemtácie GA, ktoré by sme mohli upraviť podľa vlastných požiadaviek.
+Základnú implementáciu poskytol vedúci práce Ing. Eugen Antal, PhD. Táto implementácia bola dalej nami rozvíjaná.
+Čast kódu bola prepísana, ale základná idea ostala.
+Doimplementovali sme niektoré genetické operácie kríženia: single point crossover, uniform crossover.
+
+Ďalším krokom bolo zvolenie vhodných parametrov GA, pre nájdenie omptimálneho riešenia.
+Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskôr použit pre dalšie skúmanie paralelných genetických algoritmov. 
+Medzi skúmané parametre patrili: veľkosť počiatocnej populácie, počet iterácii genetického algoritmu a kombinácie rôznych operácii (schémy).
+Veľkosť počiatočnej populácie, ktorú sme skúmali bola v počte: 10, 20, 50 a 100 chromozómov. Počet iterácii bol 10000 a 50000. 
+Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
+
+Prvým stĺpcom tabulky je názov samotnej schémy. Ďalšie stĺpce tabuľky predstavujú zreťazenie jednotlivých operácii. Riadky schémy predstavujú aplikovanie jednotlivých retazcov operácii na populáciu z predchádzajúcej generácie.
+Všimnime si napríklad schému \textbf{J}.
+Prvou operáciou v prvom riadku tejto schémy je výber elitného jedinca, ktorý pospupuje do novej generácie.
+V druhom riadku je tak isto zvolený jeden elitný jedinec, ale tentokrát je nad ním vykonaná operácia mutácie, ktorá jeden krát zamení pozície dvoch nahodne vybraných génov.
+V tretom riadku schémy \texttt{J} sa \texttt{(n-2)/2}-krát vykoná náhodný výber, ktorého výstupom sú dvaja jedinci. Týto jedinci postupujú do operácie kríženia,
+ktorej výsledkom sú dvaja nový potomkovia nad ktorými sa vykoná operácia swap.
+
+Úspešnosť jednotlivých schém bola vyhodnocovaná nad textami od dĺžky 50 po 2000 s nárastom o 50 znakov,
+pričom z každej dĺžky sme mali k dispozícii 100 rôznych textov.
+Po celom behu GA bol vybratý najlepší jedinec reprezentujúci potencionály kľúč,
+ktorým bol dešifrovaný zašifrovaný text a jeho výsledok porovnaný s pôvodným otvoreným textom.
+% Úspešnosť bola vyhodnotená podľa počtu zhodných pozícii.
 \subsection{Distribúcia parametrov}
-implementácia pomocou distrubucie parametrov
+Aby sme mohli využíť celú výpočtovú silu ktorú nám gridové prostredie ponúka a aby sme sa zároveň vyhli opakovanému spúštaniu každej schémy
+tak sme navrhli riešenie v ktorom by sme mali jeden hlavný proces distribuujúci parametre n pracovným procesov.
+
+Úlohou hlavného procesu je distribúcia parametrov (nastavení GA) pracovným procesom. Hlavný proces zostaví parametre: iterácia, veľkosť populácie, dĺžka textu,
+načíta otvorený text, načíta zašifrovaný text. Potom čaká na kým sa uvolní ľubovoľný pracovný proces od ktorého príjme jeho id a pošle mu späť zostavené parametre.
+V prípade že hlavný proces už nemá čo poslať, čaká na všetky pracovné procesy, ktoré následne ukončí.
+
+Úlohou pracovného procesu je na prijaté parametre aplikovať schémy z tabuľky \ref{tab:schemy}.
+Pracovný proces sa snaží získať prácu od hlavného procesu tak,
+že mu najprv pošle svoje id a potom čaká kým mu hlavný proces pridelí prácu (parametre) alebo zruší jeho činnosť.
+
+\begin{lstlisting}[language=c++, caption={Pseudokód ditribúcie parametrov GA}]
+  void run_master(mpi::comm &comm) {
+    for (int itteration : {10000, 50000} ) {
+      for (int populationSize : {10, 20, 50 , 100}) {
+        for (int textsize = 50; textsize <= 2000; textsize += 50) {
+          for (int text = 1; text <= 100; text++) {
+            string pt = read_plaintext();
+            string ct = read_ciphertext();
+            Data data;
+            comm.recv(mpi::any_source, 0, data);
+            // copy data
+            data.itteration = itteration;
+            ...
+            comm.send(data.workerId, 1, data);
+          }
+        }
+      } 
+    }
+    // shutdown workers
+  }
+
+  void run_worker(int id, mpi::comm &comm) {
+    // initialize
+    scheme schemes = ;
+    while (1) {
+      Data data(id);
+      comm.isend(master, 0, data);
+      comm.recv(master, 1, data);
+      if (!data.status) return;
+      // setup GA scheme
+      Scheme scheme = ...
+      for (schemeId &s : {A, B, C, ...}) {
+        GeneticAlgorithm::run(scheme);
+        // write best
+      }
+    }
+  }
+\end{lstlisting}
 \subsection{Výsledky experimentu}
 vysledky GA a ich interpretacia
 
