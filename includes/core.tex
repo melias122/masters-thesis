@@ -9,13 +9,13 @@ Feničania.
 V niektorých prípadoch predstavovalo už použitie písma utajenie samotného textu.
 Príkladom môžu byť Egyptské hieroglyfy alebo klinové písmo používané v Mezopotámii.
 Iným príkladom môžu byť semitské jazyky, ktoré sú charakteristické používaním iba spoluhlások bez použitia samohlások,
-pretože tie zaviedli až Aremejci a po nich následné Gréci aby pomocou nich boli schopný rozlíšiť jazyky \cite{ks}.
+pretože tie zaviedli až Aremejci a po nich následné Gréci, aby pomocou nich boli schopný rozlíšiť jazyky \cite{ks}.
 Aj diakritika ako taká má schopnosť rozlišovať významy slov, čo si ale až do 15.storočia nikto nevšímal,
 až pokiaľ ju Arabi nezačali používať pri kryptoanalýze rôznych šifier.
 
 Z historického hľadiska nie je možné presne zoradiť ako jednotlivé šifry vznikali, pretože súčasne vznikali na viacerých miestach sveta.
-Komunikácia a s ňou spojené sírenie informácii nebolo také rýchle ako dnes, až do roku 1440 keď Johan Guttenberg vynašiel kníhtlač,
-čo zjednodušilo výmenu a uchovávanie informácii.
+Komunikácia a s ňou spojené sírenie informácií nebolo také rýchle ako dnes, až do roku 1440, keď Johan Guttenberg vynašiel kníhtlač,
+čo zjednodušilo výmenu a uchovávanie informácií.
 % (TODO: pridať utajovanie informácie)
 
 Ku kryptografii ako aj k rôznym iným vedným disciplínam prispelo v minulosti staré Grécko.
@@ -32,7 +32,7 @@ V stredoveku, kvôli bojom medzi pápežmi Ríma a Avignonu, bola kryptografia z
 Ich charakteristickým znakom bolo zamieňanie písmen alebo nahradzovanie mien a titulov osôb v správach.
 V tomto období zabezpečovanie utajenia správ pokročilo až na takú úroveň, že na doručovanie správ boli použitý špeciálne vycvičení kuriéri.
 
-V prvej polovici 20. storočia ľudia, ktorí pracovali v oblasti utajovanej komunikácie verili, že na to aby bola zabezpečená utajovaná komunikácia musí byť utajený kľúč a okrem neho aj šifrovací algoritmus. Toto ale odporovalo Kerckhoffovmu princípu, ktorý hovorí že: \textquote{Bezpečnosť šifrovacieho algoritmu musí závisieť výlučne na utajení kľúča a nie algoritmu}. Okrem toho sformuloval aj niekoľko požiadaviek na kryptografický systém, medzi ktoré patria:
+V prvej polovici 20. storočia ľudia, ktorí pracovali v oblasti utajovanej komunikácie verili, že na to, aby bola zabezpečená utajovaná komunikácia musí byť utajený kľúč a okrem neho aj šifrovací algoritmus. Toto ale odporovalo Kerckhoffovmu princípu, ktorý hovorí že: \textquote{Bezpečnosť šifrovacieho algoritmu musí závisieť výlučne na utajení kľúča a nie algoritmu}. Okrem toho sformuloval aj niekoľko požiadaviek na kryptografický systém, medzi ktoré patria:
 \begin{enumerate}
 \item systém musí byť teoreticky, alebo aspoň prakticky bezpečný
 \item narušenie systému nesmie priniesť ťažkosti odosielateľovi a adresátovi
@@ -43,7 +43,7 @@ V prvej polovici 20. storočia ľudia, ktorí pracovali v oblasti utajovanej kom
 \end{enumerate}
 Tieto princípy sú popísané v pôvodnej publikácii od Kerckhoffa \cite{kerckhoff}.
 
-Existovala ale aj iná skupina vedcov, medzi ktorých patril aj Lester S. Hill, ktorý si uvedomoval že kryptológia je úzko spätá z matematikou.
+Existovala ale aj iná skupina vedcov, medzi ktorých patril aj Lester S. Hill, ktorý si uvedomoval, že kryptológia je úzko spätá z matematikou.
 V roku 1941 si na Hillových prácach zakladal A. Adrian Albert, ktorý pochopil, že v šifrovaní je možné použiť viacero algebraických štruktúr.
 Neskôr toto všetko usporiadal a zdokonalil Claude E. Shannon, čo možno považovať za ukončenie éry klasických šifier \cite{ks}.
 
@@ -60,7 +60,7 @@ Môžeme spomenúť niekoľko:
 \item V klasických šifrách je otvorený text, zašifrovaný text a kľúč v abecede reálneho jazyka, pričom v moderných šifrách sa používa binárne kódovanie.
 \item Na klasické šifry sa zväčša dá použiť štatistická analýza. 
 \end{itemize}
-Z spomenutých charakteristík existujú aj výnimky. Napríklad pri Vigenerovej šifre sa algoritmus neutajoval. To platí aj pre Vernamovu šifru, ktorá okrem toho používa navyše binárne znaky. Vernamova šifra je perfektne bezpečná v podľa Shannonovej teórie \cite{ks}.
+Zo spomenutých charakteristík existujú aj výnimky. Napríklad pri Vigenerovej šifre sa algoritmus neutajoval. To platí aj pre Vernamovu šifru, ktorá okrem toho používa navyše binárne znaky. Vernamova šifra je perfektne bezpečná v podľa Shannonovej teórie \cite{ks}.
 
 Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
 \begin{itemize}
@@ -74,27 +74,55 @@ Klasické šifry môžeme rozdeliť do niekoľkých základných kategórii:
 
 \item \textbf{Transpozičné šifry.}
   Transpozičné šifry sú vlastne blokové šifry, ktoré pri šifrovaní a dešifrovaní aplikujú pevne zvolenú permutáciu na každý blok
-  otvoreného/zašifrovaného textu. Od polyalfabetickej šifry sa líši v poradí vykonávania operácii.
+  otvoreného/zašifrovaného textu. Od polyalfabetickej šifry sa líši v poradí vykonávania operácií.
   
 \item \textbf{Homofónne šifry.}
   Homofónne šifry sú šifry, ktoré majú znáhodnený zašifrovaný text. Tieto šifry sa snažia zabrániť frekvenčnej analýze textu. 
   
 \item \textbf{Substitučno-permutačné šifry.}
   Ak aplikujeme viacero substitučný a permutačných šifier na otvorený text tak hovoríme o substitučno-permutačných šifrách.
-  Šifrovanie prebieha tak, že blok otvoreného textu sa rozdelí na menšie bloky, na ktoré je potom aplikovaná substitúcia, a permutácia,
+  Šifrovanie prebieha tak, že sa blok otvoreného textu rozdelí na menšie bloky, na ktoré je potom aplikovaná substitúcia, a permutácia,
   ktorá sa aplikuje na celý blok. Substitúcia zabezpečuje konfúziu a permutácia difúziu.
   
 \end{itemize}
 
 \subsection{Počítačové lúštenie klasických šifier}
-Počítače a lúštenie šifier sú v dnešnej dobe neoddelitelnou súčasťou.
-\subsubsection{Hrubou silou}
+Počítače a lúštenie šifier sú v dnešnej dobe neoddeliteľnou súčasťou. Výkon počítačov vplyvom Mooreovho zákona \footnote{Moorov zákon je empirické pravidlo, ktoré hovorí že zložitosť integrovaných obvodov sa zdvojnásobuje každých 18 až 24 mesiacov, pričom cena ostáva konštantná.} neustále narastá,
+čo má za následok vznik nových metód, ktoré sa snažia využit dostupný výkon.
+
+\textquote{Výpočtový výkon súčasných počítačov môže byť použitý na vykonanie čiastočnej, alebo až úplnej kryptoanlýzy klasických šifier} \cite{ks}.
+Takúto automatizovanú kryptoanalýzu môžeme rozdeliť do troch kategórii:
+\begin{enumerate}
+\item
+Prvou kategóriou je počítačom asistovaná kryptoanalýza, pri ktorej lúštitel využíva
+počítač ako pomôcku na zjednodušenie niektorých úkonov.
+\item
+Druhou kategóriou je poloautomatická krytoanalýza, pri ktorej počítač prehladáva priestor riešení, avšak
+rozhodujúce kroky sú prenechané na kryptoanalytika.
+\item
+Poslednou treťou kategóriou je automatická kryptoanalýza, pri ktorej lúštitel zadá zašifrovanú správu počítaču a ten mu následne poskytne jednu, prípadne aj
+viac najlepsích riešení.
+\end{enumerate}
+Automatickou kryptoanalýzou sa budeme zaoberať aj v tejto práci.
+Pri automatickej kryptoanalýze zohráva veľkú úlohu analýza a ohodnocovanie textov, pretože niektoré spôsoby lúštenia šifier,
+napríklad útok hrubou silou, produkujú veľké množstvo možných riešení, ktoré treba nejakým spôsobom ohodnotiť.
+
+Na automatické ohodnocovanie textov sa používa ohodnocovacia funkcia, pomocou ktorej môžeme stanoviť určitý stupeň kvality, takzvané skóre.
+Podľa skóre potom môžeme niektoré texty zahodiť a iné posunúť na daľšie posúdenie.
+Jednoduchú ohodnocovaciu funkciu by sme mohli skonštruovať napríklad pomocou slovníka.
+Existujú ale aj iné metódy, lepšie metódy, napríklad n-gramy, ktoré využívajú frekvecie dvojíc, trojíc, n-tíc znakov jazyka.
+
+Pri vhodne zvolenej ohodnocovacej funkcii začnú vznikať v priestore rešení takzvané extrémy. Na to aby sme v priestore riešení našli globálny extrém,
+nepotrebujeme prehladať všetky riešenia. Existujú algoritmy, ktoré dokázu nájsť globálny extrém rýchlejšie.
+Medzi takéto algoritmy patria napríklad: horolozecký algoritmus, simulované žíhanie, genetické algoritmy, a iné.
+
+\subsubsection{Útok hrubou silou}
 Útok hrubou silou (bruteforce) je typ útoku, ktorý sa snaží zlomiť kľúč tak, že sa prehľadáva celý priestor kľúčov.
 Aby bol takýto útok možný a prakticky realizovateľný, priestor prehľadávaných kľúčov nesmie byť väčší ako hranica daná dostupnými
 prostriedkami alebo časom potrebným na riešenie.
 
-Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme že bol zašifrovaný šifrou podobnou Cézarovej šifre.
-Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností posunov, čo je v tomto prípade kľúč, tak aby sme dostali zmysluplný text.
+Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme že bol zašifrovaný šifrou podobnou Cézarovej šifry.
+Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností posunov, čo je v tomto prípade kľúč, tak, aby sme dostali zmysluplný text.
 
 \begin{lstlisting}
 kluc 1
@@ -136,8 +164,57 @@ SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 LUSTENIEHISTORICKYCHSIFIERNAGRIDE
 \end{lstlisting}
 
+\subsubsection{Horolezecký algoritmus}
+Horolezecký algoritmus patrí medzi základné optimalizačné algoritmy.
+Jeho základnou myšlienkou je, že na vrchol kopca sa môžeme dostať najkratšou cestou, keď pôjdeme vždy najstrmším smerom nahor.
+
+Algoritmus sa na začiatku vždy inicializuje náhodným kľúčom. Následne sa vygeneruje množina nových potencionálnych kandidátov na riešenie
+pomocou základných zmien. Ak je kľúč napríklad permutácia zmenou môže byť výmena dvoch prvkov v kľúči.
+Jednotlivým kľúčom je potom priradené skóre pomocou ohodnocovacej funkcie.
+Za aktuálny kľúč sa bude považovať ten, ktorý má najlepšie skóre.
+Výsledky tohto algoritmu ovplyvňuje voľba ohodnocovacej funkcie, ktorá sa ľahko môže ostať v lokálnom extréme, z ktorého sa nevie dostať.
+
 \subsubsection{Genetické a evolučné algoritmy}
-todo
+\acrfull{ga} patria medzi najčastejšie používaných predstaviteľov evolučných výpočtových techník.
+
+Genetické algoritmy sa snažia napodobniť biologické procesy v prírode.
+Základnými objektami sú gén, reťazec a populácia. Nad týmito objektami sa vykonávajú operácie.
+Medzi základné operácie patria výber, mutácia a kríženie.
+\begin{figure}[!h]
+  \centering
+%  \def\svgwidth{\columnwidth}
+  \input{ga.pdf_tex}
+  \caption{Štruktúra GA}
+  \label{img:ga}
+\end{figure}
+
+\paragraph{Gén} je základnou stavebnou jednotkou reťazca a predstavuje elementárne vlastnosti jedinca.
+Gén je zvyčajne reprezentovaný číselne, alebo nejakým symbolom z abecedy.
+V tomto experimente je gén reprezentovaný ako jeden znak z abecedy.
+
+\paragraph{Reťazec (chromozóm)} je postupnosť génov, respektíve znakov, ktoré predstavujú zvolené parametre alebo vlastnosti jedinca
+z problémovej oblasti. V tomto prípade reťazec predstavuje dešifrovací kľúč. 
+
+\paragraph{Populácia} je skupina reťazcov zvoleného počtu. Veľkosť populácie sa počas riešenia genetického algoritmu môže meniť.
+
+\paragraph{Generácia} predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne môže reprezentovať poradové číslo cyklu.
+
+\paragraph{Účelová funkcia} vypočítava skóre každého jedinca v populácii a je mierou toho, čo chceme maximalizovať, prípadne minimalizovať.
+Úlohou účelovej funkcie je nájsť globálny extrém.
+
+\paragraph{Fitness} je v evolučných výpočtoch pojem predstavujúci mieru úspešnosti jedincov.
+V prípade maximalizačnej úlohy je to najväčšia hodnota účelovej funkcie. Naopak, v prípade minimalizačnej úlohy je to najmenšia hodnota.
+
+\paragraph{Výber} je proces, ktorý vyberie niektorých jedincov z populácie na základe zvolenej stratégie.
+Vybraný jedinci potom vstupujú do operácii kríženia, mutácie alebo bez zmeny pokračujú do ďalšej generácie.
+Existuje viacero stratégii výberu jedincov, avšak základnou ideou je aby lepší jedinci prežili a postupne vytlačili slabších jedincov z populácie.
+
+\paragraph{Mutácia} znamená náhodnú zmenu génu v reťazci, prípadne viac zmien v celej populácii.
+Gén zmení svoju hodnotu na inú, náhodne zvolenú hodnotu z prehľadávaného priestoru.
+Mutácia je základnou hybnou silou genetických algoritmov. Umožňuje nachádzať nové riešenia, ktoré sa v populácii ešte neobjavili.
+
+\paragraph{Kríženie} je operácia, pri ktorej si dva náhodne zvolené rodičovské jedince rozdelia v nejakom bode a vymenia si svoje gény.
+Krížením vznikajú noví, odlišní potomkovia, ktorí nesú niektoré znaky oboch rodičov.
 
 \section{Grid}
 Jedným z cieľov práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
@@ -146,7 +223,7 @@ ktoré môžu ale nemusia byť geograficky oddelené.
 Účelom takýchto počítačov je poskytnúť veľký výpočtový výkon, ktorý je použitý na riešenie špecifických úloh.
 
 \subsection{hpc.stuba.sk}
-V rámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
+Vrámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
 Každý výpočtový uzol má nasledovnú konfiguráciu:
 \begin{itemize}
 \item \acrshort{cpu}: 2 x 6 jadrový Intel Xeon X5670 2.93 GHz
@@ -160,15 +237,15 @@ Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{
 Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
 V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne úlohu.
-Umiestnenie \texttt{/home\$USER} je domovským priečinkom každého používateľa.
-Jedno z obmedzení tohoto umiestnenia je že môže obsahovať maximálne osemdesiaťtisíc súborov a priečinkov.
-Taktiež ma značne obmezdenú kapacitu čo sa nemusí hodiť pre každý typ úlohy.
-Ďaľším umiestnením, ktoré ma používateľ k dispozícii je \texttt{/work/\$USER}.
-Toto umiestnenie nemá žiadne väčšie odmedzenia slúži ako zdieľaný disk pre výpočty.
+Umiestnenie \texttt{/home/\$USER} je domovským priečinkom každého používateľa.
+Jedno z obmedzení tohto umiestnenia je, že môže obsahovať maximálne osemdesiattisíc súborov a priečinkov.
+Taktiež má značne obmedzenú kapacitu čo sa nemusí hodiť pre každý typ úlohy.
+Ďalším umiestnením, ktoré ma používateľ k dispozícii je \texttt{/work/\$USER}.
+Toto umiestnenie nemá žiadne väčšie obmedzenia slúži ako zdieľaný disk pre výpočty.
 Môžeme tu vytvárať ľubovolný počet súborov a priečinkov, avšak podľa \cite{hpc} by sa tento disk mal využívať hlavne na prenos objemnejších dát v blokoch väčších ako 16kB. Obe spomenuté umiestnenia sú sieťové disky \acrshort{gpfs}.
 Posledným umiestnením je \texttt{/scratch/\$PBS\_JOBID} alebo tiež aj \texttt{\$TMPDIR} v prípade \acrshort{pbs} skriptu.
 Tento priestor je unikátny pre každú úlohu a je vhodný na spracovanie veľkého počtu malých súborov.
-V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dáť, ktoré sa mažú ihneď po skončení úlohy.
+V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dát, ktoré sa mažú ihneď po skončení úlohy.
 
 \begin{table}[!h]
 \centering
@@ -186,13 +263,13 @@ V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dáť, kt
 Aby sme boli schopný grid používať musíme si najprv zaregistrovať projekt a požiadať o vytvorenie
 používateľského účtu na stránke výpočtového strediska \url{hpc.stuba.sk}.
 Po registrácii a získaní prihlasovacích údajov sa môžeme prihlásiť do webového rozhrania, cez ktoré môžeme spravovať projekt,
-pridávať Ďaľších riešiteľov, prezerať si štatistiky a grafy.
+pridávať ďalších riešiteľov, prezerať si štatistiky a grafy.
 Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie \acrshort{ssh} verejného kľúča, pomocou ktorého sa môžeme prihlasovať bez zadávania hesla.
 
 \subsection{Príkazy}
 Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \texttt{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade ak nepoužívame prihlasovanie pomocou verejného kľúča.
 Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použiť \acrshort{vpn}.
-Po pripojení máme k dispozícií štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
+Po pripojení máme k dispozícii štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
 Zaujímať nás budú príkazy: \texttt{module, qstat, qfree, qsub, qsig}.
 Niektoré výstupy sú pre svoju obsiahlosť skrátené.
 
@@ -287,23 +364,22 @@ Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkaz
 Prvý stĺpec popisuje názov výpočtového uzlu. Druhý stĺpec označuje druh fronty. S je pre sériové úlohy, \texttt{T} pre interaktívne úlohy,
 podobne \texttt{P} pre paralelné výpočty a \texttt{G} pre grafické výpočty.
 Stĺpce jeden až dvanásť označujú procesory \acrshort{cpu} respektíve \acrshort{gpu} pre grafické výpočty.
-Zvyšné stĺpce ako už možno vyčítať z názvu popisujú celkové zaťaženie výpočtového uzla, volnú pamäť a využitie diskov.
-Posledný stĺpec \texttt{State} popisuje stav uzlu. Uzol môže byť volný alebo na vyťažený ak vykonáva nejakú úlohu.
+Zvyšné stĺpce, ako už možno vyčítať z názvu, popisujú celkové zaťaženie výpočtového uzla, volnú pamäť a využitie diskov.
+Posledný stĺpec \texttt{State} popisuje stav uzlu. Uzol môže byť volný alebo vyťažený, ak vykonáva nejakú úlohu.
 Procesory na ktorých prebieha výpočet našej úlohy sú označené ako \texttt{[O]}, zvyšné vyťažené \acrshort{cpu} sú označené ako \texttt{[X]},
-naopak voľné \acrshort{cpu} sú označené medzerou \texttt{[ ]} a v prípade že uzol nie je dostupný budú \acrshort{cpu} označené ako \texttt{[-]}.
-
-Posledný a najdôležitejší príkaz je \texttt{qsub}, ktorý slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
+naopak voľné \acrshort{cpu} sú označené medzerou \texttt{[ ]} a v prípade, že uzol nie je dostupný, budú \acrshort{cpu} označené ako \texttt{[-]}.
 
 \subsection{Výpočtové fronty}
-Aby sme boli schopný spustiť akúkoľvek výpočtovú úlohu na gride, potrebujeme k tomu \acrfull{pbs} súbor.
+Posledný a najdôležitejší príkaz je \texttt{qsub}, ktorý slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
+Aby sme boli schopní spustiť akúkoľvek výpočtovú úlohu na gride, potrebujeme k tomu \acrfull{pbs} súbor.
 \acrshort{pbs} súbor je v skutočnosti iba jednoduchý textový súbor, ktorý definuje požiadavky na výpočtové zdroje a príkazy pre grid.
 
 V tabuľke \ref{tab:fronty} sa nachádzajú všetky výpočtové fronty, ktoré sú dostupné na gride \url{hpc.stuba.sk}.
-Fronta debug slúži na rýchle odľadenie úloh. Úlohy v tejto fronte majú vysokú prioritu preto sú spustené takmer okamžite.
+Fronta debug slúži na rýchle odladenie úloh. Úlohy v tejto fronte majú vysokú prioritu preto sú spustené takmer okamžite.
 Debug fronta je obmedzená na maximálne dve súčasne spustené úlohy. Fronta gpu je ďalším typom fronty pre úlohy, ktoré využívajú grafický akcelerátor.
 Pre úlohy, ktoré využívajú \acrshort{mpi}, \acrshort{omp} a iné knižnice na paralelné programovanie slúži fronta parallel.
-Úlohy takého typu musia použiť minimálne štyry a maximálne deväťdesiatšesť \acrshort{cpu}.
-Poslednou výpočtovou frontou je serial, na ktorej môžeme spúštať jednoprocesorové úlohy. 
+Úlohy takého typu musia použiť minimálne štyri a maximálne deväťdesiatšesť \acrshort{cpu}.
+Poslednou výpočtovou frontou je serial, na ktorej môžeme spúšťať jednoprocesorové úlohy. 
 
 % todo: check mmlsquota
 \begin{table}[!h]
@@ -335,8 +411,8 @@ cd /work/3xelias/uloha1
 ./seriova_uloha
 \end{lstlisting}
 
-Vo výpise \ref{pbs:1} môžeme vidieť príklad jednoduchého skriptu ktorý sériovej úlohy.
-Popíšme si jednotlivé riadky skriptu:
+Vo výpise \ref{pbs:1} môžeme vidieť príklad jednoduchého skriptu sériovej úlohy.
+Poukážeme na jednotlivé riadky skriptu:
 \begin{itemize}
 \item
   Prvý riadok v súbore definuje aký shell sa má použiť pre spustenie skriptu.
@@ -344,13 +420,13 @@ Popíšme si jednotlivé riadky skriptu:
 \item
   Tretí riadok určuje názov úlohy.
 \item
-  Štvrtý riadok vymedzuje koľko uzlov a procesorov si žiadame od gridu.
+  Štvrtý riadok vymedzuje, koľko uzlov a procesorov si žiadame od gridu.
   V tomto prípade si žiadame jeden výpočtový uzol a jeden procesor.
 \item
   Piaty riadok v \acrshort{pbs} skripte vymedzuje aké časové rozpätie potrebujeme pre úlohu.
   V tomto príklade si žiadame jednu minútu.
 \item
-  V šiestom riadku sa nachádza identifikátor podľa ktorého sa identifikujú úlohy s jednotlivými projektami.
+  V šiestom riadku sa nachádza identifikátor, podľa ktorého sa identifikujú úlohy s jednotlivými projektami.
   Tento parameter je povinný a možno ho získať po prihlásení na webový portál \url{https://www.hpc.stuba.sk/index.php?l=sk&page=login}.
 \item
   Parameter -q v siedmom riadku definuje typ výpočtovej fronty do akej bude úloha zaradená.
@@ -385,28 +461,28 @@ mpirun ./parallel
 Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektoré riadky príkladu \texttt{uloha2.pbs}:
 \begin{itemize}
 \item
-  Na rozdiel od predchádzajúcej úlohy si v tomto príklade na riadku číslo štyri žiadame päť výpočtových uzlov a na každom uzle dvanásť \acrshort{cpu}.
+  Na rozdiel od predchádzajúcej úlohy, v tomto príklade si na riadku číslo štyri žiadame päť výpočtových uzlov a na každom uzle dvanásť \acrshort{cpu}.
   Dokopy si žiadame šesťdesiat procesorov.
 \item
-  V piatom riadku požadujeme časové rozpätie štyridsitich ôsmich hodín.
+  V piatom riadku požadujeme časové rozpätie štyridsiatich ôsmich hodín.
 \item
   Siedmy riadok definuje paralelnú frontu.
 \item
-  Parametre \texttt{e} a \texttt{a} na riadku osem hovoria kedy sa má poslať email o zmene stavu úlohy.
+  Parametre \texttt{e} a \texttt{a} na riadku osem hovoria o tom, kedy sa má poslať email o zmene stavu úlohy.
   Parameter \texttt{e} znamená po skončení úlohy.
   Parameter \texttt{a} znamená pri zrušení úlohy.
   Ďalšie parametre môžu byť \texttt{b} (štart úlohy) a \texttt{n} (neposielať žiadny e-mail) \cite{cmd:qsub}.
 \item
-  V deviatom riadku definujeme e-mailovú adresu, na ktorú bude zaslaný mail v prípade ak úloha skončí alebo bude prerušená.
+  V deviatom riadku definujeme e-mailovú adresu, na ktorú bude zaslaný mail v prípade, ak úloha skončí alebo bude prerušená.
 \item
   V jedenástom riadku načítame všetky potrebné premenné prostredia pre moduly.
 \item
-  V dvanástom riadku odstránime všetky načítané moduly ak boli nejaké dostupné v premmenných prostredia.
+  V dvanástom riadku odstránime všetky načítané moduly ak boli nejaké dostupné v premenných prostredia.
 \item
   V riadku číslo dvanásť tohto súboru načítame knižnicu gcc verzie 5.4 a knižnicu openmpi verzie 1.10.2.
-  Pre správny beh programu by sa všetky načítané knižnice mali zhodovať stými, s ktorými bola aplikácia spúštaná v tomto skripte skompilovaná.
+  Pre správny beh programu by sa všetky načítané knižnice mali zhodovať stými, s ktorými bola aplikácia spúšťaná v tomto skripte skompilovaná.
 \item
-  Podobne ako v ukázke \ref{pbs:1} sa prepneme do priečinku \texttt{/work/3xelias/parallel}, ktorý musí obsahovať vsetky potrebné dáta
+  Podobne ako v ukážke \ref{pbs:1} sa prepneme do priečinku \texttt{/work/3xelias/parallel}, ktorý musí obsahovať všetky potrebné dáta
   pre samotný program \texttt{parallel}.
 \item
   Posledný riadok spustí program mpirun, ktorý potom spustí program parallel. Tento krok je vysvetlený v kapitole mpi. .Pridat odkaz.
@@ -414,36 +490,36 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
 
 \section{MPI}
 Message passing je forma programovania, ktorá sa používa pri paralelnom programovaní či už na viacjadrových procesoroch, alebo v gridovom prostredí.
-V takejto forme programovania môže byť program rozdelený na viacero logických blokov alebo procesov,
-ktorých môže byť viacej ako počet dostupných \acrshort{cpu}, avšak zvyčajne by mal byť tento počet rovnaký.
-Procesy môžu vykonávať rozlicné úlohy a môžu bežať na rozlicných, geograficky odelených \acrshort{cpu}.
+V takejto forme programovania môže byť program rozdelený na viacero logických blokov alebo procesov.
+Takýchto procesov môže byť viac ako počet dostupných \acrshort{cpu}, avšak zvyčajne by mal byť tento počet rovnaký.
+Procesy môžu vykonávať rozličné úlohy a môžu bežať na rozličných, geograficky oddelených \acrshort{cpu}.
 
 Procesy medzi sebou komunikujú posielaním správ.
-Správy zyčajne reprezentujú nejaké dáta, ale môžu slúžiť aj na sychronizáciu.
+Správy zvyčajne reprezentujú nejaké dáta, ale môžu slúžiť aj na synchronizáciu.
 
-Táto forma programovania zaznamenala velký rozmach hlavne v devädesiatich rokoch minulého storočia,
-keď takmer každý predajca paralelných systémov ponúkal vlastnú implemetáciu message passing prostredia.
+Táto forma programovania zaznamenala veľký rozmach hlavne v deväťdesiatych rokoch minulého storočia,
+keď takmer každý predajca paralelných systémov ponúkal vlastnú implementáciu message passing prostredia.
 
-Následkom týchto udalostí vznilko \acrfull{mpi} Forum, čo bola skupina viac ako osemdesiať ľudí zo štyridsaťich rôznych organizácii,
+Následkom týchto udalostí vzniklo \acrfull{mpi} Forum, čo bola skupina viac ako osemdesiat ľudí zo štyridsiatich rôznych organizácií,
 ktoré predstavovali predajcov paralelných systémov, používateľov ale aj výskumné laboratória a univerzity \cite{mpibook}.
 
 Úloha \acrshort{mpi} fóra bola bola zjednotiť message passing systémy a navrhnúť nový systém.
-Systém by mal podporovť komplexné dátové štruktúry, bezpečnú komunikáciu a byť dostatočne modulárny.
+Systém by mal podporovať komplexné dátové štruktúry, bezpečnú komunikáciu a byť dostatočne modulárny.
 
 Výsledkom práce \acrshort{mpi} fóra vznikol v júni roku 1994 štandard \acrshort{mpi}-1.0,
 ktorý je dodnes akceptovaný a má mnoho používateľov aj napriek tomu, že už existujú novšie verziu štandardu.
-\acrshort{mpi} štadard nie je knižnica. Je to špecifikácia toho ako by mala konkrétna implementácia knižnice vyzerať.
-Existuje viacero implementácii. Medzi najznámejšie patria \acrshort{ompi}, MVAPICH, IBM MPI.
+\acrshort{mpi} štandard nie je knižnica. Je to špecifikácia toho ako by mala konkrétna implementácia knižnice vyzerať.
+Existuje viacero implementácií. Medzi najznámejšie patria \acrshort{ompi}, MVAPICH, IBM MPI.
 % mozno ciele MPI
 
-Aj napriek tomu, že \acrshort{mpi} štandard je veľmi rozsiahly, obsahuje stovky funkcii, zaujímať sa však budeme len o niektoré znich.
+Aj napriek tomu, že \acrshort{mpi} štandard je veľmi rozsiahly, obsahuje stovky funkcií, zaujímať sa však budeme len o niektoré z nich.
 
 \subsection{Point-to-point komunikácia}
-Odosielanie a prímanie správ je kľúcovým stavebným mechanizmom \acrshort{mpi} komunikácie.
-Základoné operácie sú \textbf{send} (posielanie) a \textbf{receive} (prímanie).
+Odosielanie a prijímanie správ je kľúčovým stavebným mechanizmom \acrshort{mpi} komunikácie.
+Základné operácie sú \textbf{send} (posielanie) a \textbf{receive} (prijímanie).
 Výmene správ medzi dvoma procesmi hovoríme \textit{point-to-point} komunikácia.
-Takmer všetky \acrshort{mpi} konštrukcie sú založené na point-to-point komunukácii \cite{mpi3-1}.
-Pre ilustraciu si uveďme jednoduchý príklad:
+Takmer všetky \acrshort{mpi} konštrukcie sú založené na point-to-point komunikácii \cite{mpi3-1}.
+Pre ilustráciu si uveďme jednoduchý príklad:
 
 \begin{lstlisting}[language=c, caption={Point-to-point komunikácia}, label={mpi:1}, numbers=left]
 #include <stdio.h>
@@ -466,27 +542,27 @@ int main(int argc, char **argv) {
 \end{lstlisting}
 
 V tomto príklade proces nula \texttt{(rank == 0)} pošle správu procesu prostredníctvom \textbf{send} operácie \texttt{MPI\_SEND}.
-Táto operácia definuje tazkvaný \texttt{send buffer}. Send buffer je miesto v pamäti
+Táto operácia definuje takzvaný \texttt{send buffer}. Send buffer je miesto v pamäti
 odosielateľa, v ktorom sa nachádzajú dáta na odoslanie.
-V tomto príklade send buffer premmenná \texttt{msg} nachádzajúca sa v pamati procesu nula.
-Prvé tri argumenty send operacie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
-Ďaľsie tri paramtre send operacie sú definujú príjmatela správy.
-Proces jedna \texttt{(rank == 1)}, príjme správu s \textbf{receive} operáciou \texttt{MPI\_Recv}.
+Send buffer je v tomto prípade premenná \texttt{msg} nachádzajúca sa v pamäti procesu nula.
+Prvé tri argumenty send operácie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
+Ďalšie tri parametre send operácie definujú príjmatela správy.
+Proces jedna \texttt{(rank == 1)}, prijme správu s \textbf{receive} operáciou \texttt{MPI\_Recv}.
 Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \texttt{receive buffera}.
-V tomto príklade je receive buffer premmenná msg v pamäťovom priestore procesu jedna.
-Prvé tri parametre definujú dáta, ktoré chce príjemca prijať. Ďaľsie tri parametre slúžia na zvolenie správy od odosieľateľa.
-Posledný parameter sa používa na získanie informácií o prijateje správe. V tomto príklade tento parameter ignorujeme.
+V tomto príklade je receive buffer premenná msg v pamäťovom priestore procesu jedna.
+Prvé tri parametre definujú dáta, ktoré chce príjemca prijať. Ďalšie tri parametre slúžia na zvolenie správy od odosielateľa.
+Posledný parameter sa používa na získanie informácií o prijatej správe. V tomto príklade tento parameter ignorujeme.
 
 Program z výpisu \ref{mpi:1} môžeme skompilovať a následne spustiť v dvoch krokoch:
 \begin{lstlisting}
 mpicc main.c -o p2p
 mpirun -n 2 ./p2p
 \end{lstlisting}
-Výsledkom programu a komunikácie týchto dvoch procesov bude ze proces jedna vypíše \texttt{Hello, MPI}.
+Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \texttt{Hello, MPI}.
 
 \subsection{Blokujúca komunikácia}
-Obe \acrshort{mpi} volania v príklade \ref{mpi:1} boli obe blokujúce.
-To znamena, že odsielateľ čaká na volaní \texttt{MPI\_Send} dovtedy až kým príjemca správu príjme.
+Obe \acrshort{mpi} volania v príklade \ref{mpi:1} boli blokujúce.
+To znamená, že odosielateľ čaká na volaní \texttt{MPI\_Send} dovtedy, kým príjemca správu prijme.
 To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \texttt{MPI\_Recv}  až kým nedostane správu od odosielateľa.
 
 \begin{lstlisting}[language=c, caption={MPI\_Send}, label={mpi:send}]
@@ -499,14 +575,14 @@ To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \texttt{MPI\_
   MPI_Comm comm)
 \end{lstlisting}
 
-Vo výpise \ref{mpi:send} vidíme definíciu volania MPI\_Send. Prvý argumentom funkcie je adresa receive buffera, ďaľší argument je dĺžka buffera (count), ktorá musí byť celé kladné číslo.
+Vo výpise \ref{mpi:send} vidíme definíciu volania MPI\_Send. Prvým argumentom funkcie je adresa receive buffera, ďalší argument je dĺžka buffera (count), ktorá musí byť celé kladné číslo.
 V prípade, že táto podmienka nie je splnená MPI volanie vráti chybu. Typ buffera špecifikujeme pomocou argumentu datatype.
 Niektoré základné dátové typy môžeme vidieť v tabuľke \ref{tab:mpi-datatypes}.
-Daľšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra dest môžeme zvoliť komu je správa adresovaná.
-V prípade, že si odosielateľ a príjemca vymienajú viacej správ s rôznym typom alebo rôzneho obsahu potrebujeme tieto správy nejako odlíšiť.
+Ďalšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra dest môžeme zvoliť komu je správa adresovaná.
+V prípade, že si odosielateľ a príjemca vymieňajú viac správ s rôzneho typu alebo rôzneho obsahu potrebujeme tieto správy nejako odlíšiť.
 Na odlíšenie správ slúži argument tag. Tag musí byť kladné celé číslo. V príklade \ref{mpi:1} sme ako tag použili nulu,
 avšak mohli sme použiť aj inú hodnotu. Posledným argumentom je comm, ktorý slúži na definovanie komunikačnej skupiny.
-Základná komunikacná skupina je svet (\texttt{MPI\_COMM\_WORLD}), kde si všetci môžu vymienať správy.
+Základná komunikačná skupina je svet (\texttt{MPI\_COMM\_WORLD}), kde si všetci môžu vymieňať správy.
 \acrshort{mpi} štandard zahŕňa aj vytváranie vlastných podskupín komunikátorov, napríklad pomocou volania \texttt{MPI\_Comm\_create\_group} \cite{mpi3-1}.
 
 \begin{lstlisting}[language=c, caption={MPI\_Recv}, label={mpi:recv}]
@@ -520,9 +596,9 @@ Základná komunikacná skupina je svet (\texttt{MPI\_COMM\_WORLD}), kde si vše
   MPI_Status *status)
 \end{lstlisting}
 
-\acrshort{mpi} volanie \texttt{MPI\_Recv} používa veľmi podobnú syntax ako \texttt{MPI\_Send}. Prvé tri argumenty sú indentické.
-Argument source v prípade funkcie \texttt{MPI\_Recv} definuje rank odosielateľa. Daľším rozdielom je argument status,
-ktorý sa používa na získanie informácii o prijatej správe, alebo môže byť aj ingnorovaný ako v príklade \ref{mpi:1}.
+\acrshort{mpi} volanie \texttt{MPI\_Recv} používa veľmi podobnú syntax ako \texttt{MPI\_Send}. Prvé tri argumenty sú identické.
+Argument source v prípade funkcie \texttt{MPI\_Recv} definuje rank odosielateľa. Ďalším rozdielom je argument status,
+ktorý sa používa na získanie informácií o prijatej správe, alebo môže byť aj ignorovaný ako v príklade \ref{mpi:1}.
 Štruktúra \texttt{MPI\_Status} obsahuje 3 hlavné informácie: rank odosielateľa, tag správy a dĺžku správy.
 
 \begin{table}[!h]
@@ -549,18 +625,18 @@ MPI\_BYTE                 & char                   \\ \bottomrule
 \end{table}
 
 \subsection{Neblokujúca komunikácia}
-Výkonnosť programov môže byť v mnohých prípadoch vylepšná prekrívaním blokujúcich volaní.
-Jedným z možných spôsobov ako toto dosianuť je použitie threadov \cite{mpi3-1}.
-Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcech komunikácie.
+Výkonnosť programov môže byť v mnohých prípadoch vylepšená prekrývaním blokujúcich volaní.
+Jedným z možných spôsobov ako toto dosiahnuť je použitie threadov \cite{mpi3-1}.
+Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcich komunikácie.
 
-Pri neblokujúcej komunikácii si môžeme zadefinovať štyry rôzne neblokujúce operácie: \texttt{send} pre posielanie,
-\texttt{recv} pre prímanie, \texttt{send complete} pre dokončenie posielania a \texttt{recv complete} pre dokončenie prijatia.
-Neblokujúce volanie \texttt{send} spustí send operáciu, ale nedokončí jú.
+Pri neblokujúcej komunikácii si môžeme zadefinovať štyri rôzne neblokujúce operácie: \texttt{send} pre posielanie,
+\texttt{recv} pre prijímanie, \texttt{send complete} pre dokončenie posielania a \texttt{recv complete} pre dokončenie prijatia.
+Neblokujúce volanie \texttt{send} spustí send operáciu, ale nedokončí ju.
 Toto volanie inicializuje skopírovanie do send buffera ale samotné kopírovanie nedokončí.
-Na dokončenie operácie send je potrebná dalšie volanie \texttt{send complete},
-ktorá overí že dáta boli skutočne skopírované a prenesené príjemcovi.
+Na dokončenie operácie send je potrebné ďalšie volanie \texttt{send complete},
+ktoré overí že dáta boli skutočne skopírované a prenesené príjemcovi.
 Neblokujúca send operácia zvyčajne beží paralelne s vykonávaným programom.
-Podobne aj nebolokujúce volanie \texttt{recv} inicializuje recv operáciu, ale nedokoncí ju. Na dokončenie potrebuje separátne volanie \texttt{recv complete},
+Podobne aj neblokujúce volanie \texttt{recv} inicializuje recv operáciu, ale nedokončí ju. Na dokončenie potrebuje separátne volanie \texttt{recv complete},
 ktoré zaručí že dáta boli prenesené do recv buffera. Neblokujúca recv operácia podobne ako send pokračuje paralelne so zvyškom programu.
 
 \begin{lstlisting}[language=c, caption={Neblokujúca komunikácia}, label={mpi:2}]
@@ -582,26 +658,26 @@ if (rank == 0) {
 }
 \end{lstlisting}
 
-Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcech komunikácie. V tomto príklade ako send operácia slúži funkcia \texttt{MPI\_Isend}.
+Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcej komunikácie. V tomto príklade ako send operácia slúži funkcia \texttt{MPI\_Isend}.
 Proces nula \texttt{(rank == 0)} pošle najprv správu \texttt{msg1} a následne správu \texttt{msg2}.
 Obe volania sú neblokujúce, to znamená, že program nečaká
-a pokračuje funkciou \texttt{zlozity\_vypocet}. Po dokončení výpočtu čaká kým správy neboli prenesené.
-Tento krok je dôležitý pretože ak by sme nečakali na dokončenie prenosu správy premmenné msg1 a msg2 by už viacej nemuseli byť validné,
-za prepokladu ze vídeme z if konštrukcie.
+a pokračuje funkciou \texttt{zlozity\_vypocet}. Po dokončení výpočtu čaká na doručenie správ.
+Tento krok je dôležitý pretože ak by sme nečakali na dokončenie prenosu správy premenné msg1 a msg2 by už viacej nemuseli byť validné,
+za predpokladu že vyjdeme z if konštrukcie.
 V prípade procesu jedna \texttt{(rank == 1)}, príjemca inicializuje neblokujúce volanie \texttt{MPI\_Irecv} a pokračuje funkciou \texttt{iny\_vypocet}.
 Po dokončení výpočtu skontroluje či už boli dáta prijaté volaním \texttt{MPI\_Waitall}.
 Na tomto volaní čaká, v prípade ak dáta ešte neboli prijaté.
-Tento krok je pre príjemncu dôležitý pretože mu zaručuje že dáta boli prijaté a môže ich použiť.
+Tento krok je pre príjemcu dôležitý pretože mu zaručuje že dáta boli prijaté a môže ich použiť.
 
-Výstupom tohto programu môže \textquote{\texttt{Hello, MPI}} alebo aj \textquote{\texttt{MPIHello, }}, pretože poradie vykonania operácii nie je zaručené.
-Správneme poradie správ by sme dosielili rôznymi tagmi pre správy msg1 a msg2.
+Výstupom tohto programu môže byť \textquote{\texttt{Hello, MPI}} alebo aj \textquote{\texttt{MPIHello, }}, pretože poradie vykonania operácii nie je zaručené.
+Správne poradie správ by sme docielili rôznymi tagmi pre správy msg1 a msg2.
 % \subsection{Kolektívna komunikácia}
-\subsection{Dynamicka alokácia}
-V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo vačšine prípadov nepraktické a často môže viesť k chybám.
-Ak by v tomto príklade odosielatel poslal dlhšiu správu ako je príjemca schopný prijať tak by tento program zlyhal.
+\subsection{Dynamická alokácia}
+V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo väčšine prípadov nepraktické a často môže viesť k chybám.
+Ak by v tomto príklade odosielateľ poslal dlhšiu správu ako je príjemca schopný prijať tak by tento program zlyhal.
 
 Riešením tohto problému je dynamická alokácia pamäte pre prijaté správy. Aby sme mohli pamäť dynamicky alokovať potrebujeme vedieť
-koľko dát sa nám snaží odosielatel poslať. To môžeme zistiť pomocou štruktúry \texttt{MPI\_Status} a volaní \texttt{MPI\_Probe, MPI\_Get\_count}.
+koľko dát sa nám snaží odosielateľ poslať. To môžeme zistiť pomocou štruktúry \texttt{MPI\_Status} a volaní \texttt{MPI\_Probe, MPI\_Get\_count}.
 Kód procesu jedna z príkladu \ref{mpi:1} by sme mohli nahradiť nasledovne:
 \begin{lstlisting}[language=c]
 MPI_Status status;
@@ -615,14 +691,14 @@ free(buf);
 \end{lstlisting}
 
 \subsection{Serializácia dátových typov}
-Čaštokrát si procesy pri \acrshort{mpi} komunikácii medzi sebou potrebujú vymienať nie len primitívne dátové typy, ale aj zložitejšie dátové štruktúry.
-Odosielateľ musí dátové štruktúry pred komunikáciou rozložiť na primitívne typy. Spôsob ako sa dáta rozložia je medzi odosielatelom aj príjemcom vopred dohodnutý.
+Častokrát si procesy pri \acrshort{mpi} komunikácii medzi sebou potrebujú vymieňať nie len primitívne dátové typy, ale aj zložitejšie dátové štruktúry.
+Odosielateľ musí dátové štruktúry pred komunikáciou rozložiť na primitívne typy. Spôsob ako sa dáta rozložia je medzi odosielateľom a príjemcom vopred dohodnutý.
 Príjemca po prijatí dát znovuposkladá dátové štruktúry do pôvodného stavu. Tomuto procesu sa hovorí serializácia dát.
 
 \acrshort{mpi} rieši tento problém napríklad volaniami \texttt{MPI\_Type\_create\_struct, MPI\_Pack}.
-Avšak tieto volania častokrát vyžadujú príliž nízkourovňové programovanie.
+Avšak tieto volania častokrát vyžadujú príliš nízkoúrovňové programovanie.
 \subsection{Boost MPI}
-Lepší spôsobob poskytuje napríklad knižnica C++ Boost
+Lepší spôsob poskytuje napríklad knižnica C++ Boost
 \begin{lstlisting}[language=c++]
 #include "MpiApp.h"
 int main(int argc, char **argv) {
@@ -639,21 +715,20 @@ int main(int argc, char **argv) {
 \end{lstlisting}
 
 \section{Návrh}
-Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie programové prostredie pre ďalších lúštitelov a programátorov,
-ktorý budú pri svojej práci využívať grid.
+Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie programové prostredie pre ďalších lúštiteľov a programátorov,
+ktorí budú pri svojej práci využívať grid.
 
 Takéto prostredie by malo poskytnúť spoločné stavebné bloky, ktoré by si riešitelia medzi sebou mohli navzájom zdielať.
-Stavebné bloky by mohli zahŕňať napríklad implementácie šifier, ohodnocovacích funkcii alebo prácu zo súbormi.
+Stavebné bloky by mohli zahŕňať napríklad implementácie šifier, ohodnocovacích funkcií alebo prácu so súbormi.
 Ďalším spoločným črtom je vytváranie projektov, ktoré by malo byť čo najviac automatické a malo by generovať štruktúru priečinkov a základných súborov.
 
-Keďže vývoj priamo na gride v konzolovom prostredí je nepraktický. Vývoj v nami navrhovanom prostredí by mal o
-
-Základné požiadavky by mali spĺnať nasledovné kritéria:
+Keďže vývoj priamo na gride v konzolovom prostredí je nepraktický, vývoj v nami navrhovanom prostredí by mal spĺňať nasledovné
+základné požiadavky:
 \begin{itemize}
 \item
   Automatické vytvorenie projektu.
 \item
-  Lokálny vývoj a testovnie
+  Lokálny vývoj a testovanie
 \item
   Zdieľanie modulov medzi projektami
 \item
@@ -664,7 +739,7 @@ Základné požiadavky by mali spĺnať nasledovné kritéria:
 
 % flow diagram?
 \subsection{Štruktúra prostredia}
-V tejto kapitole popíšeme štruktúru prostredia a význam jednotlivých priečinkov a súborov.
+V tejto kapitole si definujeme štruktúru prostredia a význam jednotlivých priečinkov a súborov.
 
 Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
 % tree -L 3 | sed "s/├/|/g" | sed 's/│/|/g' | sed 's/└/|/g' | sed 's/──/-/g'
@@ -699,11 +774,11 @@ Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
     |- ...
 \end{lstlisting}
   
-Skript \texttt{build.sh} vytvára projeky do podpriečinku \texttt{project}. Každý projekt po vytvorení obsahuje automaticky generované súbory:
-\texttt{CMakeLists.txt}, binárny spustitelný súbor, (po kompilácii), \texttt{.pbs} súbor a \texttt{main.cpp} v priečinku \texttt{src}.
-Do priečinku \texttt{src} by sa mali umiestovať zdrojové súbory špecifické pre daný projekt.
+Skript \texttt{build.sh} vytvára projekty do podpriečinku \texttt{project}. Každý projekt po vytvorení obsahuje automaticky generované súbory:
+\texttt{CMakeLists.txt}, binárny spustiteľný súbor (po kompilácii), \texttt{.pbs} súbor a \texttt{main.cpp} v priečinku \texttt{src}.
+Do priečinku \texttt{src} by sa mali umiestňovať zdrojové súbory špecifické pre daný projekt.
 Ostatné zdrojové kódy, ktoré nesúvisia s daným projektom by mali ísť do modulov (priečinok \texttt{module}).
-Priečinok \texttt{module} slúži na zdielanie zdrojových kódov (modulov) medzi projektami.
+Priečinok \texttt{module} slúži na zdieľanie zdrojových kódov (modulov) medzi projektami.
 Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižníc od tretích strán.
 \subsection{Implementácia}
 % zvolene technologie:
@@ -714,70 +789,70 @@ Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižn
 % boost(serializacia, mpi(mvapich, openmpi), automaticke stiahnutie a buildovanie)
 % build.sh
 % git
-V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandartnú knižnicu.
-Teto programovací jazyk sa taktiež vyučuje na Fakulte elektrotechniky a informatiky a je veľmi rozšírený v industriálnej sfére.
+V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandardnú knižnicu.
+Tento programovací jazyk sa taktiež vyučuje na Fakulte elektrotechniky a informatiky a je veľmi rozšírený v industriálnej sfére.
 
 Keďže \acrshort{mpi} štandard od verzie tri priamo nepodporuje C++ volania \cite{mpi3-1},
 budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu. Z Boost knižnice tiež využijeme modul serialization pre dátovú serializáciu.
-Vrámci gridu hpc.stuba.sk nemáme k dispozícii knižnicu boost. Tiež nemáme možnosť inštalovať žiadne dalšie knižnice
-a preto sa pred prvou kompiláciou knižnica Boost stiahne a automacike skompiluje pre dané prostredie.
-Kompilácia prebieha iba jeden krát a knižnica sa uloží do priečinku vendor/boost\_<verzia>.
+Vrámci gridu hpc.stuba.sk nemáme k dispozícii knižnicu boost. Tiež nemáme možnosť inštalovať žiadne ďalšie knižnice,
+a preto sa pred prvou kompiláciou knižnica Boost stiahne a automaticky skompiluje pre dané prostredie.
+Kompilácia prebieha iba jedenkrát a knižnica sa uloží do priečinku vendor/boost\_<verzia>.
 
-Ako buildovací systém sme použilii cmake.
-Cmake je multiplatformový, opensource nástroj, ktorý sa používa na buildovanie a testovanie softvéru.
+Ako buildovací systém sme použili cmake.
+Cmake je multiplatformový, open-source nástroj, ktorý sa používa na buildovanie a testovanie softvéru.
 \begin{lstlisting}
   
 \end{lstlisting}
 
 Na správu zdrojových kódov sme použili systém \texttt{git} pretože archiváciu správu zdrojových kódov považujeme za veľmi dôležitú.
-Zdrojvé kódy tohto projektu sú dostupné na githube \url{https://github.com/melias122/grid}.
+Zdrojové kódy tohto projektu sú dostupné na githube \url{https://github.com/melias122/grid}.
 
 Základným príkazom celého prostredia je skript \texttt{build.sh} v kombinácii s buildovacím nástrojom cmake.
 Skript \texttt{build.sh} sa používa na vytváranie nových projektov, kompilovanie,
-synchonizáciu s gridom a na spúštanie projektov v lokálnom prostredí ale aj na gride.
-Základné oprácie tohto príkazu \texttt{build.sh} sú:
+synchronizáciu s gridom a na spúšťanie projektov v lokálnom prostredí ale aj na gride.
+Základné operácie tohto príkazu \texttt{build.sh} sú:
 \begin{itemize}
 \item
-  \texttt{-b, --build}, tento argument skompiluje všetky projekty a moduly nachádzajúce sa v priečinkoch project, module. Taktiež skompiluje
+  \texttt{-b, -{}-build}, tento argument skompiluje všetky projekty a moduly nachádzajúce sa v priečinkoch project, module. Taktiež skompiluje
   všetky potrebné závislosti. Kombinuje príkaz module z kapitoly (kap), a buildovací nástroj cmake.
 \item
-  \texttt{-h, --help} argument vypíše ako návod ako pracovať stýmto príkazom.
+  \texttt{-h, -{}-help} argument vypíše návod ako pracovať s týmto príkazom.
 \item
-  \texttt{-r, --run [projekt]} spustí projekt, ktorý je zadaný ako další argument tohto príkazu.
-  Hlavou myšlienkou tohto príkazu je že by sa mal správať podobne v lokánom prostredí ale aj na gride.
+  \texttt{-r, -{}-run [projekt]} spustí projekt, ktorý je zadaný ako ďalší argument tohto príkazu.
+  Hlavou myšlienkou tohto príkazu je že by sa mal správať podobne v lokálnom prostredí ale aj na gride.
   Príkaz parsuje main.cpp v priečinku projektu a podľa nastavenia nodes, ppn, walltime a queue dynamicky upravuje .pbs súbor pre grid,
   alebo tieto nastavenia použije do príkazu mpirun na simulovanie gridu.
 \item
-  \texttt{-n, --new-project [nazov\_projektu]} vytvorí projekt v priecinku project.
+  \texttt{-n, -{}-new-project [nazov\_projektu]} vytvorí projekt v priečinku project.
   Tento príkaz automaticky vytvára niektoré základné súbory ako main.cpp, a .pbs súbor.
 \item
-  \texttt{--sync} zosynchronizuje lokálny projekt na grid do priečinku \texttt{/work/\$USER/grid}.
+  \texttt{-{}-sync} zosynchronizuje lokálny projekt na grid do priečinku \texttt{/work/\$USER/grid}.
   Priečinok work bol zvolený narozdiel od home, pretože nekladie žiadne obmedzenia na počet súborov.
-  Tento príkaz nemá deštruktívny charakter, nemaže žiadne súbory.
+  Tento príkaz nemá deštruktívny charakter, nezmazáva žiadne súbory.
 \end{itemize}
 
 \subsection{Príklad použitia}
-Táto kapitola by mala slúžiť ako manuál pre daľších používateľov.
+Táto kapitola by mala slúžiť ako manuál pre ďalších používateľov.
 Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru.
 
 \subsubsection{Lokálny vývoj}
 \label{subsec:local-dev}
 Na lokálny vývoj sme použili linuxový operačný systém Ubuntu 16.04 LTS, ktorý poskytuje všetky potrebné nástroje na vývoj.
 Podobné kroky by však mali platiť aj na iných linuxových operačných systémoch, prípadne MacOS alebo Windows 10,
-ktorý v najnovsích verziách podporuje \texttt{bash} a balíčkový systém \texttt{apt} \cite{bash-on-win}.
+ktorý v najnovších verziách podporuje \texttt{bash} a balíčkový systém \texttt{apt} \cite{bash-on-win}.
 
 Prvým krokom je nainštalovanie potrebných balíčkov príkazom \texttt{apt}.
 \begin{lstlisting}
   sudo apt install build-essential libmpich-dev git cmake clang-format
 \end{lstlisting}
-Druhý krok je naklonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojvé súbory priložené k tejto práci.
+Druhý krok je klonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojové súbory priložené k tejto práci.
 \begin{lstlisting}
   git clone git@github.com:melias122/grid.git
 \end{lstlisting}
 V tretom kroku sa prepneme do repozitára a skompilujeme celý projekt.
 Ešte pred kompiláciou musíme vytvoriť súbor \texttt{.project-id}, ktorý by musí obsahovať
 identifikátor pre náš projekt.
-Prvý krát môže byť kompilovanie časovo náročnejšie,
+Prvýkrát môže byť kompilovanie časovo náročnejšie,
 pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modulmi. 
 \begin{lstlisting}
   # prepnutie sa do repozitara
@@ -790,8 +865,8 @@ pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modu
   ./build.sh -b
 \end{lstlisting}
 V štvrtom kroku by sme mali mať celý repozitár úspešne skompilovaný a môžeme založiť nový projekt.
-V prípade že niečo neprebehlo dobre môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}, alebo projekt zmazať a začať od kroku jedna.
-Na vytvorenie noveho projektu nam staci zadať:
+V prípade, že niečo neprebehlo dobre, môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}, alebo projekt zmazať a začať od kroku jedna.
+Na vytvorenie nového projektu nám stačí zadať:
 \begin{lstlisting}
   # vytvorenie noveho projektu s nazvom HelloGrid
   ./build.sh -n HelloGrid
@@ -806,7 +881,7 @@ Na vytvorenie noveho projektu nam staci zadať:
   project/HelloGrid/src/main.cpp
 \end{lstlisting}
 Dôležité súbory pre kompilačný systém sú všetky CMakeLists.txt súbory bez ktorých sa projekt neskomkpiluje.
-V prípade že by sme cheli pridať ďalší .cpp súbor, môžeme ho pridat do priečinku \texttt{HelloGrid/src} a následne ho musíme pridať do
+V prípade že by sme chceli pridať ďalší .cpp súbor, môžeme ho pridať do priečinku \texttt{HelloGrid/src} a následne ho musíme pridať do
 súboru \texttt{HelloGrid/CMakeLists.txt}.
 
 \begin{lstlisting}[language=c++, caption={HelloGrid/src/main.cpp}, numbers=left]
@@ -838,8 +913,8 @@ súboru \texttt{HelloGrid/CMakeLists.txt}.
       return 0;
   }
 \end{lstlisting}
-Zmeňme riadok sesť na \texttt{nodes = 2}, riadok trinásť na \texttt{walltime = 00:01:00} a riadok sestnásť na \texttt{walltime = debug}.
-Parametre nodes a ppn sú dôležité pre spustenie programu na lokálnom počítaci. Zvyšné parametre, queue a walltime sa prejavia až pri spustení na gride.
+Zmeňme riadok šesť na \texttt{nodes = 2}, riadok trinásť na \texttt{walltime = 00:01:00} a riadok šestnásť na \texttt{walltime = debug}.
+Parametre nodes a ppn sú dôležité pre spustenie programu na lokálnom počítací. Zvyšné parametre, queue a walltime sa prejavia až pri spustení na gride.
 Teraz môžeme projekt HelloGrid skompilovať a následne spustiť pomocou príkazov:
 \begin{lstlisting}
   # skompiloje projekt HelloGrid a vsetky zavislosti
@@ -860,13 +935,13 @@ Výstup programu nemusí vyzerať presne takto.
 Aby sme boli schopný použiť program vytvorený v kapitole \ref{subsec:local-dev}. Musíme najprv celý projekt skopírovať na grid hpc.stuba.sk.
 Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne napríklad pomocou programu \texttt{rsync}, \texttt{scp}
 alebo môžeme použiť systém git, prípadne iný program.
-Pri manuánom kopírovaní si treba dať pozor aby sme neskopírovali priečinky a súbory, ktoré môžu mať závislosti na lokálne prostredie.
+Pri manuálnom kopírovaní si treba dať pozor aby sme neskopírovali priečinky a súbory, ktoré závisia od lokálneho prostredia.
 Sú to hlavne súbory z predchádzajúcich kompilácii a priečinky \texttt{.build, vendor/boost}.
-Nachadzame sa v priecinku \texttt{~/grid} a repozitáre môžeme zosynchronizovať pomocou: 
+Nachádzame sa v priečinku \texttt{~/grid} a repozitáre môžeme zosynchronizovať pomocou: 
 \begin{lstlisting}
   ./build.sh --sync
 \end{lstlisting}
-Príkaz \texttt{./build.sh --sync} skopíruje cely projekt \texttt{~/grid} na server hpc.stuba.sk do priečinku \texttt{/work/3xelias/grid}.
+Príkaz \texttt{./build.sh -{}-sync} skopíruje cely projekt \texttt{~/grid} na server hpc.stuba.sk do priečinku \texttt{/work/3xelias/grid}.
 Taktiež skopíruje \texttt{.project-id} a vynechá všetky súbory viazané na lokálne prostredie.
 Po skopírovaní súborov sa môžeme prihlásiť pomocou \texttt{ssh}.
 \begin{lstlisting}
@@ -882,66 +957,20 @@ Po skopírovaní súborov sa môžeme prihlásiť pomocou \texttt{ssh}.
   # pridanie programu do vypoctovej fronty
   ./build.sh -r project/HelloGrid
 \end{lstlisting}
-V tomto prípapade neuvidíme žiadny výstup. Výstup si môžeme pozrieť až po zaradení do fronty a skončení programu, čo by malo v prípade že sme použili
+V tomto prípade neuvidíme žiadny výstup. Výstup si môžeme pozrieť až po zaradení do fronty a skončení programu, čo by malo v prípade že sme použili
 debug frontu takmer okamžité. Výstup môžeme nájsť po skončení programu v priečinku \texttt{project/HelloGrid}. 
-Sú to súboru HelloGrid s príponou \texttt{.o<id\_procesu>} pre štandardný výstup a \texttt{.e<id\_procesu>} pre chybový výstup.
+Sú to súbory HelloGrid s príponou \texttt{.o<id\_procesu>} pre štandardný výstup a \texttt{.e<id\_procesu>} pre chybový výstup.
 Výstupy si môžeme stiahnuť na lokálny počítač pomocou:
 \begin{lstlisting}
   # na lokalnom pocitaci v priecinku ~/grid
   ./build.sh --sync
 \end{lstlisting}
-Tentokrát ak sme nespravili žiadnu zmenu na lokalnom pc, tak sa neskopiruje nič,
+Tentokrát, ak sme nespravili žiadnu zmenu na lokálnom pc, tak sa neskopíruje nič,
 ale stiahnu sa výstupy s programu HelloGrid do priečinku \texttt{project/HelloGrid}.
 
-\section{Genetické algoritmy}
-\acrfull{ga} patria medzi patria medzi najčastejšie používaných predstaviteľov evolučných výpočtových techník.
-V tejto práci sme si ich zvolili pretože sú výpočtovo náročné a dajú sa paralelizovať.
-Tieto vlastnoti ich určujú ako vhodných kandidátov na nasadenie do gridového prostredia.
-
-\subsection{Základná terminológia}
-Genetické algoritmy sa snažia napodobniť biologické procesy v prírode.
-Základnými objektami sú gén, reťazec a populácia. Nad týmito objektami sa výkonávajú operácie.
-Medzi základné operácie patria výber, mutácia a kríženie.
-
-Gén je základnou stavebnou jednotkou reaťazca a predstavuje elementárne vlastnosti jedinca.
-Gén je zvyčajne reprezentovaný číselne, alebo nejakým symbolom z abecedy.
-V tomto experimente je gén reprezentovaný ako jeden znak z abecedy.
-
-Reťazec (chromozóm) je postupnosť génov, respektíve znakov, ktoré predstavujú zvolené parametre alebo vlastnosti jedinca
-z problémovej oblasti. V tomto prípade reťazec predstavuje dešifrovací klúč. 
-
-Populácia je skupina reťazcov zvoleného počtu. Veľkosť populácie sa počas riešenia genetického algoritmu môže meniť.
-
-Generácia predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne môže reprezentovať poradové číslo cyklu.
-
-Účelová funkcia vypočítava skóre každého jedinca v populácii a je mierou toho čo chceme maximalizovať, prípadne minimalizovať.
-Úlohou účelovej funkcie je nájsť globálny extrém.
-
-Fitness je v evolučných výpočtoch pojem predstavujúci mieru úspešnosti jedincov.
-V prípade maximalizačnej úlohy je to najväčšia hodnota účelovej funkcie. Naopak v prípade minimalizačnej úlohy je to najmenšia hodnota.
-
-Výber je process, ktorý vyberie niektorých jedincov z populácie na základe zvolenej stratégie.
-Vybraný jedinci potom vstupujú do operácii kríženia, mutácie alebo bez zmeny pokračujú do ďalšej generácie.
-Existuje viacero stratégii výberu jedincov, avšak základnou ideou je aby lepší jedinci prežili a postupne vytlačili horších jedincov z populácie.
-
-Mutácia znamená náhodnú zmenu génu v reťazci, prípadne viac zmien v celej populácii.
-Gén zmení svoju hodnotu na inú náhodne zvolenú hodnotu z prehladávného priestoru.
-Mutácia je základnou hybnou silou genetických algoritmov. Umožnuje nachádzať nové riešenia, ktoré sa v populácii ešte neobjavili.
-
-Kríženie je operácia, pri ktorej si dva náhodne zvolené rodičovské jedince rozdelia v nejakom bode a vymenia si svoje gény.
-Krížením vznikajú nový, odlisný potomkovia, ktorý nesú niektoré znaky oboch rodičov.
-
-%\subsection{Štruktúra GA}
-
-%\begin{figure}[!h]
-%  \centering
-%  \def\svgwidth{\columnwidth}
-%  \input{ga.pdf_tex}
-%  \caption{Štruktúra GA}
-%  \label{img:ga}
-%\end{figure}
-
-\subsection{Experiment}
+\section{Experiment s GA}
+V tejto práci sme si zvolili genetické algoritmy pretože sú výpočtovo náročné a dajú sa paralelizovať.
+Tieto vlastnosti ich určujú ako vhodných kandidátov na nasadenie do gridového prostredia.
 \begin{table}[!h]
 \centering
 \begin{tabular}{@{}lllll@{}}
@@ -976,43 +1005,49 @@ Krížením vznikajú nový, odlisný potomkovia, ktorý nesú niektoré znaky o
 \label{tab:schemy}
 \end{table}
 
-V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré budú lúštiť monoalfabetickú substitúciu.
+V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré lúštia monoalfabetickú substitúciu.
 Dôležitosť tohto experimentu spočívala v nájdení vhodných parametrov, pri ktorých bude najvyššia úspešnosť rozlúštenia zašifrovaného textu.
 
-Prvým krokom bolo nasadenie vlastnej implemtácie GA, ktoré by sme mohli upraviť podľa vlastných požiadaviek.
-Základnú implementáciu poskytol vedúci práce Ing. Eugen Antal, PhD. Táto implementácia bola dalej nami rozvíjaná.
-Čast kódu bola prepísana, ale základná idea ostala.
-Doimplementovali sme niektoré genetické operácie kríženia: single point crossover, uniform crossover.
+Prvým krokom bolo nasadenie vlastnej implementácie GA, ktoré by sme mohli upraviť podľa vlastných požiadaviek.
+Základnú implementáciu poskytol vedúci práce Ing. Eugen Antal, PhD. Táto implementácia bola ďalej nami rozvíjaná.
+Čast kódu bola prepísaná, ale základná idea ostala.
+Implementovali sme niektoré genetické operácie kríženia: single point crossover, uniform crossover.
 
-Ďalším krokom bolo zvolenie vhodných parametrov GA, pre nájdenie omptimálneho riešenia.
-Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskôr použit pre dalšie skúmanie paralelných genetických algoritmov. 
-Medzi skúmané parametre patrili: veľkosť počiatocnej populácie, počet iterácii genetického algoritmu a kombinácie rôznych operácii (schémy).
+Ďalším krokom bolo zvolenie vhodných parametrov GA, pre nájdenie optimálneho riešenia.
+Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskôr použiť pre ďalšie skúmanie paralelných genetických algoritmov. 
+Medzi skúmané parametre patrili: veľkosť počiatočnej populácie, počet iterácií genetického algoritmu a kombinácie rôznych operácií (schémy).
 Veľkosť počiatočnej populácie, ktorú sme skúmali bola v počte: 10, 20, 50 a 100 chromozómov. Počet iterácii bol 10000 a 50000. 
 Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
 
-Prvým stĺpcom tabulky je názov samotnej schémy. Ďalšie stĺpce tabuľky predstavujú zreťazenie jednotlivých operácii. Riadky schémy predstavujú aplikovanie jednotlivých retazcov operácii na populáciu z predchádzajúcej generácie.
+Prvým stĺpcom tabuľky je názov samotnej schémy. Ďalšie stĺpce tabuľky predstavujú zreťazenie jednotlivých operácii. Riadky schémy predstavujú aplikovanie jednotlivých reťazcov operácii na populáciu z predchádzajúcej generácie.
 Všimnime si napríklad schému \textbf{J}.
-Prvou operáciou v prvom riadku tejto schémy je výber elitného jedinca, ktorý pospupuje do novej generácie.
-V druhom riadku je tak isto zvolený jeden elitný jedinec, ale tentokrát je nad ním vykonaná operácia mutácie, ktorá jeden krát zamení pozície dvoch nahodne vybraných génov.
-V tretom riadku schémy \texttt{J} sa \texttt{(n-2)/2}-krát vykoná náhodný výber, ktorého výstupom sú dvaja jedinci. Týto jedinci postupujú do operácie kríženia,
+Prvou operáciou v prvom riadku tejto schémy je výber elitného jedinca, ktorý postupuje do novej generácie.
+V druhom riadku je tak isto zvolený jeden elitný jedinec, ale tentokrát je nad ním vykonaná operácia mutácie, ktorá jeden krát zamení pozície dvoch náhodne vybraných génov.
+V tretom riadku schémy \texttt{J} sa \texttt{((n-2)/2)}-krát vykoná náhodný výber, ktorého výstupom sú dvaja jedinci. Títo jedinci postupujú do operácie kríženia,
 ktorej výsledkom sú dvaja nový potomkovia nad ktorými sa vykoná operácia swap.
 
 Úspešnosť jednotlivých schém bola vyhodnocovaná nad textami od dĺžky 50 po 2000 s nárastom o 50 znakov,
 pričom z každej dĺžky sme mali k dispozícii 100 rôznych textov.
-Po celom behu GA bol vybratý najlepší jedinec reprezentujúci potencionály kľúč,
+Po celom behu GA bol vybratý najlepší jedinec reprezentujúci potencionálny kľúč,
 ktorým bol dešifrovaný zašifrovaný text a jeho výsledok porovnaný s pôvodným otvoreným textom.
-% Úspešnosť bola vyhodnotená podľa počtu zhodných pozícii.
+Ako ohodnocovacia funkcia bola použitá bigramová funkcia, ktorá vypočítavala manhatanovskú vzdialenosť.
 \subsection{Distribúcia parametrov}
-Aby sme mohli využíť celú výpočtovú silu ktorú nám gridové prostredie ponúka a aby sme sa zároveň vyhli opakovanému spúštaniu každej schémy
-tak sme navrhli riešenie v ktorom by sme mali jeden hlavný proces distribuujúci parametre n pracovným procesov.
+Aby sme mohli využiť celú výpočtovú silu ktorú nám gridové prostredie ponúka a aby sme sa zároveň vyhli opakovanému spúšťaniu každej schémy,
+navrhli sme riešenie, v ktorom by sme mali jeden hlavný proces distribuujúci parametre n pracovných procesov.
+Tento spôsob môže mať dve riešenia. Prvým je, že hlavný proces rozhoduje komu posiela prácu. Druhý spôsob riešenia je, že pracovné procesy
+notifikujú hlavný proces keď sú volné. Nevýhodou prvého riešenia je, že môžu vznikať časové prestoje pracovných procesov,
+pretože tu chýba spätná komunikácia a hlavný proces prakticky nemá možnosť zistiť či proces svoju prácu skončil.
+Tento problém rieši druhý prístup, kde sa pracovné procesy snažia získať prácu hneď ako je to možné.
+Preto sme sa rozhodli implementovať druhý spôsob, ktorý je podľa nášho názoru ľahší na implementáciu a aj rýchlejší.
 
 Úlohou hlavného procesu je distribúcia parametrov (nastavení GA) pracovným procesom. Hlavný proces zostaví parametre: iterácia, veľkosť populácie, dĺžka textu,
-načíta otvorený text, načíta zašifrovaný text. Potom čaká na kým sa uvolní ľubovoľný pracovný proces od ktorého príjme jeho id a pošle mu späť zostavené parametre.
-V prípade že hlavný proces už nemá čo poslať, čaká na všetky pracovné procesy, ktoré následne ukončí.
+načíta otvorený text a zašifrovaný text. Potom čaká na notifikáciu od ľubovoľného pracovného procesu, od ktorého príjme jeho id.
+Následne zostaví parametre a pošle ich pracovnému procesu na spracovanie.
+V prípade, že hlavný proces už nemá čo poslať, čaká na všetky pracovné procesy, ktoré následne ukončí.
 
 Úlohou pracovného procesu je na prijaté parametre aplikovať schémy z tabuľky \ref{tab:schemy}.
 Pracovný proces sa snaží získať prácu od hlavného procesu tak,
-že mu najprv pošle svoje id a potom čaká kým mu hlavný proces pridelí prácu (parametre) alebo zruší jeho činnosť.
+že mu najprv pošle svoje id a potom čaká kým mu hlavný proces pridelí prácu (parametre), alebo zruší jeho činnosť.
 
 \begin{lstlisting}[language=c++, caption={Pseudokód ditribúcie parametrov GA}]
   void run_master(mpi::comm &comm) {
@@ -1037,9 +1072,9 @@ Pracovný proces sa snaží získať prácu od hlavného procesu tak,
 
   void run_worker(int id, mpi::comm &comm) {
     // initialize
-    scheme schemes = ;
     while (1) {
       Data data(id);
+      // nonblocking send 
       comm.isend(master, 0, data);
       comm.recv(master, 1, data);
       if (!data.status) return;
@@ -1052,14 +1087,51 @@ Pracovný proces sa snaží získať prácu od hlavného procesu tak,
     }
   }
 \end{lstlisting}
-\subsection{Výsledky experimentu}
-vysledky GA a ich interpretacia
+\subsection{Výsledky}
+Experiment s GA bežal na gride hpc.stuba.sk 34 hodín.
+Použitých bolo pritom 96 výpočtových uzlov, čo zjavne urýchlilo celý experiment.
+Spolu bolo treba 320000 spustení genetického algoritmu.
 
-\section{Paralelné genetické algoritmy}
-% uvod a teoria
-% optimalizaci pomocou cache, 
+Na obrázku \ref{schema:ga_10000_10} môžeme vidieť jeden z výsledkov genetického algoritmu.
+Ako možno vidieť z grafu najhoršie výsledky dosiahla schéma B, ktorá je zložená z náhodného výberu a jedeného swapu. Táto schéma sa správa podľa naších očakavaní. Náhodnosť spôsobuje vysokú mieru diverzity.
+O niečo lepšie ale podobné výsledky dosahujú schémy A a D, ktoré sa správajú veľmi náhodne a neprinásajú lepšie výsledky.
+Prekvapivé výsledky prináša schéma C, u ktorej videť vysokú mieru selektívneho tlaku, avšak táto schéma ako vidieť z grafu uviazne v nejakom lokálnom extréme.
+Lepšie výsledky prinášajú schémy E, F, G, H, I J, ktoré vďaka zachovaniu elitných jedincov dokážu pri dostatočne dlhých textoch prinášať dobré výsledky.
+\input{includes/plot/10000_10}
+
+Na dalšom obrázku \ref{schema:ga_10000_50} môžeme vidieť GA s počiatočnou populáciou o veľkosti 50 jedincov. Zvýšenie počtu jedincov spôsobuje malé zlepšie \textquote{náhodných} schém A a D, avšak úspešnosť týchto schém nie je dostatočná. Zvýšenie veľkosti populácie značne pomohlo schéme C, ktorá takto vďaka vyššej diverzite má možnosť dosiahnuť globálny extrém. Zvyšné schémy, ktoré obsahujú elitný jedincov, dosahujú z vyšším počtom jedincov mierne zlepšenie u kratších textov. 
+\input{includes/plot/10000_50}
+
+Podľa očakávaní naších očakávaní boli dosiahnuté najlpšie výsledky s nastavením genetického algoritmu pri 50000 iterácii a s počiatočnou populáciou veľkosti 100 jedincov (obrázok \ref{schema:ga_50000_100}). Lepšie výsledky boli dosiahnuté najmä pri kratších textoch a mierne zlepšenie môžeme vidieť aj pri dlhších textoch. Treba však poznamenať, že GA pri taktom nastavení beži značne dlhšie a dobré výsledky sa dajú dosiahnuť aj s mensím počtom iterácii a menšou populácioiu. 
+\input{includes/plot/50000_100}
+
+Zo schémy B na obrázku \ref{schema:ga_B} možno vidieť, že náhodne zvolený jedinci prinášajú do GA diverzitu.
+\input{includes/plot/B}
+
+Ako sme uz poznamenali schéma C (obrázok \ref{schema:ga_C}) dosahuje prekvapivé výsledky aj najpriek tomu, že neobsahuje výber elitných jedincov. K dosahovaniu vysokej úspešnosti jej pomáha najmä veľkosť populácie, avšak ako možno vidieť z grafu tejto schémy napríklad zväčšenie populácie z 50 a 100 jedincov už neprinieslo o toľko lepšie výsledky a je možné že príliž veľká populácia by tejto schéme mohla aj uškodiť pôsobením väčšej rôznorodosti.
+\input{includes/plot/C}
+
+Na dalsích obrázkoch schém E a F, môžeme vidieť že žvačšenie počtu iterácii GA ako aj veľkosti populácie prináša pri lúštení monoalfabetickej substitúcie iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii že zlepšenie sa pohybuje okolo 10\%.
+\input{includes/plot/E}
+\input{includes/plot/J}
+
+Zvyšné výsledky z tohto exprimentu môžeme vidieť v prílohe B tejto práce.
+\section{Experiment s PGA}
+Paralelné genetické algoritmy (PGA) možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zýšiť výkonnosť aj efektivitu genetických algoritmov \cite{pea}.
+PGA prinášajú výhody v porovnaní s GA, ktoré sú podľa \cite{pea} sú: paralelné hladanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, shopnosť nájsť lepšie riešnia, shopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému.
+
+Na obrázku \ref{img:pga} môžeme vidieť zjednodušenú blokovú shému PGA s migračným modelom. Pri takomto type prebieha výpočet jednotlivých genetických algoritmov vo viacero nezávislých, ale spolupracujúcich subpopulácia (ostrovoch). Tieto ostrovy môžu bezať na viacerých procesoroch alebo aj nezávislých počítačoch.
+Ostrovy si medzi sebou po určitom počte generácií a na základe vopred určených väzieb (topológii) vymenia niektorých jedincov, napríklad najlepších v aktuálnej generácii. Potom pokračujú izolovane dalej. Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
+\begin{figure}[!h]
+  \centering
+%  \def\svgwidth{\columnwidth}
+  \input{pga.pdf_tex}
+  \caption{Štruktúra PGA s migračným modelom}
+  \label{img:pga}
+\end{figure}
+optimalizacia pomocou cache. 
 \subsection{Trieda Migrator}
-Komunikacia cez triedu Migrator
+Komunikácia, tvorba topológii
 \subsection{Topológie}
 
 \begin{figure}[!htbp]
@@ -1068,10 +1140,9 @@ Komunikacia cez triedu Migrator
   \caption{Topológie paralelných genetických algoritmov \cite{pea}.}
   \label{img:topology}
 \end{figure}
-
-Schemy PGA
 \subsection{Výsledky experimentu}
-Vysledky PGA a ich interpretacia
+Výsledky PGA a ich interpretácia
+...
 
 %% Zaver
 %%
