@@ -174,23 +174,15 @@ Jednotlivým kľúčom je potom priradené skóre pomocou ohodnocovacej funkcie.
 Za aktuálny kľúč sa bude považovať ten, ktorý má najlepšie skóre.
 Výsledky tohto algoritmu ovplyvňuje voľba ohodnocovacej funkcie, ktorá sa ľahko môže ostať v lokálnom extréme, z ktorého sa nevie dostať.
 
-\subsubsection{Genetické a evolučné algoritmy}
+\subsubsection{Genetické algoritmy}
 \acrfull{ga} patria medzi najčastejšie používaných predstaviteľov evolučných výpočtových techník.
-
 Genetické algoritmy sa snažia napodobniť biologické procesy v prírode.
+
 Základnými objektami sú gén, reťazec a populácia. Nad týmito objektami sa vykonávajú operácie.
 Medzi základné operácie patria výber, mutácia a kríženie.
-\begin{figure}[!h]
-  \centering
-%  \def\svgwidth{\columnwidth}
-  \input{ga.pdf_tex}
-  \caption{Štruktúra GA}
-  \label{img:ga}
-\end{figure}
 
 \paragraph{Gén} je základnou stavebnou jednotkou reťazca a predstavuje elementárne vlastnosti jedinca.
 Gén je zvyčajne reprezentovaný číselne, alebo nejakým symbolom z abecedy.
-V tomto experimente je gén reprezentovaný ako jeden znak z abecedy.
 
 \paragraph{Reťazec (chromozóm)} je postupnosť génov, respektíve znakov, ktoré predstavujú zvolené parametre alebo vlastnosti jedinca
 z problémovej oblasti. V tomto prípade reťazec predstavuje dešifrovací kľúč. 
@@ -215,6 +207,46 @@ Mutácia je základnou hybnou silou genetických algoritmov. Umožňuje nachádz
 
 \paragraph{Kríženie} je operácia, pri ktorej si dva náhodne zvolené rodičovské jedince rozdelia v nejakom bode a vymenia si svoje gény.
 Krížením vznikajú noví, odlišní potomkovia, ktorí nesú niektoré znaky oboch rodičov.
+
+Skôr než sa GA začne realizovať treba definovať treba určiť spôsob zakódovania parameterov jednotlivých objektov.
+Pri klasických šifrách sa gény zvyčajne reprezentujú pomocou abededných znakov alebo čísiel.
+Ďalsím krokom je určiť prehladávaný priestor a následne formulovať účelovú funkciu. Dôležité je aj určiť veľkosť populácie,
+ktorá sa doporučuje medzi 10 a 100 jedincov \cite{ev}.
+Pri malých populácia býva nedostatočný priestor pre rôznorodosť (diverzitu) genetických informácii,
+naopak pri veľkých populáciach sa už nedosahuje lepšieho efektu.
+
+\begin{figure}[!h]
+  \centering
+%  \def\svgwidth{\columnwidth}
+  \input{ga.pdf_tex}
+  \caption{Štruktúra GA}
+  \label{img:ga}
+\end{figure}
+
+
+Princíp genetických algoritmov možno vidieť aj na obrázku \ref{img:ga}, ktorý pozostáva z niekoľkých krokov:
+\begin{enumerate}
+\item
+  Prvým krokom je vygenerovnie počiatočnej populácie $ P_0 $.
+\item
+  V tomto kroku sa vyhodnocuje populácia pomocou účelovej funkcie pre akuálnu populáciu $ P_k $.
+\item
+  V tejto fáze sa testuje ukončujúce podmienky genetického algoritmu.
+  V prípade že algoritmus skončil vyberie za najlepší jedinec aktuálnej populácie, ktorý predstavuje výsledné riešenie GA.
+\item
+  Ak algoritmus ešte neskončil, nasleduje výber dvoch skupín jedincov. Najprv sa vyberie jeden, prípadne viac najlepších jedincov, ktorí sa bez zmeny skopírujú
+  do novej populácie (skupina $ A $). Tieto reťazce zabezpečia monotónnu konvergenciu, čo znamená, že úloha v ďalšom kroku nebude mať horšie výsledky ako v tom predchádzajúcom.
+  Ďalšie jedine vybraté iným spôsobom sú skopírované do operácie kríženia (skupina $ B $).
+\item
+  V operácii kríženia sa náhodne spárujú rodičovské reťazce so skupiny $ B $, s ktorých vznikne rovnaký počet potomkovských reťazcov.
+  Potomkovia vytvoria skupinu $ C $, ktorá pokračuje do oprácie mutácie. 
+\item
+  Mutácia spôsobí, že náhodne zvoleným jedincom zmenia niektoré náhodne zvolené gény a vznikne populácia $ D $.
+\item
+  Nová populácia $ P_{k+1} $ vzniká zjednotením populácii $ A \cup D $. Genetický algoritmus pokračuje bodom 2.
+\end{enumerate}
+Predstavená schéma je len príklad ako by GA mohol vyzerať, v skutočnosti však môžeme uvažovať o viacerých kritériach, ktoré vplývajú na GA.
+Niektoré uvedieme v experimentálnej časti tejto práce.
 
 \section{Grid}
 Jedným z cieľov práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
@@ -1111,7 +1143,7 @@ Zo schémy B na obrázku \ref{schema:ga_B} možno vidieť, že náhodne zvolený
 Ako sme uz poznamenali schéma C (obrázok \ref{schema:ga_C}) dosahuje prekvapivé výsledky aj najpriek tomu, že neobsahuje výber elitných jedincov. K dosahovaniu vysokej úspešnosti jej pomáha najmä veľkosť populácie, avšak ako možno vidieť z grafu tejto schémy napríklad zväčšenie populácie z 50 a 100 jedincov už neprinieslo o toľko lepšie výsledky a je možné že príliž veľká populácia by tejto schéme mohla aj uškodiť pôsobením väčšej rôznorodosti.
 \input{includes/plot/C}
 
-Na dalsích obrázkoch schém E a F, môžeme vidieť že žvačšenie počtu iterácii GA ako aj veľkosti populácie prináša pri lúštení monoalfabetickej substitúcie iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii že zlepšenie sa pohybuje okolo 10\%.
+Na dalsích obrázkoch schém E (obrázok \ref{schema:ga_E}) a F (obrázok \ref{schema:ga_F}), môžeme vidieť že žvačšenie počtu iterácii GA ako aj veľkosti populácie prináša pri lúštení monoalfabetickej substitúcie iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii že zlepšenie sa pohybuje okolo 10\%.
 \input{includes/plot/E}
 \input{includes/plot/J}
 
@@ -1120,24 +1152,71 @@ Zvyšné výsledky z tohto exprimentu môžeme vidieť v prílohe B tejto práce
 Paralelné genetické algoritmy (PGA) možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zýšiť výkonnosť aj efektivitu genetických algoritmov \cite{pea}.
 PGA prinášajú výhody v porovnaní s GA, ktoré sú podľa \cite{pea} sú: paralelné hladanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, shopnosť nájsť lepšie riešnia, shopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému.
 
-Na obrázku \ref{img:pga} môžeme vidieť zjednodušenú blokovú shému PGA s migračným modelom. Pri takomto type prebieha výpočet jednotlivých genetických algoritmov vo viacero nezávislých, ale spolupracujúcich subpopulácia (ostrovoch). Tieto ostrovy môžu bezať na viacerých procesoroch alebo aj nezávislých počítačoch.
-Ostrovy si medzi sebou po určitom počte generácií a na základe vopred určených väzieb (topológii) vymenia niektorých jedincov, napríklad najlepších v aktuálnej generácii. Potom pokračujú izolovane dalej. Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
 \begin{figure}[!h]
   \centering
-%  \def\svgwidth{\columnwidth}
   \input{pga.pdf_tex}
   \caption{Štruktúra PGA s migračným modelom}
   \label{img:pga}
 \end{figure}
-optimalizacia pomocou cache. 
-\subsection{Trieda Migrator}
-Komunikácia, tvorba topológii
+
+Na obrázku \ref{img:pga} môžeme vidieť zjednodušenú blokovú shému PGA s migračným modelom. Pri takomto type prebieha výpočet jednotlivých genetických algoritmov vo viacero nezávislých, ale spolupracujúcich subpopulácia (ostrovoch). Tieto ostrovy môžu bezať na viacerých procesoroch alebo aj nezávislých počítačoch.
+Ostrovy si medzi sebou po určitom počte generácií a na základe vopred určených väzieb (topológii) vymenia niektorých jedincov, napríklad najlepších v aktuálnej generácii. Potom pokračujú izolovane dalej.
+Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
+
+Štrutúra toplógie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
+Niektoré vybrané topológie z \cite{pea} môžeme vidieť na obrázku \ref{img:topology}.
+Perióda migrácie by nemala byť veľmi krátka a migračné väzby by nemali byť príliš početné pretože sa môže stať že sa celý PGA bude správať ako keby jedna veľká populácia.
+
+% optimalizacia pomocou cache. 
+\subsection{MpiMigrator}
+Aby sme boli schopný vytvoriť PGA potrebujeme okrem genetického algoritmu nejako vytvárať topológie, ktoré medzi sebou dokážu komunikovať.
+
+Vytvránie topológii sa nám podarilo zovšeobecniť nasledovným spôsobom:
+\begin{lstlisting}[language=c++]
+class Migrator {
+public:
+  Migrator(int migrationTime);
+  virtual void migrate(int senderId, int itteration, Population &population) = 0;
+  // sender -> receiver
+  void addMigration(int senderId, int receiverId, Migration::Type t, int n)
+  // ...
+};
+\end{lstlisting}
+\texttt{Migrator} je základná trieda, ktorá definuje interface \texttt{migrage} a pomocnú funkciu \texttt{addMigration} na vytváranie topológii.
+Ideou tohto modelu je, že každý GA migruje v rovnakom čase.
+Funkcia \texttt{addMigration} vytvára migračné väzby typu odosielateľ (\texttt{senderId}) posiela príjemcovi (\texttt{receiverId}) \texttt{n} jedincov typu \texttt{t}.
+Pričom typ môže byť napríklad: najlepší, najhorsí, nahodný a iné. Pre príjemcu samozrejme platí, že očakáva migráciu takéhoto typu.
+Funkciu \texttt{migrate} sa musí implementovať zvlášť pre kontrétny PGA Migrator. Konkrétne implentácie môžu byť pre: thready, \acrshort{mpi}, OpenMP, a dalšie. 
+
+V našom prípade sme implementovali \acrshort{mpi} migrátor. Migrátor pošle niektorých jedincov populácie vopred zadaného typu.
+Posielanie nesmie byť blokujúce, pretože to by znamenalo deadlock. Príjatie môže byť blokujúce odosielateľ príjme nových jedincov ak existuje k nemu priradená väzba.
+Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie všetkých neblokujúcich volaní.
+\begin{lstlisting}[language=c++, caption={Pseudokód MpiMigrator}]
+    // nonblocking send
+    for (const Migration &m : p_senderMigrations[senderId]) {
+      Population pop = m.select(p);
+      mpi::request r = comm.isend<Population>(m.receiverId(), 0, pop);
+    }
+
+    // recv
+    for (const int &id : p_receiverMigrations[senderId]) {
+      Population pop;
+      comm.recv<Population>(id, 0, pop);
+      append(p, pop);
+    }
+
+    // wait for non blocking send
+    for (auto &r : request) {
+      r.wait();
+    }
+\end{lstlisting}
+% Komunikácia, tvorba topológii 
 \subsection{Topológie}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\textwidth]{img/topology.png}
-  \caption{Topológie paralelných genetických algoritmov \cite{pea}.}
+  \caption{Topológie paralelných genetických algoritmov}
   \label{img:topology}
 \end{figure}
 \subsection{Výsledky experimentu}
