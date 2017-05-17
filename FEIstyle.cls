@@ -433,7 +433,7 @@
 }
 
 \newcommand\FEIthanks[1]{
-    \pagestyle{plain}
+    \pagestyle{empty}
     \vspace*{120mm}
     \IfEqCase*{\FEIenglish}{
         {0}{\section*{\fontsize{22pt}{1.3}\selectfont Po\v{d}akovanie}}
@@ -447,7 +447,7 @@
 }
 
 \newcommand\FEIassignment[1]{   
-    \pagestyle{plain}
+    \pagestyle{empty}
     \setlength{\voffset}{-2.5cm}
     \begin{center}
         \makebox[\textwidth]{\includegraphics[width=\paperwidth]{#1}}
@@ -457,7 +457,7 @@
 }
 
 \newcommand\FEIabstract[1]{
-    \pagestyle{plain}   
+    \pagestyle{empty}   
     \section*{\fontsize{22pt}{1.3}\selectfont S\'{U}HRN}
     \noindent\MakeTextUppercase{\printSkola}
     \newline
@@ -485,7 +485,7 @@
 }
     
 \newcommand\FEIabstractEn[1]{
-    \pagestyle{plain}   
+    \pagestyle{empty}   
     \section*{\fontsize{22pt}{1.3}\selectfont ABSTRACT\color{white}\'U\color{black}}
     \noindent\MakeTextUppercase{\printSkolaEn}
     \newline
