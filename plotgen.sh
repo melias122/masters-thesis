@@ -1,14 +1,11 @@
 #!/bin/bash
 
 plot() {
-    
-    # plot "10000_50_H" smooth bezier, "10000_50_H" smooth csplines, "10000_50_H" w linespoints
-
     # settings
     i=$1
     j=$2
     lines="smooth csplines"
-    data="data/${i}_$j"
+    data="data/ga/${i}_$j"
 
     cat << EOF > includes/plot/${i}_${j}.tex
 \begin{figure}[!ht]
@@ -55,19 +52,19 @@ set terminal pdf enhanced size 15cm, 8cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Počet iterácii/Veľkosť populácie'
+set key samplen 3 spacing 1 font ',10' left title 'Počet iterácii/veľkosť populácie'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť schémy (%)"
 
-plot "data/10000_10_${i}" $lines dt 1 title '10000/10', \\
-     "data/10000_20_${i}" $lines dt 2 title '10000/20', \\
-     "data/10000_50_${i}" $lines dt 3 title '10000/50', \\
-     "data/10000_100_${i}" $lines dt 4 title '10000/100', \\
-     "data/50000_10_${i}" $lines dt 5 title '50000/10', \\
-     "data/50000_20_${i}" $lines dt 1 title '50000/20', \\
-     "data/50000_50_${i}" $lines dt 2 title '50000/50', \\
-     "data/50000_100_${i}" $lines dt 3 title '50000/100'
+plot "data/ga/10000_10_${i}" $lines dt 1 title '10k/10', \\
+     "data/ga/10000_20_${i}" $lines dt 2 title '10k/20', \\
+     "data/ga/10000_50_${i}" $lines dt 3 title '10k/50', \\
+     "data/ga/10000_100_${i}" $lines dt 4 title '10k/100', \\
+     "data/ga/50000_10_${i}" $lines dt 5 title '50k/10', \\
+     "data/ga/50000_20_${i}" $lines dt 1 title '50k/20', \\
+     "data/ga/50000_50_${i}" $lines dt 2 title '50k/50', \\
+     "data/ga/50000_100_${i}" $lines dt 3 title '50k/100'
 
 \end{gnuplot}
 \caption{Schéma: ${i}}
@@ -75,6 +72,9 @@ plot "data/10000_10_${i}" $lines dt 1 title '10000/10', \\
 \end{figure}
 EOF
 }
+
+#plot3() {    
+#}
 
 for i in 10000 50000; do
     for j in 10 20 50 100; do
@@ -86,4 +86,8 @@ done
 for j in A B C D E F G H I J; do
     plot2 $j
 done
+#done
+
+#for i in 3 5 11; do
+    #plot3
 #done
