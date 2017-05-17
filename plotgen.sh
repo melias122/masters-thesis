@@ -12,9 +12,10 @@ plot() {
 
     cat << EOF > includes/plot/${i}_${j}.tex
 \begin{figure}[!ht]
+\def\svgwidth{\columnwidth}
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 15cm, 8cm
+set terminal pdf enhanced size 16cm, 10cm
 set xrange [0:2000]
 set yrange [0:1]
 

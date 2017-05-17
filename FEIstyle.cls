@@ -94,7 +94,7 @@
 \usepackage{booktabs}
 \usepackage{svg}
 \usepackage{gnuplottex}
-\usepackage{geometry}
+% \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 
