@@ -96,7 +96,7 @@
 \usepackage{gnuplottex}
 % \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{epstopdf}
+%\usepackage{epstopdf}
 
 \addbibresource{includes/bibliography.bib}
 

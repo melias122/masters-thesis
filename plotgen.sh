@@ -8,7 +8,7 @@ plot() {
     data="data/ga/${i}_$j"
 
     cat << EOF > includes/plot/${i}_${j}.tex
-\begin{figure}[!ht]
+\begin{figure}[!htbp]
 \def\svgwidth{\columnwidth}
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
@@ -45,7 +45,7 @@ plot2() {
     #data="data/${i}_${j}"
 
     cat << EOF > includes/plot/${i}.tex
-\begin{figure}[!ht]
+\begin{figure}[!htbp]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
 set terminal pdf enhanced size 15cm, 8cm

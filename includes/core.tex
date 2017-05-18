@@ -268,6 +268,8 @@ Každý výpočtový uzol má nasledovnú konfiguráciu:
 Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{ram} , 104TB lokálneho úložného priestoru a ďalších 115TB zdielaného úložiska.
 Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
+kód
+
 V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne úlohu.
 Umiestnenie \texttt{/home/\$USER} je domovským priečinkom každého používateľa.
 Jedno z obmedzení tohto umiestnenia je, že môže obsahovať maximálne osemdesiattisíc súborov a priečinkov.
@@ -543,7 +545,7 @@ Výsledkom práce \acrshort{mpi} fóra vznikol v júni roku 1994 štandard \acrs
 ktorý je dodnes akceptovaný a má mnoho používateľov aj napriek tomu, že už existujú novšie verziu štandardu.
 \acrshort{mpi} štandard nie je knižnica. Je to špecifikácia toho ako by mala konkrétna implementácia knižnice vyzerať.
 Existuje viacero implementácií. Medzi najznámejšie patria \acrshort{ompi}, MVAPICH, IBM MPI.
-% mozno ciele MPI
+% možno ciele MPI
 
 Aj napriek tomu, že \acrshort{mpi} štandard je veľmi rozsiahly, obsahuje stovky funkcií, zaujímať sa však budeme len o niektoré z nich.
 
@@ -816,12 +818,12 @@ Ostatné zdrojové kódy, ktoré nesúvisia s daným projektom by mali ísť do 
 Priečinok \texttt{module} slúži na zdieľanie zdrojových kódov (modulov) medzi projektami.
 Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižníc od tretích strán.
 \subsection{Implementácia}
-% zvolene technologie:
-% linux
+% zvolené technológie:
+% Linux
 % c++(gcc 5.4)
 % Ako programovací jazyk sme si zvolili C++, s kompilátorom gcc5.4. 
 % cmake
-% boost(serializacia, mpi(mvapich, openmpi), automaticke stiahnutie a buildovanie)
+% boost(serializácia, mpi(mvapich, openmpi), automatické stiahnutie a buildovanie)
 % build.sh
 % git
 V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandardnú knižnicu.
@@ -894,59 +896,197 @@ Tieto ostrovy môžu bezať na viacerých procesoroch alebo aj nezávislých po�
 Ostrovy si medzi sebou po určitom počte generácií a na základe vopred určených väzieb (topológii) vymenia niektorých jedincov,
 napríklad najlepších v aktuálnej generácii. Potom pokračujú izolovane dalej.
 Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
-V tejto práci sme implementovali paralelné genetické algoritmy pomocou MPI.
+% V tejto práci sme implementovali paralelné genetické algoritmy pomocou MPI.
+
+\begin{table}[!ht]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lll@{}}
+\toprule
+Operácia           & Typ                 & Popis                                                                        \\ \midrule
+\textbf{Select}    & Elitism(n)          & Vyberie n najlepších jedincov                                                \\
+                   & Random(n)           & Náhodne zvolí n jedincov                                                     \\
+                   & Tournament(n)       & n-krát zvolí 2 jedincov a vyberie lepšieho                                   \\
+                   & Worst(n)            & Vyberie n najhoších jedincov                                                 \\ \midrule
+\textbf{Crossover} & SinglePoint(1 || 2) & Zvolí nádhoný bod a skríži 2 rodičov. Vráti 1 alebo 2 potomkov.              \\
+                   & Uniform(1 || 2)     & Zvolí niekoľko náhodných bodov a skríži 2 rodičov. Vráti 1 alebo 2 potomkov. \\ \midrule
+\textbf{Mutation}  & Swap(n)             & n-krát vymení 2 rôzne gény.                                                  \\
+                   & SwapAll             & Zmení všetky gény jedinca.                                                   \\
+                   & WithProbability(p)  & S pravdepodobnosťou p zmení náhodný gén.                                     \\ \bottomrule
+\end{tabular}%
+}
+\caption{Operácie GA}
+\label{tab:ops}
+\end{table}
 
 
+Základné stavebné bloky GA v našej implementácii sú:
+\paragraph{Genes} Obsahuje jednotlivé gény a predtavuje klúč šifry. Z implentačného hladiska sme zvolili reprezentáciu pomocou \texttt{std::string}.
+Výhodou tejto reprezentácie je jednoduchosť a aj o niečo lepší výkonu, napríklad oporoti \texttt{std::vector}.
+\paragraph{Chromosome} Je tvorený z génov a má skóre. Ohodnocovnie génov prebieha v našom modeli pomocou fitnes funkcie a aj šifrovacej funkcie.
+\paragraph{Generator} Generuje gény pre chromozóm. Gény sú generované z abecedy podľa vopred určeného modelu.
+Generator je interface a teda umožňuje rôzne implementácie, pre rôzne reprezentácie génov.
+Pre monoalfabetickú subtitúciu sme napríklad vytvorili \texttt{ShuffleGenerator}, ktorý generuje náhodné permutácie so zadanej abecedy.
+\paragraph{Population} Obsahuje chromozómy a je reprezentovaná pomocou \texttt{std::vector}.
+\paragraph{Cipher} Interface, ktorý definuje šifru pomocou dešifrovacej funkcie.
+\paragraph{Fitness} Interface, ktorý definuje vyhodnocovaciu funkciu.
+\paragraph{Migrator} Abstraktná trieda, ktorá definuje migračnú logiku a vytvára topológie.
+\paragraph{Select} Abstraktná trieda, ktorá definuje operáciu výber.
+\paragraph{GeneticOperation} Abstraktná trieda, definuje operácie kríženie a mutácia.
+\paragraph{Schema} Popisuje genetický algoritmus.
+Obsahuje počet iterácii, veľkosť počiatočnej populácie, generátor, lúštenú šifru, fitnes funkciu a migrátor v prípade že použíame PGA.
+Schéma tiež umožnuje pridávať operácie.
+Operácia je dvojica zložená z výberu (Select) a genetickej operácie (Mutation, Crossover).
+Dostupné operácie môžeme vidieť aj tabuľke \ref{tab:ops}.
 
-\subsection{Serializácia Chromozómov}
-Ako už bolo spomenuté v kapitole \ref{kap:serialize}, pri MPI komunikácii častokrát potrebujeme vymienať aj zložené dátové typy ako štrukúry, triedy.
-Pri implementácii PGA sme narazili na tento problém. Keď nastane čas migrácie, jednotlivé ostrovy si medzi sebou potrebujú vymeniť časť populácie.
-Aby bolo možné 
+\subsubsection{Genetický algoritmus}
+Genetický algoritmus v module PGA je implementovaný nasledovne:
+\begin{lstlisting}[language={c++}, caption={Genetický algoritmus}, numbers=left]
+  Population GeneticAlgorithm::run(int id, const Scheme &scheme) {
+    Population pop;
+    for (int i = 0; i < scheme.initialPopulation; i++) {
+      pop.emplace_back(scheme.generator, scheme.cipher, scheme.fitness);
+    }
+    for (int i = 1; i <= scheme.iterations; i++) {
+      if (scheme.migrator) {
+        scheme.migrator->migrate(id, i, pop);
+      }
+      Population newpop;
+      for (const std::vector<Operation> &ops : scheme.operations) {
+        Population subpop = pop;
+        for (const Operation &op : ops) {
+          
+          subpop = op.select->select(subpop);
+          op.geneticOperation->apply(subpop);
+          
+          for (Chromosome &c : subpop) {
+            c.calculateScore(scheme.cipher, scheme.fitness, scheme.cache);
+          }
+        }
+        append(newpop, subpop);
+      }
+      pop.swap(newpop);
+    }
+    std::sort(pop.begin(), pop.end(), Chromosome::byBestScore());
+    return pop;
+}
+\end{lstlisting}
+Základom tohto GA je trieda \texttt{Scheme}, ktorá definuje štruktúru genetického algoritmu. V prípade, že používame migračný model algroritmus musí mať unikátne id.
+Na riadku 2 až 5 algoritmus vytvorí jednotlivé chromozómy populácie o veľkosti initialPopulation. Gény sú výtvára generátor a skóre je vypočítané pomocou šifry a fitnes funkcie. 
+Ak je migrátor definovaný v schéme, tak na riadku 7-9 vykonáme migráciu populáciu. Migračná logika sa odohráva vo vnútri migrátora a migrovaný jedinci sa pridajú do aktuálnej populácie. Následne sa na aktuálnu populáciu na riadkoch 10 až 21 budú vykonávať operácie podľa vytvorenej schémy. Operácie môžu mať aj podoperácie a vytvárajú tak akúsi reťaz operácii. Na riadku 12 sa vytvorí kópia pôvodnej populácie, na ktorú sa ide aplikovať reťaz operácii. Riadok 13 pre prechádza cez jednotlivé operácie. Vždy sa vykoná najprv výber (Select) a na vybratú subpopuláciu je aplikovaná genetická operáciu kríženia alebo mutácie (riadok 15 a 16). Tejto subpopulácii sa preráta skóre. V tomto modeli musíme rátať skóre pri každej subpopulácii, pretože niektorá operácia, napríklad swap, mohla zmeniť gény a teda aj skóre jedinca, ktoré by mohlo byť použité v ďalšom výbere. Riadok 22 zjednocuje jednotlivé subpopulácie a na riadku 24 sa aktuálna populácia vymení za novú. Po prejdení všetkých iterácii už len algoritmus zoradí jedincov podľa najlepšieho skóre a vráti výslednú populáciu.
 
-\subsection{Mpi migrátor a topológie}
+Pomcou triedy Scheme by sme mohli vytvoriť jednoduchú schému GA napríklad takto:
+\begin{lstlisting}[language={c++}, numbers={left}]
+  ShuffleGenerator gen(alpha);
+  Monoalphabetic cipher(ciphertext);
+  L1DistanceBigrams fitness(bigrams);
+  Scheme s(10000, 30, &gen, &cipher, &fitness);
+  s.addOperations(new Select::Elitism(1), new Mutation::Swap(1));
+  auto subop = s.addOperations(new Select::Elitism(2), new Crossover::SinglePoint(2));
+  subop.emplace_back(new Select::Interface, new Mutation::WithProbability(0.25));
+  ...
+\end{lstlisting}
+V tomto príklade by sme vytvorili ShuffleGenerator z danej abecedy alpha, monoalfabetickú šifru s ciphertextom, ktorý chceme lúštiť, bigramovú fitnes funkciu s referenčnými hodnotami bigrams. Schéma s má 10000 iterácii GA, počiatočná populácia má veľkosť 30 jedincov. Schéma obsahuje dve zreťazenia operácii. Prvé zreťazenie je na riadku 5, kde sa vyberie jeden elitný jedinec na ktorého je aplikovaná operácia Swap. Druhé zreťazenie je na riadku 6 a 7, kde sa z populácie vyberú dvaja elitný jedinci, ktorí sa skrížia a vytvoria dvoch potomkov. Na riadku 7 potom pridáme suboperáciu. Výber len skopíruje populáciu na ktorú sa aplikuje mutácia.
+Jednotlivých podoperácii ako aj zreťazení môžeme vytvárať ľubovolne veľa.
+
+\subsubsection{Serializácia Chromozómov}
+Ako už bolo spomenuté v kapitole \ref{kap:serialize}, pri MPI komunikácii častokrát potrebujeme vymienať aj zložené dátové typy ako štrukúry, triedy, vektory a iné..
+Pri implementácii PGA migrátora sme narazili na tento problém. Keď nastane čas migrácie, jednotlivé ostrovy si medzi sebou potrebujú vymeniť časť populácie.
+Aby migrátor mohol posielať a aj prijímať vektory chromozómov (populácie). Do triedy Chromosome sme museli implementovať serializačnú procedúru, čo bolo vďaka použitiu Boost knižnice veľmi jednoduché.
+
+Na nasledujúcich riadkoch môžeme vidieť ako vyzerala trieda Choromosome pred úpravou potrebnou na serializáciu:
+\begin{lstlisting}[language={c++}, numbers={left}]
+class Chromosome {
+public:
+  // public methods ...
+private:
+    Genes  m_genes; // std::string
+    double m_score;
+};
+using Population = std::vector<Chromosome>;
+\end{lstlisting}
+
+Ďalše riadky zobrazujú triedu Chromosome po úprave na serializáciu aj s potrebnými include súbormi z knižnice Boost.
+\begin{lstlisting}[language={c++}, numbers={left}]
+#include <boost/serialization/access.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
+
+class Chromosome {
+public:
+  // public methods ...
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive &ar, const unsigned int version)
+    {
+        ar &m_genes;
+        ar &m_score;
+    }
+    Genes  m_genes; // std::string
+    double m_score;
+};
+using Population = std::vector<Chromosome>;
+\end{lstlisting}
+Hlavnou myšlienkou tohto riešenia je sprístupnenie privátnych premenných a funkcie serialize triedy Chromosome. To sme dosiahli pridaním riadku 9.
+Na riadku 10 až 15 je uvedený kód serializácie, ktorý je veľmi jednoduchý aj pre elegantnosť Boost knižnice, v ktorej je už serializácia pre stringy, vektory aj primitívne typy implementovaná.
+
+\subsubsection{Mpi migrátor a topológie}
 Aby sme boli schopný vytvoriť PGA potrebujeme okrem genetického algoritmu nejako vytvárať topológie, ktoré medzi sebou dokážu komunikovať.
 
 Vytvránie topológii sa nám podarilo zovšeobecniť nasledovným spôsobom:
-\begin{lstlisting}[language=c++]
-class Migrator {
-public:
-  Migrator(int migrationTime);
-  virtual void migrate(int senderId, int itteration, Population &population) = 0;
-  // sender -> receiver
-  void addMigration(int senderId, int receiverId, Migration::Type t, int n)
-  // ...
-};
+\begin{lstlisting}[language=c++, caption={Abstrktná trieda Migrator}, numbers={left}]
+  class Migrator {
+    public:
+    Migrator(int migrationTime);
+    virtual void migrate(int senderId, int itteration, Population &population) = 0;
+    // sender -> receiver
+    void addMigration(int senderId, int receiverId, Migration::Type t, int n)
+    // ...
+  };
 \end{lstlisting}
-\texttt{Migrator} je základná trieda, ktorá definuje interface \texttt{migrage} a pomocnú funkciu \texttt{addMigration} na vytváranie topológii.
+Migrator je abstraktná trieda, ktorá definuje interface migrate a pomocnú funkciu addMigration na vytváranie topológii.
 Ideou tohto modelu je, že každý GA migruje v rovnakom čase.
-Funkcia \texttt{addMigration} vytvára migračné väzby typu odosielateľ (\texttt{senderId}) posiela príjemcovi (\texttt{receiverId}) \texttt{n} jedincov typu \texttt{t}.
-Pričom typ môže byť napríklad: najlepší, najhorsí, nahodný a iné. Pre príjemcu samozrejme platí, že očakáva migráciu takéhoto typu.
-Funkciu \texttt{migrate} sa musí implementovať zvlášť pre kontrétny PGA Migrator. Konkrétne implentácie môžu byť pre: thready, \acrshort{mpi}, OpenMP, a dalšie. 
+Funkcia addMigration vytvára migračné väzby typu odosielateľ (senderId) posiela príjemcovi (receiverId) n jedincov typu t.
+Pričom typ t môže byť napríklad: najlepší, najhorsí, nahodný a iné. Pre príjemcu samozrejme platí, že očakáva migráciu rovnakého typu.
+Interface migrate musí  byť implementovaný pre kontrétny PGA Migrator. Konkrétne implementácie môžu zahŕňať napríklad: thready, \acrshort{mpi}, \acrshort{omp},
+a ďalšie.
+Pomocou Migrator-a by sme mohli vytvoriť napríklad topológiu f z obrázku \ref{img:topology}, ktorá by obsahovala 5 ostrovov.
+\begin{lstlisting}[language={c++}, numbers=left]
+  int size = 5;
+  Migrator m;
+  for (int i = 0; i <= size - 2; i += 2) {
+    m.addMigration(i + 1, 0, Migration::Type::Best, 1);
+    for (int j = 1; j <= size - 2; j += 2) {
+      m.addMigration(i + 2, j, Migration::Type::Best, 1);
+    }
+  }
+\end{lstlisting}
 
-V našom prípade sme implementovali \acrshort{mpi} migrátor. Migrátor pošle niektorých jedincov populácie vopred zadaného typu.
-Posielanie nesmie byť blokujúce, pretože to by znamenalo deadlock. Príjatie môže byť blokujúce odosielateľ príjme nových jedincov ak existuje k nemu priradená väzba.
-Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie všetkých neblokujúcich volaní.
-\begin{lstlisting}[language=c++, caption={Pseudokód MpiMigrator}]
+V tejto práci sme implementovali \acrshort{mpi} migrátor nasledovným spôsobom:
+\begin{lstlisting}[language=c++, caption={Kód MpiMigrator-a}, numbers={left}, label={lst:mpi-mig}]
+  void MpiMigrator::migrate(int senderId, int itteration, Population &population)
+  {
     // nonblocking send
     for (const Migration &m : p_senderMigrations[senderId]) {
       Population pop = m.select(p);
       mpi::request r = comm.isend<Population>(m.receiverId(), 0, pop);
     }
-
     // recv
     for (const int &id : p_receiverMigrations[senderId]) {
       Population pop;
       comm.recv<Population>(id, 0, pop);
       append(p, pop);
     }
-
     // wait for non blocking send
     for (auto &r : request) {
       r.wait();
     }
+  }
 \end{lstlisting}
-
-%\subsection{Projekty}
+MpiMigrátor pošle niektorých jedincov populácie vopred zadaného typu, podľa vytvorenej migračnej schémy (riadok 4-7).
+Posielanie v tomto prípade nesmie byť blokujúce, pretože by sa každý odosielateľ snažil iba posielať ale nikto by nič nepríjmal, čo by znamenalo deadlock.
+Naopak prijímanie blokujúce byť môže (riadok 9-13). Migrátor príjme nových jedincov ak existuje k nemu priradená väzba.
+Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie neblokujúcich volaní (riadok 15-17).
 
 \subsection{Príklad použitia}
 Táto kapitola by mala slúžiť ako manuál pre ďalších používateľov.
@@ -962,15 +1102,14 @@ Prvým krokom je nainštalovanie potrebných balíčkov príkazom \texttt{apt}.
 \begin{lstlisting}
   sudo apt install build-essential libmpich-dev git cmake clang-format
 \end{lstlisting}
-Druhý krok je klonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojové súbory priložené k tejto práci.
+Druhý krok je naklonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojové súbory priložené k tejto práci.
 \begin{lstlisting}
   git clone git@github.com:melias122/grid.git
 \end{lstlisting}
-V tretom kroku sa prepneme do repozitára a skompilujeme celý projekt.
+V treťom kroku sa prepneme do repozitára a skompilujeme celý projekt.
 Ešte pred kompiláciou musíme vytvoriť súbor \texttt{.project-id}, ktorý by musí obsahovať
-identifikátor pre náš projekt.
-Prvýkrát môže byť kompilovanie časovo náročnejšie,
-pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modulmi. 
+identifikátor pre náš projekt, v opačnom prípade nás na to upozorní príkaz build.sh.
+Prvýkrát môže byť kompilovanie časovo náročnejšie, pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modulmi. 
 \begin{lstlisting}
   # prepnutie sa do repozitara
   cd grid/
@@ -999,7 +1138,7 @@ Na vytvorenie nového projektu nám stačí zadať:
 \end{lstlisting}
 Dôležité súbory pre kompilačný systém sú všetky CMakeLists.txt súbory bez ktorých sa projekt neskomkpiluje.
 V prípade že by sme chceli pridať ďalší .cpp súbor, môžeme ho pridať do priečinku \texttt{HelloGrid/src} a následne ho musíme pridať do
-súboru \texttt{HelloGrid/CMakeLists.txt}.
+súboru \texttt{HelloGrid/CMakeLists.txt}, v ktorom existuje nápoveda kam pridať zdrojový súbor.
 
 \begin{lstlisting}[language=c++, caption={HelloGrid/src/main.cpp}, numbers=left]
   // Project HelloGrid
@@ -1026,12 +1165,31 @@ súboru \texttt{HelloGrid/CMakeLists.txt}.
   using namespace std;
   int main(int argc, char **argv) {
       MpiApp app(argc, argv);
-      cout << "Hello, grid from " << app.rank() << " out of " << app.size() << endl;
+      println("Hello, " << "MpiApp");
       return 0;
   }
 \end{lstlisting}
-Zmeňme riadok šesť na \texttt{nodes = 2}, riadok trinásť na \texttt{walltime = 00:01:00} a riadok šestnásť na \texttt{walltime = debug}.
 Parametre nodes a ppn sú dôležité pre spustenie programu na lokálnom počítací. Zvyšné parametre, queue a walltime sa prejavia až pri spustení na gride.
+
+Zmeňme riadok 6 na \texttt{nodes = 2}, riadok 11 na \texttt{queue = debug}, riadok 14 na \texttt{walltime = 00:01:00}
+a nahraďme funkciu main nasledovne:
+\begin{lstlisting}
+  int main(int argc, char **argv) {
+      MpiApp app(argc, argv);
+      if (app.rank() == 0) {
+          string msg;
+          for (int i = 1; i < app.size(); i++) {
+              app.recv(i, 0, msg);
+              println(msg);
+          }
+      } else {
+          string msg("hello my number is " + to_string(Rand.Int(0, 100)));
+          app.send(0, 0, msg);
+      }
+      return 0;
+  }  
+\end{lstlisting}
+Proces 0 v tomto príklade príjme 3 správy od procesov 1, 2, 3, ktoré posielajú náhodné číslo medzi 0 a 100.
 Teraz môžeme projekt HelloGrid skompilovať a následne spustiť pomocou príkazov:
 \begin{lstlisting}
   # skompiloje projekt HelloGrid a vsetky zavislosti
@@ -1040,27 +1198,25 @@ Teraz môžeme projekt HelloGrid skompilovať a následne spustiť pomocou prík
   # spustenie programu HelloGrid
   ./build.sh -r HelloGrid
 
-  # vystup programu HelloGrid
-  Hello, grid from 2 out of 4
-  Hello, grid from 3 out of 4
-  Hello, grid from 0 out of 4
-  Hello, grid from 1 out of 4
+  # priklad vystupu programu HelloGrid
+  hello my number is 26
+  hello my number is 62
+  hello my number is 73
 \end{lstlisting}
-Výstup programu nemusí vyzerať presne takto.
 
 \subsubsection{Spustenie na gride hpc.stuba.sk}
 Aby sme boli schopný použiť program vytvorený v kapitole \ref{subsec:local-dev}. Musíme najprv celý projekt skopírovať na grid hpc.stuba.sk.
-Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne napríklad pomocou programu \texttt{rsync}, \texttt{scp}
-alebo môžeme použiť systém git, prípadne iný program.
+Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne napríklad pomocou programu rsync, scp
+alebo môžeme použiť systém git, prípadne iný program na kopírovanie.
 Pri manuálnom kopírovaní si treba dať pozor aby sme neskopírovali priečinky a súbory, ktoré závisia od lokálneho prostredia.
-Sú to hlavne súbory z predchádzajúcich kompilácii a priečinky \texttt{.build, vendor/boost}.
+Sú to hlavne súbory z predchádzajúcich kompilácii a priečinky: .build a vendor/boost. Odporúčame preto použiť príkaz build.sh a jeho argument -{}-sync.
 Nachádzame sa v priečinku \texttt{~/grid} a repozitáre môžeme zosynchronizovať pomocou: 
 \begin{lstlisting}
   ./build.sh --sync
 \end{lstlisting}
-Príkaz \texttt{./build.sh -{}-sync} skopíruje cely projekt \texttt{~/grid} na server hpc.stuba.sk do priečinku \texttt{/work/3xelias/grid}.
-Taktiež skopíruje \texttt{.project-id} a vynechá všetky súbory viazané na lokálne prostredie.
-Po skopírovaní súborov sa môžeme prihlásiť pomocou \texttt{ssh}.
+Príkaz ./build.sh -{}-sync skopíruje cely projekt ~/grid na server hpc.stuba.sk do priečinku /work/3xelias/grid.
+Taktiež skopíruje .project-id a vynechá všetky súbory viazané na lokálne prostredie.
+Po skopírovaní súborov sa môžeme prihlásiť pomocou ssh.
 \begin{lstlisting}
   # prihlasenie do gridu
   ssh 3xelias@login.hpc.stuba.sk
@@ -1075,10 +1231,13 @@ Po skopírovaní súborov sa môžeme prihlásiť pomocou \texttt{ssh}.
   ./build.sh -r project/HelloGrid
 \end{lstlisting}
 V tomto prípade neuvidíme žiadny výstup. Výstup si môžeme pozrieť až po zaradení do fronty a skončení programu, čo by malo v prípade že sme použili
-debug frontu takmer okamžité. Výstup môžeme nájsť po skončení programu v priečinku \texttt{project/HelloGrid}. 
-Sú to súbory HelloGrid s príponou \texttt{.o<id\_procesu>} pre štandardný výstup a \texttt{.e<id\_procesu>} pre chybový výstup.
+debug frontu takmer okamžité. Výstup môžeme nájsť po skončení programu v priečinku project/HelloGrid. 
+Sú to súbory HelloGrid s príponou .o<id\_procesu> pre štandardný výstup a .e<id\_procesu> pre chybový výstup.
 Výstupy si môžeme stiahnuť na lokálny počítač pomocou:
 \begin{lstlisting}
+  # exit z gridu
+  exit
+  
   # na lokalnom pocitaci v priecinku ~/grid
   ./build.sh --sync
 \end{lstlisting}
@@ -1086,9 +1245,19 @@ Tentokrát, ak sme nespravili žiadnu zmenu na lokálnom pc, tak sa neskopíruje
 ale stiahnu sa výstupy s programu HelloGrid do priečinku \texttt{project/HelloGrid}.
 
 \section{Experiment s GA}
-V tejto práci sme si zvolili genetické algoritmy pretože sú výpočtovo náročné a dajú sa paralelizovať.
-Tieto vlastnosti ich určujú ako vhodných kandidátov na nasadenie do gridového prostredia.
-\begin{table}[!h]
+V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré lúštia monoalfabetickú substitúciu.
+Dôležitosť tohto experimentu spočívala v nájdení vhodných parametrov, pri ktorých bude najvyššia úspešnosť rozlúštenia zašifrovaného textu.
+
+Prvým krokom bolo nasadenie vlastnej implementácie GA, ktoré by sme mohli upraviť podľa vlastných požiadaviek.
+
+Ďalším krokom bolo zvolenie vhodných parametrov GA, pre nájdenie optimálneho riešenia.
+Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskôr použiť pre ďalšie skúmanie paralelných genetických algoritmov. 
+Medzi skúmané parametre patrili: veľkosť počiatočnej populácie, počet iterácií genetického algoritmu a kombinácie rôznych operácií (schémy).
+Veľkosť počiatočnej populácie, ktorú sme skúmali bola v počte: 10, 20, 50 a 100 chromozómov. Počet iterácii bol 10000 a 50000. 
+Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
+
+
+\begin{table}[!htbp]
 \centering
 \begin{tabular}{@{}lllll@{}}
 \toprule
@@ -1118,20 +1287,9 @@ Tieto vlastnosti ich určujú ako vhodných kandidátov na nasadenie do gridové
                 & Elite(1)                  & Swap(1)          & -                 & -                    \\
                 & ((n-2)/2) * Random(2)     & -                & Singlepoint(2)    & Swap(1)              \\ \bottomrule
 \end{tabular}
-\caption{schemy}
+\caption{Schémy GA}
 \label{tab:schemy}
 \end{table}
-
-V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré lúštia monoalfabetickú substitúciu.
-Dôležitosť tohto experimentu spočívala v nájdení vhodných parametrov, pri ktorých bude najvyššia úspešnosť rozlúštenia zašifrovaného textu.
-
-Prvým krokom bolo nasadenie vlastnej implementácie GA, ktoré by sme mohli upraviť podľa vlastných požiadaviek.
-
-Ďalším krokom bolo zvolenie vhodných parametrov GA, pre nájdenie optimálneho riešenia.
-Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskôr použiť pre ďalšie skúmanie paralelných genetických algoritmov. 
-Medzi skúmané parametre patrili: veľkosť počiatočnej populácie, počet iterácií genetického algoritmu a kombinácie rôznych operácií (schémy).
-Veľkosť počiatočnej populácie, ktorú sme skúmali bola v počte: 10, 20, 50 a 100 chromozómov. Počet iterácii bol 10000 a 50000. 
-Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
 
 Prvým stĺpcom tabuľky je názov samotnej schémy. Ďalšie stĺpce tabuľky predstavujú zreťazenie jednotlivých operácii. Riadky schémy predstavujú aplikovanie jednotlivých reťazcov operácii na populáciu z predchádzajúcej generácie.
 Všimnime si napríklad schému \textbf{J}.
@@ -1145,6 +1303,7 @@ pričom z každej dĺžky sme mali k dispozícii 100 rôznych textov.
 Po celom behu GA bol vybratý najlepší jedinec reprezentujúci potencionálny kľúč,
 ktorým bol dešifrovaný zašifrovaný text a jeho výsledok porovnaný s pôvodným otvoreným textom.
 Ako ohodnocovacia funkcia bola použitá bigramová funkcia, ktorá vypočítavala manhatanovskú vzdialenosť.
+
 \subsection{Distribúcia parametrov}
 Aby sme mohli využiť celú výpočtovú silu ktorú nám gridové prostredie ponúka a aby sme sa zároveň vyhli opakovanému spúšťaniu každej schémy,
 navrhli sme riešenie, v ktorom by sme mali jeden hlavný proces distribuujúci parametre n pracovných procesov.
@@ -1158,6 +1317,8 @@ Preto sme sa rozhodli implementovať druhý spôsob, ktorý je podľa nášho n�
 načíta otvorený text a zašifrovaný text. Potom čaká na notifikáciu od ľubovoľného pracovného procesu, od ktorého príjme jeho id.
 Následne zostaví parametre a pošle ich pracovnému procesu na spracovanie.
 V prípade, že hlavný proces už nemá čo poslať, čaká na všetky pracovné procesy, ktoré následne ukončí.
+
+kluc
 
 Úlohou pracovného procesu je na prijaté parametre aplikovať schémy z tabuľky \ref{tab:schemy}.
 Pracovný proces sa snaží získať prácu od hlavného procesu tak,
@@ -1234,11 +1395,11 @@ Zvyšné výsledky z tohto exprimentu môžeme vidieť v prílohe B tejto práce
 Paralelné genetické algoritmy (PGA) možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zýšiť výkonnosť aj efektivitu genetických algoritmov \cite{pea}.
 PGA prinášajú výhody v porovnaní s GA, ktoré sú podľa \cite{pea} sú: paralelné hladanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, shopnosť nájsť lepšie riešnia, shopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému.
 
-Štrutúra toplógie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
+Štruktúra topológie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
 Niektoré vybrané topológie z \cite{pea} môžeme vidieť na obrázku \ref{img:topology}.
 Perióda migrácie by nemala byť veľmi krátka a migračné väzby by nemali byť príliš početné pretože sa môže stať že sa celý PGA bude správať ako keby jedna veľká populácia.
 
-% optimalizacia pomocou cache. 
+% optimalizácia pomocou cache. 
 % Komunikácia, tvorba topológii 
 \subsection{Topológie}
 
@@ -1254,6 +1415,6 @@ Výsledky PGA a ich interpretácia
 
 %% Zaver
 %%
-%% Spolupraca s Petrom Javorkom
-%% Spotrebovany cas/peniaze
+%% Spolupráca s Petrom Javorkom
+%% Spotrebovaný čas/peniaze
 
