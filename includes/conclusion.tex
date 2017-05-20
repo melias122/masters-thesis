@@ -1,1 +1,21 @@
-Conclusion is going to be where? \newline Here.
+%% Výber diplomovej práce Lúštenie historických šifier na GRIDe bol podmienený osob-
+%% ným zájmom o túto problematiku. Hlavným cieľom tejto práce je zaoberanie sa lúšte-
+%% ním monoalfabetickej substitúcie pomocou paralelných genetických algoritmov v grido-
+%% vom prostredí. Tematikou paralelných výpočtov sa zaoberala aj práca [1], z ktorej sme
+%% čerpali niekoľko základných poznatkov o paralelných genetických algoritmoch. Ďalším cie-
+
+Ambíciou diplomovej práce bolo vytvorenie nástrojov na kryptoanalýzu klasických šifier v gridovom prostredí SIVVP.
+Tento krok bol úspešne zrealizovaný. Vytvorili sme vývojové prostredie, ktoré zjednodušuje prácu a vývoj v lokálnom prostredí
+a prostredníctvom ktorého je možné: vytvárať projekty,  synchronizovať ich s gridom a spúšťať lokálne a tiež na gride.
+V nami vyvinutom vývojovom prostredí sme vytvorili modul pre paralelné genetické algoritmy,
+ktorý si ďalší lúštitelia môžu prispôsobiť podľa vlastných potrieb.
+
+Tento modul sme si aj my upravili podľa vlastných potrieb a implementovali sme útok na monoalfabetickú substitúciu pomocou PGA.
+V prvom experimente sme hľadali vhodné schémy a nastavenia GA, pričom sme využili distribúciu parametrov na 96 uzloch gridu.
+Tento experiment trval 34 hodín. Výsledkom experimentu bolo, že sedem z desiatich schém dosahovalo 80\% úspešnosť pri textoch
+dĺžky 500 znakov a viac ako 90\% úspešnosť pri textoch dlhších ako 1000 znakov.
+
+Schémy z prvého experimentu sme použili v nasledujúcom experimente s PGA.
+Na týchto schémach sme skúmali vplyv štyroch rôznych topológií a troch migračných časov, a ich úspešnosť pri lúštení
+monoalfabetickej substitúcie.
+TODO: vysledky

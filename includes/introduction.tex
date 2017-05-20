@@ -1,1 +1,25 @@
-Tu bude krasny uvod s diakritikou atd. \newline A mozno aj viac riadkovy uvod.
+
+Výber diplomovej práce \textit{Lúštenie historických šifier na GRIDe} bol podmienený osobným zájmom o túto problematiku.
+Hlavným cieľom tejto práce je vytvorenie nástrojov na kryptoanalýzu klasických šifier v gridovom prostredí SIVVP.
+V tejto práci implementujeme útok pomocou paralelných genetických algoritmov.
+Tematikou paralelných výpočtov sa zaoberala aj práca \cite{pea} a čiastočne aj práca \cite{ev}, z ktorých sme čerpali niekoľko základných poznatkov o paralelných genetických algoritmoch.
+Ďalším cieľom tejto práce je vyvinúť vývojové prostredie slúžiace pre ďalších potenciálnych lúštiteľov, ktorí by mohli potrebovať ku svojej práci gridové prostredie.
+
+Štruktúra diplomovej práce sa skladá zo šiestich kapitol.
+Prvá kapitola slúži ako teoretický úvod do problematiky klasických šifier vychádzajúc zo skrípt \cite{ks}, počnúc históriou, charakteristikou a počítačovým lúštením klasických šifier. V tejto kapitole predstavíme aj niektoré základné útoky.
+
+Druhá kapitola práce sa zameriava na predstavenie gridu \textit{hpc.stuba.sk}, pričom naším cieľom bude predstaviť základy práce so spomínaným prostredím.
+Okrem toho sa budeme snažiť poukázať na poskytovanú funkcionalitu tohto prostredia a predstavíme niekoľko základných typov úloh.
+
+V tretej kapitole si uvedieme základné princípy MPI komunikácie, ktoré budeme využívať pri medziprocesorovej komunikácii na gride.
+Taktiež poskytneme aj niekoľko principiálnych ukážok komunikácie a spomenie si dva základné problémy súvisiace s výmenou dát pomocou MPI.
+
+Nasledujúca kapitola pozostáva zo stručného návrhu a požiadaviek kladených na vývojové prostredie.
+Táto kapitola má praktické zameranie a predstavíme si v nej použité technológie, základ vývojového prostredia ktorým je skript build.sh.
+V nasledujúcom kroku predstavíme vývoj a implementáciu paralelných genetických algoritmov. Táto kapitola má slúžiť aj ako manuál
+pre ďalších používateľov tohto prostredia.
+
+V piatej kapitole vykonáme experiment s genetickými algoritmami a ukážeme prístup zvolený pri paralelizácii programu.
+
+Záverečná kapitola pozostáva z ďalšieho experimentu súvisiaceho s paralelnými genetickými algoritmami, pri ktorom vychádzame z kapitoly päť.
+

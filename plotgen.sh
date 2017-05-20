@@ -73,8 +73,46 @@ plot "data/ga/10000_10_${i}" $lines dt 1 title '10k/10', \\
 EOF
 }
 
-#plot3() {    
-#}
+# schemy a migracne casy
+plot3() {
+
+	vp=$1 # velkost populacie
+	vt=$2 # velkost topologie
+	top=$3 # topologia
+#	mc=$4 # migracny cas
+
+	x="${vp}_${vt}_${top}"
+	
+    lines="smooth csplines"
+    c="data/pga/C_${x}"
+	j="data/pga/J_${x}"
+	
+    cat << EOF > includes/plot/CJ_${x}.tex
+\begin{figure}[!htbp]
+\centering
+\begin{gnuplot}[terminal=pdf,terminaloptions=color]
+set terminal pdf enhanced size 15cm, 8cm
+set xrange [0:2000]
+set yrange [0:1]
+
+set key samplen 3 spacing 1 font ',10' left title 'Schéma/migračný čas'
+
+set xlabel "Počet znakov zašifrovaného textu"
+set ylabel "Úspešnosť (%)"
+
+plot "${c}_1000" $lines dt 1 title 'C/1k', \\
+     "${c}_5000" $lines dt 2 title 'C/5k', \\
+     "${c}_10000" $lines dt 3 title 'C/10k', \\
+     "${j}_1000" $lines dt 4 title 'J/1k', \\
+     "${j}_5000" $lines dt 5 title 'J/5k', \\
+     "${j}_10000" $lines dt 1 title 'J/10k'
+\end{gnuplot}
+\caption{Topológia ${top}, }
+\label{schema:cj_${i}}
+\end{figure}
+EOF
+	
+}
 
 for i in 10000 50000; do
     for j in 10 20 50 100; do
@@ -88,6 +126,12 @@ for j in A B C D E F G H I J; do
 done
 #done
 
-#for i in 3 5 11; do
-    #plot3
-#done
+for i in 3 5 11; do
+	for j in 10 20 50 100; do
+		for k in b d e f; do
+#			for l in 1000 5000 10000; do
+				plot3 j k i # J,C 1000,5000,10000
+#			done
+		done
+	done
+done

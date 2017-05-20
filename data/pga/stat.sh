@@ -8,7 +8,7 @@ for i in 3 5 11; do
 		for mt in 1000 5000 10000; do
 
 		infile=raw/pga_${i}_${t}.stdout
-		file=${i}_${p}_${s}_${t}_${mt}.data
+		file=${s}_${p}_${t}_${i}_${mt}.data
 		echo -n "" > $file
 
 		if [ ! -f $infile ]; then
@@ -16,7 +16,7 @@ for i in 3 5 11; do
 		    continue
 		fi
 		
-    		for j in `seq 50 50 2000`; do
+    	for j in `seq 50 50 2000`; do
 		    grep -E "^${j} [0-9]+ [0-9]+ ${p} ${s} . ${mt}$" $infile | awk '{print $1,$3/$1}' >> $file
 		done
 
