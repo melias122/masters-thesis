@@ -120,7 +120,7 @@ Medzi takéto algoritmy patria napríklad: horolezecký algoritmus, simulované 
 Aby bol takýto útok možný a prakticky realizovateľný, priestor prehľadávaných kľúčov nesmie byť väčší ako hranica daná dostupnými
 prostriedkami alebo časom potrebným na riešenie.
 
-Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textquote{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme,
+Pre ilustráciu si uveďme jednoduchý príklad. Majme zašifrovaný text \textit{VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO}, ktorý vieme,
 že bol zašifrovaný Cézarovou šifrou.
 Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností posunov, čo je v tomto prípade kľúč tak, aby sme dostali zmysluplný text.
 
@@ -128,11 +128,11 @@ Pre získanie otvoreného textu potrebujeme vyskúšať všetkých 26 možností
 kluc 1
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 WFDEPYTPSTDEZCTNVJNSDTQTPCYLRCTOP
-
+  
 kluc 2
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 XGEFQZUQTUEFADUOWKOTEURUQDZMSDUPQ
-
+ 
 kluc 3
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 YHFGRAVRUVFGBEVPXLPUFVSVREANTEVQR
@@ -140,15 +140,13 @@ YHFGRAVRUVFGBEVPXLPUFVSVREANTEVQR
 ... // dalsie kluce 4..26
 \end{lstlisting}
 
-Po prezretí všetkých možností by sme zistili, že kľúč 16 sa dešifruje na \textquote{LUSTENIEHISTORICKYCHSIFIERNAGRIDE}.
-
-% \todo{praktickosť útoku}
+Po prezretí všetkých možností by sme zistili, že kľúč 16 sa dešifruje na \textit{LUSTENIEHISTORICKYCHSIFIERNAGRIDE}.
 
 \subsubsection{Slovníkový útok}
 Slovníkový útok narozdiel od útoku hrubou silou skúša iba niektoré možnosti z vopred pripraveného slovníka kľúčov.
 
 Ukážme si ako by v princípe mohol fungovať slovníkový útok na šifru Vigenere.
-Nech zašifrovaný text je \textquote{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textquote{ABC, SOMAR, HESLO, ...}.
+Nech zašifrovaný text je \textit{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textit{ABC, SOMAR, HESLO, ...}.
 
 \begin{lstlisting}
 kluc: JANO
@@ -164,6 +162,7 @@ SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 LUSTENIEHISTORICKYCHSIFIERNAGRIDE
 \end{lstlisting}
 
+V tomto príklade bol kľúč \textit{HESLO} a text sa dešifroval na \textit{LUSTENIEHISTORICKYCHSIFIERNAGRIDE}.
 \subsubsection{Horolezecký algoritmus}
 Horolezecký algoritmus patrí medzi základné optimalizačné algoritmy.
 Jeho základnou myšlienkou je, že na vrchol kopca sa môžeme dostať najkratšou cestou keď pôjdeme vždy najstrmším smerom nahor.
@@ -225,26 +224,17 @@ naopak pri veľkých populáciách sa už nedosahuje lepší efekt.
 
 
 Princíp genetických algoritmov možno vidieť aj na obrázku \ref{img:ga}, ktorý je realizovaný nasledovne:
-%\begin{enumerate}
-%\item
-  \paragraph{Inicializácia} vygeneruje počiatočnú populáciu $ P_0 $.
-%\item
-  \paragraph{Fitness} vyhodnocuje populáciu pomocou účelovej funkcie pre aktuálnu populáciu $ P_k $.
-%\item
-  \paragraph{Koniec?} V tejto fáze sa testujú ukončujúce podmienky genetického algoritmu.
-  V prípade, že algoritmus skončil, vyberie sa najlepší jedinec z aktuálnej populácie, ktorý predstavuje výsledné riešenie GA.
-%\item
-  \paragraph{Výber} Ak algoritmus ešte neskončil, nasleduje výber dvoch skupín jedincov. Najprv sa vyberie jeden, prípadne viac najlepších jedincov, ktorí sa bez zmeny skopírujú
-  do novej populácie (skupina $ A $). Tieto reťazce zabezpečia monotónnu konvergenciu, čo znamená, že úloha v ďalšom kroku nebude mať horšie výsledky ako v tom predchádzajúcom.
-  Ďalšie jedince vybraté iným spôsobom sú skopírované do operácie kríženia (skupina $ B $).
-%\item
-  \paragraph{Kríženie} V operácii kríženia sa náhodne spárujú rodičovské reťazce so skupiny $ B $, z ktorých vznikne rovnaký počet potomkovských reťazcov.
-  Potomkovia vytvoria skupinu $ C $, ktorá pokračuje do operácie mutácie. 
-%\item
-  \paragraph{Mutácia} spôsobí, že náhodne zvoleným jedincom zmenia niektoré náhodne zvolené gény a vznikne populácia $ D $.
-%\item
-  \paragraph{Nová populácia} $ P_{k+1} $ vzniká zjednotením populácií $ A \cup D $. Genetický algoritmus pokračuje bodom 2.
-  %\end{enumerate}
+\paragraph{Inicializácia} Vygeneruje počiatočnú populáciu $ P_0 $.
+\paragraph{Fitness} Vyhodnocuje populáciu pomocou účelovej funkcie pre aktuálnu populáciu $ P_k $.
+\paragraph{Koniec?} V tejto fáze sa testujú ukončujúce podmienky genetického algoritmu.
+V prípade, že algoritmus skončil, vyberie sa najlepší jedinec z aktuálnej populácie, ktorý predstavuje výsledné riešenie GA.
+\paragraph{Výber} Ak algoritmus ešte neskončil, nasleduje výber dvoch skupín jedincov. Najprv sa vyberie jeden, prípadne viac najlepších jedincov, ktorí sa bez zmeny skopírujú
+do novej populácie (skupina $ A $). Tieto reťazce zabezpečia monotónnu konvergenciu, čo znamená, že úloha v ďalšom kroku nebude mať horšie výsledky ako v tom predchádzajúcom.
+Ďalšie jedince vybraté iným spôsobom sú skopírované do operácie kríženia (skupina $ B $).
+\paragraph{Kríženie} V operácii kríženia sa náhodne spárujú rodičovské reťazce so skupiny $ B $, z ktorých vznikne rovnaký počet potomkovských reťazcov.
+Potomkovia vytvoria skupinu $ C $, ktorá pokračuje do operácie mutácie. 
+\paragraph{Mutácia} spôsobí, že náhodne zvoleným jedincom zmenia niektoré náhodne zvolené gény a vznikne populácia $ D $.
+\paragraph{Nová populácia} $ P_{k+1} $ vzniká zjednotením populácií $ A \cup D $. Genetický algoritmus pokračuje bodom 2.
   
 Predstavená schéma je len príklad ako by GA mohol vyzerať, v skutočnosti však môžeme uvažovať o viacerých kritériách, ktoré vplývajú na GA.
 Niektoré uvedieme v experimentálnej časti tejto práce.
@@ -259,9 +249,9 @@ Jednotlivé uzly môžu, ale nemusia byť geograficky oddelené.
 Vrámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
 Každý výpočtový uzol má nasledovnú konfiguráciu:
 \begin{itemize}
-\item \acrshort{cpu}: 2 x 6 jadrový Intel Xeon X5670 2.93 GHz
+\item \acrshort{cpu}: 2 x 6 jadrový Intel Xeon X5670 2.93GHz
 \item \acrshort{ram}: 48GB (24GB na procesor)
-\item \acrshort{hdd}: 2TB 7200 RPM SATA
+\item \acrshort{hdd}: 2TB 7200RPM SATA
 \item \acrshort{gpu}: 2 x NVIDIA Tesla M2050 448 cuda jadier, 3GB ECC \acrshort{ram}
 \item Operačný systém: Scientific Linux 6.4
 \item Sieťové pripojenie: 2 x 10Gb/s Ethernet
@@ -270,13 +260,13 @@ Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{
 Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
 V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne úlohu.
-Umiestnenie \texttt{/home/\$USER} je domovským priečinkom každého používateľa.
+Umiestnenie \textit{/home/\$USER} je domovským priečinkom každého používateľa.
 Jedno z obmedzení tohto umiestnenia je, že môže obsahovať maximálne osemdesiattisíc súborov a priečinkov.
 Taktiež má značne obmedzenú kapacitu, čo sa nemusí hodiť pre každý typ úlohy.
-Ďalším umiestnením, ktoré ma používateľ k dispozícii je \texttt{/work/\$USER}.
+Ďalším umiestnením, ktoré ma používateľ k dispozícii je \textit{/work/\$USER}.
 Toto umiestnenie nemá žiadne väčšie obmedzenia, slúži ako zdieľaný disk pre výpočty.
 Môžeme tu vytvárať ľubovolný počet súborov a priečinkov, avšak podľa \cite{hpc} by sa tento disk mal využívať hlavne na prenos objemnejších dát v blokoch väčších ako 16kB. Obe spomenuté umiestnenia sú sieťové disky \acrshort{gpfs}.
-Posledným umiestnením je \texttt{/scratch/\$PBS\_JOBID} alebo tiež aj \texttt{\$TMPDIR} v prípade \acrshort{pbs} skriptu.
+Posledným umiestnením je \textit{/scratch/\$PBS\_JOBID} alebo tiež aj \textit{\$TMPDIR} v prípade \acrshort{pbs} skriptu.
 Tento priestor je unikátny pre každú úlohu, a je vhodný na spracovanie veľkého počtu malých súborov.
 V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dát, ktoré sa mažú ihneď po skončení úlohy.
 
@@ -300,102 +290,105 @@ pridávať ďalších riešiteľov, prezerať si štatistiky a grafy.
 Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie \acrshort{ssh} verejného kľúča, pomocou ktorého sa prihlasujeme bez zadávania hesla.
 
 \subsection{Príkazy}
-Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \texttt{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade,
+Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \textit{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade,
 ak nepoužívame prihlasovanie pomocou verejného kľúča.
 Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použiť \acrshort{vpn}.
 Po pripojení máme k dispozícii štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
-Zaujímať nás budú príkazy: \texttt{module, qstat, qfree, qsub, qsig}.
+Zaujímať nás budú príkazy: \textit{module, qstat, qfree, qsub, qsig}.
 Niektoré výstupy sú pre svoju obsiahlosť skrátené.
 
 \subsubsection{module}
 \label{kap:module}
-Príkaz \texttt{module} slúži na rýchle nastavenie ciest k vybraným knižniciam. Existujúce moduly môžeme vypísať pomocou \texttt{module avail}
+Príkaz \textit{module} slúži na rýchle nastavenie ciest k vybraným knižniciam.
+Existujúce moduly môžeme vypísať pomocou \textit{module avail}.
 
 \begin{lstlisting}[caption={module avail}]
-  --------------------------- /apps/modulefiles ---------------------------
-  abyss/1.3.7                 gaussian/g03                mvapich2/2.1
-  ansys/15.0                  gaussian/g09                mvapich2/2.2
-  cmake/2.8.10.2              gcc/4.7.4(default)          nwchem/6.1.1(default)
-  cmake/3.1.0                 gcc/4.8.4                   nwchem/6.6
-  cp2k/2.5.1                  gcc/4.9.3                   openblas/0.2.18
-  cuda/6.5                    gcc/5.4                     openmpi/1.10.2
-  devel                       gcc/6.3                     openmpi/1.10.4
-  dirac/13.3                  gridMathematica/9.0         openmpi/1.10.5
-  dirac/14                    intel/composer_xe_2011      openmpi/1.4.5
-  esi/pamstamp                intel/composer_xe_2013      openmpi/1.6.5(default)
-  esi/pamstamp-platform       intel/libs_2011             openmpi/1.6.5-int8
-  esi/procast                 intel/libs_2013             openmpi/1.7.2
-  esi/sysweld                 matlab/R2015b               openmpi/1.7.5
-  fftw3/3.3.3                 molcas/8.0                  openmpi/1.8.8
-  fftw3/3.3.5                 mvapich2/1.8a2              openmpi/1.8.8-int8
-  fftw3/intel-3.3.3           mvapich2/1.9(default)       openmpi/2.1.0
-  fluent/15.0.7               mvapich2/2.0                openmpi/intel-1.10.4
+--------------------------- /apps/modulefiles -------------------------
+abyss/1.3.7                 gaussian/g03                mvapich2/2.1
+ansys/15.0                  gaussian/g09                mvapich2/2.2
+cmake/2.8.10.2              gcc/4.7.4(default)          nwchem/6.1.1(default)
+cmake/3.1.0                 gcc/4.8.4                   nwchem/6.6
+cp2k/2.5.1                  gcc/4.9.3                   openblas/0.2.18
+cuda/6.5                    gcc/5.4                     openmpi/1.10.2
+devel                       gcc/6.3                     openmpi/1.10.4
+dirac/13.3                  gridMathematica/9.0         openmpi/1.10.5
+dirac/14                    intel/composer_xe_2011      openmpi/1.4.5
+esi/pamstamp                intel/composer_xe_2013      openmpi/1.6.5(default)
+esi/pamstamp-platform       intel/libs_2011             openmpi/1.6.5-int8
+esi/procast                 intel/libs_2013             openmpi/1.7.2
+esi/sysweld                 matlab/R2015b               openmpi/1.7.5
+fftw3/3.3.3                 molcas/8.0                  openmpi/1.8.8
+fftw3/3.3.5                 mvapich2/1.8a2              openmpi/1.8.8-int8
+fftw3/intel-3.3.3           mvapich2/1.9(default)       openmpi/2.1.0
+fluent/15.0.7               mvapich2/2.0                openmpi/intel-1.10.4
 \end{lstlisting}
 
-Pre načítanie modulov zadáme \texttt{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
-\texttt{module list} a odstrániť ich môžeme príkazom \texttt{module purge}.
-Podrobnejšie voľby príkazu \texttt{module} sa môžeme dozvedieť z manuálových stránok.
+Pre načítanie modulov zadáme \textit{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
+\textit{module list} a odstrániť ich môžeme príkazom \textit{module purge}.
+Podrobnejšie voľby príkazu \textit{module} sa môžeme dozvedieť z manuálových stránok.
 
+%\clearpage
 \subsubsection{qstat}
-Ďalším dôležitým príkazom je \texttt{qstat}, ktorý zobrazuje status aktuálne bežiacich úloh.
-Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \texttt{qstat -u \$USER} alebo \texttt{qstat -a}
-
+Ďalším dôležitým príkazom je \textit{qstat}, ktorý zobrazuje status aktuálne bežiacich úloh.
+Detailnejší výpis o nami spustených úlohách môžeme vypísať cez \textit{qstat -u \$USER} alebo \textit{qstat -a}.
 \begin{lstlisting}[caption={qstat}]
-  Job ID          Name             User          Time Use   S Queue
-  --------------- ---------------- ------------- ---------  - --------
-  114557.one      halogen          3xjakubecj    499:03:0   R parallel
-  114640.one      JerMnchexFq5     3breza        218:35:9   R parallel
-  114663.one      Job4             3xrasova      78:07:20   R parallel
-  114668.one      run.opt          3antusek      674:08:1   R parallel
-  114692.one      Job5             3xbuchab      43:39:43   R parallel
-  114710.one      PGA              3xelias       226:46:1   R parallel
+Job ID          Name             User          Time Use   S Queue
+----------      ------------     -----------  ---------   - --------
+114557.one      halogen          3xjakubecj    499:03:0   R parallel
+114640.one      JerMnchexFq5     3breza        218:35:9   R parallel
+114663.one      Job4             3xrasova      78:07:20   R parallel
+114668.one      run.opt          3antusek      674:08:1   R parallel
+114692.one      Job5             3xbuchab      43:39:43   R parallel
+114710.one      PGA              3xelias       226:46:1   R parallel
 \end{lstlisting}
 
 \begin{lstlisting}[caption={qstat -u 3xelias}]
-  Job ID      Queue    Jobname       SessID   TSK  Time    S   Time
-  ----------  -------- ------------  ------  ----- ------ --------- - 
-  114710.one  parallel PGA             3418   96   120:00:00 R 19:08:38
-  115265.one  parallel PGA_Mpi_3_b    24619    4   120:00:00 R 31:17:51
-  115266.one  parallel PGA_Mpi_3_d    14748    4   120:00:00 R 31:17:51
-  115267.one  parallel PGA_Mpi_3_e    14780    4   120:00:00 R 31:17:51
-  115268.one  parallel PGA_Mpi_5_b    16429    6   120:00:00 R 31:17:50
-  115269.one  parallel PGA_Mpi_5_d    16471    6   120:00:00 R 31:17:49
-  115270.one  parallel PGA_Mpi_5_e    22492    6   120:00:00 R 31:15:43
-  115271.one  parallel PGA_Mpi_5_f    22450    6   120:00:00 R 31:15:45
-  115272.one  parallel PGA_Mpi_11_b    4254   12   120:00:00 R 31:12:39
-  115273.one  parallel PGA_Mpi_11_d     --    12   120:00:00 Q    -- 
-  115274.one  parallel PGA_Mpi_11_e    1647   12   120:00:00 R 31:12:08
-  115275.one  parallel PGA_Mpi_11_f   22605   12   120:00:00 R 31:11:37
+Job ID      Queue    Jobname       SessID   TSK  Time       S   Time
+----------  -------- -----------   ------  ---- ---------  - --------
+114710.one  parallel PGA             3418   96   120:00:00 R 19:08:38
+115265.one  parallel PGA_Mpi_3_b    24619    4   120:00:00 R 31:17:51
+115266.one  parallel PGA_Mpi_3_d    14748    4   120:00:00 R 31:17:51
+115267.one  parallel PGA_Mpi_3_e    14780    4   120:00:00 R 31:17:51
+115268.one  parallel PGA_Mpi_5_b    16429    6   120:00:00 R 31:17:50
+115269.one  parallel PGA_Mpi_5_d    16471    6   120:00:00 R 31:17:49
+115270.one  parallel PGA_Mpi_5_e    22492    6   120:00:00 R 31:15:43
+115271.one  parallel PGA_Mpi_5_f    22450    6   120:00:00 R 31:15:45
+115272.one  parallel PGA_Mpi_11_b    4254   12   120:00:00 R 31:12:39
+115273.one  parallel PGA_Mpi_11_d     --    12   120:00:00 Q    -- 
+115274.one  parallel PGA_Mpi_11_e    1647   12   120:00:00 R 31:12:08
+115275.one  parallel PGA_Mpi_11_f   22605   12   120:00:00 R 31:11:37
 \end{lstlisting}
-
-Posledný riadok tabuľky príkazu \texttt{qstat -u 3xelias} popisuje nami spustenú úlohu.
+Posledný riadok tabuľky príkazu \textit{qstat -u 3xelias} popisuje nami spustenú úlohu.
 Dôležité sú pre nás predovšetkým stĺpce \texttt{Time}, \texttt{Job ID}.
 Posledný stĺpec \texttt{Time} hovorí o tom ako dlho je už naša úloha spustená, druhý stĺpec \texttt{Time} deklaruje maximálny možný čas,
-ktorý má úloha PGA vyhradený. Hodnoty zo stĺpca \texttt{Job ID} môžeme použiť do príkazu \texttt{qsig} pre vynútené ukončenie úlohy.
-
+ktorý má úloha PGA vyhradený. Hodnoty zo stĺpca \texttt{Job ID} môžeme použiť do príkazu \textit{qsig} pre vynútené ukončenie úlohy.
 \subsubsection{qfree}
-Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \texttt{qfree}.
-
+Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \textit{qfree}.
+%\begin{figure}[!h]
+%\centering
+%\begin{tabular}{c}
 \begin{lstlisting}[caption={qfree}]
-  CLUSTER STATE SUMMARY                   Local    GPFS Storage
-  
-  Core        1  ...  12  load  FreeMem  Scratch  Read   Write  State
-  Node  Queue                    [GB]     [GB]   [MB/s] [MB/s]
-  
-  comp01  S  [ ] ... [ ]  0.00  44.44   0 (0.0%)  0.00   0.00   free
-  comp02  T  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
-  ...
-  comp44  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
-  comp45  P  [O] ... [O]  12.0  44.40   0 (0.0%)  0.00   0.00   job-exclusive
-  comp46  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
-  comp47  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
-  comp48  P  [X] ... [X]  1.25  22.76   0 (0.0%) 45.50   2.83   job-exclusive
-  gpu1    G  [X] ... [X]  7.98  38.33   0 (0.0%) 42.13   0.92   job-exclusive
-  gpu2    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
-  gpu3    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
-  gpu4    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
-\end{lstlisting}
+CLUSTER STATE SUMMARY                   Local    GPFS Storage
 
+Core        1  ...  12  load  FreeMem  Scratch  Read   Write  State
+Node  Queue                    [GB]     [GB]   [MB/s] [MB/s]
+ 
+comp01  S  [ ] ... [ ]  0.00  44.44   0 (0.0%)  0.00   0.00   free
+comp02  T  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+...
+comp44  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+comp45  P  [O] ... [O]  12.0  44.40   0 (0.0%)  0.00   0.00   job-exclusive
+comp46  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+comp47  P  [O] ... [O]  12.0  44.41   0 (0.0%)  0.00   0.00   job-exclusive
+comp48  P  [X] ... [X]  1.25  22.76   0 (0.0%) 45.50   2.83   job-exclusive
+gpu1    G  [X] ... [X]  7.98  38.33   0 (0.0%) 42.13   0.92   job-exclusive
+gpu2    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+gpu3    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+gpu4    G  [ ] ... [ ]  0.00  44.45   0 (0.0%)  0.00   0.00   free
+\end{lstlisting}
+%\end{tabular}
+%\caption{Výpis qfree}
+%\end{figure}
 Prvý stĺpec popisuje názov výpočtového uzla. Druhý stĺpec označuje druh fronty. S je pre sériové úlohy, \texttt{T} pre interaktívne úlohy,
 podobne \texttt{P} pre paralelné výpočty a \texttt{G} pre grafické výpočty.
 Stĺpce jeden až dvanásť označujú procesory \acrshort{cpu}, respektíve \acrshort{gpu} pre grafické výpočty.
@@ -405,7 +398,7 @@ Procesory, na ktorých prebieha výpočet našej úlohy, sú označené ako \tex
 naopak voľné \acrshort{cpu} sú označené medzerou \texttt{[ ]} a v prípade, ak uzol nie je dostupný, budú \acrshort{cpu} označené ako \texttt{[-]}.
 
 \subsection{Výpočtové fronty}
-Posledný a najdôležitejší príkaz je \texttt{qsub}, slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
+Posledný a najdôležitejší príkaz je \textit{qsub}, slúži na zaradenie úloh, \acrshort{pbs} skriptov do výpočtovej fronty.
 Aby sme boli schopní spustiť akúkoľvek výpočtovú úlohu na gride, potrebujeme k tomu \acrfull{pbs} súbor.
 \acrshort{pbs} súbor je v skutočnosti iba jednoduchý textový súbor, ktorý definuje požiadavky na výpočtové zdroje a príkazy pre grid.
 
@@ -464,14 +457,14 @@ Poukážme na jednotlivé riadky skriptu:
   V šiestom riadku sa nachádza identifikátor, podľa ktorého sa identifikujú úlohy s jednotlivými projektami.
   Tento parameter je povinný a možno ho získať po prihlásení na webový portál \url{https://www.hpc.stuba.sk/index.php?l=sk&page=login}.
 \item
-  Parameter -q v siedmom riadku definuje typ výpočtovej fronty do ktorej bude úloha zaradená.
-  V tomto príklade chceme úlohu zaradiť do fronty \textquote{serial}.
+  Parameter \textit{-q} v siedmom riadku definuje typ výpočtovej fronty do ktorej bude úloha zaradená.
+  V tomto príklade chceme úlohu zaradiť do fronty \textit{serial}.
 \item
-  V deviatom riadku sa presunieme do priečinku, v ktorom sú uložené všetky potrebné dáta pre túto úlohu vrátane programu \textquote{seriova\_uloha}.
+  V deviatom riadku sa presunieme do priečinku, v ktorom sú uložené všetky potrebné dáta pre túto úlohu vrátane programu \textit{seriova\_uloha}.
 \item
-  Posledný riadok spustí program \textquote{seriova\_uloha}.
+  Posledný riadok spustí program \textit{seriova\_uloha}.
 \end{itemize}
-Úlohu môže zaradiť do fronty príkazom \texttt{qsub uloha1.pbs}.
+Úlohu môže zaradiť do fronty príkazom \textit{qsub uloha1.pbs}.
 
 \subsection{Príklad paralelnej úlohy}
 \begin{lstlisting}[language=bash, caption={uloha2.pbs}, label={pbs:2}, numbers=left]
@@ -493,7 +486,7 @@ cd /work/3xelias/parallel
 mpirun ./parallel
 \end{lstlisting}
 
-Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektoré riadky príkladu \texttt{uloha2.pbs}:
+Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektoré riadky príkladu \textit{uloha2.pbs}:
 \begin{itemize}
 \item
   Na rozdiel od predchádzajúcej úlohy, v tomto príklade si na riadku číslo štyri žiadame päť výpočtových uzlov a na každom uzle dvanásť \acrshort{cpu}.
@@ -503,10 +496,10 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
 \item
   Siedmy riadok definuje paralelnú frontu.
 \item
-  Parametre \texttt{e} a \texttt{a} na riadku osem hovoria o tom, kedy sa má poslať email o zmene stavu úlohy.
-  Parameter \texttt{e} znamená po skončení úlohy.
-  Parameter \texttt{a} znamená pri zrušení úlohy.
-  Ďalšie parametre môžu byť \texttt{b} (štart úlohy) a \texttt{n} (neposielať žiadny e-mail) \cite{cmd:qsub}.
+  Parametre \textit{e} a \textit{a} na riadku osem hovoria o tom, kedy sa má poslať email o zmene stavu úlohy.
+  Parameter \textit{e} znamená po skončení úlohy.
+  Parameter \textit{a} znamená pri zrušení úlohy.
+  Ďalšie parametre môžu byť \textit{b} (štart úlohy) a \textit{n} (neposielať žiadny e-mail) \cite{cmd:qsub}.
 \item
   V deviatom riadku definujeme e-mailovú adresu, na ktorú bude zaslaný mail v prípade, ak úloha skončí alebo bude prerušená.
 \item
@@ -514,13 +507,13 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
 \item
   V dvanástom riadku odstránime všetky načítané moduly ak boli nejaké dostupné v premenných prostredia.
 \item
-  V riadku číslo dvanásť tohto súboru načítame knižnicu gcc verzie 5.4 a knižnicu openmpi verzie 1.10.2.
+  V riadku číslo trinásť tohto súboru načítame knižnicu gcc verzie 5.4 a knižnicu openmpi verzie 1.10.2.
   Pre správny beh programu by sa všetky načítané knižnice mali zhodovať s tými, s ktorými bola aplikácia spúšťaná v tomto skripte skompilovaná.
 \item
-  Podobne ako v ukážke \ref{pbs:1} sa prepneme do priečinku \texttt{/work/3xelias/parallel}, ktorý musí obsahovať všetky potrebné dáta
-  pre samotný program \texttt{parallel}.
+  Podobne ako v ukážke \ref{pbs:1} sa prepneme do priečinku \textit{/work/3xelias/parallel}, ktorý musí obsahovať všetky potrebné dáta
+  pre samotný program \textit{parallel}.
 \item
-  Posledný riadok spustí program mpirun, ktorý potom spustí program parallel. Tento krok bude vysvetlený v nasledujúcej kapitole.
+  Posledný riadok spustí program \textit{mpirun}, ktorý potom spustí program \textit{parallel}. Tento krok bude vysvetlený v nasledujúcej kapitole.
 \end{itemize}
 
 \section{MPI}
@@ -551,7 +544,7 @@ Aj napriek tomu, že \acrshort{mpi} štandard je veľmi rozsiahly, obsahuje stov
 
 \subsection{Point-to-point komunikácia}
 Odosielanie a prijímanie správ je kľúčovým stavebným mechanizmom \acrshort{mpi} komunikácie.
-Základné operácie sú \textbf{send} (posielanie) a \textbf{receive} (prijímanie).
+Základné operácie sú \textit{send} (posielanie) a \textit{receive} (prijímanie).
 Výmene správ medzi dvoma procesmi hovoríme \textit{point-to-point} komunikácia.
 Takmer všetky \acrshort{mpi} konštrukcie sú založené na point-to-point komunikácii \cite{mpi3-1}.
 Pre ilustráciu si uveďme jednoduchý príklad:
@@ -576,15 +569,15 @@ int main(int argc, char **argv) {
 }
 \end{lstlisting}
 
-V tomto príklade proces nula \texttt{(rank == 0)} pošle správu procesu prostredníctvom \textbf{send} operácie \texttt{MPI\_SEND}.
-Táto operácia definuje takzvaný \texttt{send buffer}. Send buffer je miesto v pamäti
+V tomto príklade proces nula \textit{(rank == 0)} pošle správu procesu prostredníctvom send operácie \textit{MPI\_SEND}.
+Táto operácia definuje takzvaný \textit{send buffer}. Send buffer je miesto v pamäti
 odosielateľa, v ktorom sa nachádzajú dáta na odoslanie.
-Send buffer je v tomto prípade premenná \texttt{msg} nachádzajúca sa v pamäti procesu nula.
+Send buffer je v tomto prípade premenná \textit{msg} nachádzajúca sa v pamäti procesu nula.
 Prvé tri argumenty send operácie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
 Ďalšie tri parametre send operácie definujú príjmatela správy.
-Proces jedna \texttt{(rank == 1)}, prijme správu s \textbf{receive} operáciou \texttt{MPI\_Recv}.
-Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \texttt{receive buffera}.
-V tomto príklade je receive buffer premenná msg v pamäťovom priestore procesu jedna.
+Proces jedna \textit{(rank == 1)}, prijme správu s \textit{receive} operáciou \textit{MPI\_Recv}.
+Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \textit{receive buffera}.
+V tomto príklade je receive buffer premenná \textit{msg} v pamäťovom priestore procesu jedna.
 Prvé tri parametre definujú dáta, ktoré chce príjemca prijať. Ďalšie tri parametre slúžia na zvolenie správy od odosielateľa.
 Posledný parameter sa používa na získanie informácií o prijatej správe. V tomto príklade tento parameter ignorujeme.
 
@@ -593,48 +586,49 @@ Program z výpisu \ref{mpi:1} môžeme skompilovať a následne spustiť v dvoch
 mpicc main.c -o p2p
 mpirun -n 2 ./p2p
 \end{lstlisting}
-Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \texttt{Hello, MPI}.
+Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \textit{Hello, MPI}.
 
 \subsection{Blokujúca komunikácia}
 Obe \acrshort{mpi} volania v príklade \ref{mpi:1} boli blokujúce.
-To znamená, že odosielateľ čaká na volaní \texttt{MPI\_Send} dovtedy, kým príjemca správu prijme.
-To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \texttt{MPI\_Recv}  až kým nedostane správu od odosielateľa.
+To znamená, že odosielateľ čaká na volaní \textit{MPI\_Send} dovtedy, kým príjemca správu prijme.
+To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \textit{MPI\_Recv}  až kým nedostane správu od odosielateľa.
 
 \begin{lstlisting}[language=c, caption={MPI\_Send}, label={mpi:send}]
-  MPI_Send(
-  const void* buf,
-  int count,
-  MPI_Datatype datatype,
-  int dest,
-  int tag,
-  MPI_Comm comm)
+MPI_Send(
+const void* buf,
+int count,
+MPI_Datatype datatype,
+int dest,
+int tag,
+MPI_Comm comm)
 \end{lstlisting}
 
-Vo výpise \ref{mpi:send} vidíme definíciu volania MPI\_Send. Prvým argumentom funkcie je adresa receive buffera, ďalší argument je dĺžka buffera (count), ktorá musí byť celé kladné číslo.
-V prípade, že táto podmienka nie je splnená MPI volanie vráti chybu. Typ buffera špecifikujeme pomocou argumentu datatype.
+Vo výpise \ref{mpi:send} vidíme definíciu volania \textit{MPI\_Send}. Prvým argumentom funkcie je \textit{adresa} receive buffera,
+ďalší argument je dĺžka buffera (\textit{count}), ktorá musí byť celé kladné číslo.
+V prípade, že táto podmienka nie je splnená MPI volanie vráti chybu. Typ buffera špecifikujeme pomocou argumentu \textit{datatype}.
 Niektoré základné dátové typy môžeme vidieť v tabuľke \ref{tab:mpi-datatypes}.
-Ďalšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra dest môžeme zvoliť komu je správa adresovaná.
+Ďalšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra \textit{dest} môžeme zvoliť komu je správa adresovaná.
 V prípade, že si odosielateľ a príjemca vymieňajú viac správ rôzneho typu alebo rôzneho obsahu, potrebujeme tieto správy nejako odlíšiť.
-Na odlíšenie správ slúži argument tag. Tag musí byť kladné celé číslo. V príklade \ref{mpi:1} sme ako tag použili nulu,
-avšak mohli sme použiť aj inú hodnotu. Posledným argumentom je comm, ktorý slúži na definovanie komunikačnej skupiny.
-Základná komunikačná skupina je svet (\texttt{MPI\_COMM\_WORLD}), kde si všetci môžu vymieňať správy.
-\acrshort{mpi} štandard zahŕňa aj vytváranie vlastných podskupín komunikátorov, napríklad pomocou volania \texttt{MPI\_Comm\_create\_group} \cite{mpi3-1}.
+Na odlíšenie správ slúži argument \textit{tag}. Tag musí byť kladné celé číslo. V príklade \ref{mpi:1} sme ako tag použili nulu,
+avšak mohli sme použiť aj inú hodnotu. Posledným argumentom je \textit{comm}, ktorý slúži na definovanie komunikačnej skupiny.
+Základná komunikačná skupina je svet (\textit{MPI\_COMM\_WORLD}), kde si všetci môžu vymieňať správy.
+\acrshort{mpi} štandard zahŕňa aj vytváranie vlastných podskupín komunikátorov, napríklad pomocou volania \textit{MPI\_Comm\_create\_group} \cite{mpi3-1}.
 
 \begin{lstlisting}[language=c, caption={MPI\_Recv}, label={mpi:recv}]
-  MPI_Recv(
-  const void* buf,
-  int count,
-  MPI_Datatype datatype,
-  int source,
-  int tag,
-  MPI_Comm comm,
-  MPI_Status *status)
+MPI_Recv(
+const void* buf,
+int count,
+MPI_Datatype datatype,
+int source,
+int tag,
+MPI_Comm comm,
+MPI_Status *status)
 \end{lstlisting}
 
-\acrshort{mpi} volanie \texttt{MPI\_Recv} používa veľmi podobnú syntax ako \texttt{MPI\_Send}. Prvé tri argumenty sú identické.
-Argument source, v prípade funkcie \texttt{MPI\_Recv}, definuje rank odosielateľa. Ďalším rozdielom je argument status,
+\acrshort{mpi} volanie \textit{MPI\_Recv} používa veľmi podobnú syntax ako \textit{MPI\_Send}. Prvé tri argumenty sú identické.
+Argument source, v prípade funkcie \textit{MPI\_Recv}, definuje rank odosielateľa. Ďalším rozdielom je argument \textit{status},
 ktorý sa používa na získanie informácií o prijatej správe, alebo môže byť aj ignorovaný ako v príklade \ref{mpi:1}.
-Štruktúra \texttt{MPI\_Status} obsahuje 3 hlavné informácie: rank odosielateľa, tag správy a dĺžku správy.
+Štruktúra \textit{MPI\_Status} obsahuje 3 hlavné informácie: rank odosielateľa, tag správy a dĺžku správy.
 
 \begin{table}[!h]
 \centering
@@ -664,17 +658,17 @@ Výkonnosť programov môže byť v mnohých prípadoch vylepšená prekrývaní
 Jedným z možných spôsobov ako toto dosiahnuť je použitie threadov \cite{mpi3-1}.
 Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcich volaní.
 
-Pri neblokujúcej komunikácii si môžeme zadefinovať štyri rôzne neblokujúce operácie: \texttt{send} pre posielanie,
-\texttt{recv} pre prijímanie, \texttt{send complete} pre dokončenie posielania a \texttt{recv complete} pre dokončenie prijatia.
-Neblokujúce volanie \texttt{send} spustí send operáciu, ale nedokončí ju.
+Pri neblokujúcej komunikácii si môžeme zadefinovať štyri rôzne neblokujúce operácie: \textit{send} pre posielanie,
+\textit{recv} pre prijímanie, \textit{send complete} pre dokončenie posielania a \textit{recv complete} pre dokončenie prijatia.
+Neblokujúce volanie send spustí send operáciu, ale nedokončí ju.
 Toto volanie inicializuje skopírovanie do send buffera ale samotné kopírovanie nedokončí.
-Na dokončenie operácie send je potrebné ďalšie volanie \texttt{send complete},
+Na dokončenie operácie send je potrebné ďalšie volanie send complete,
 ktoré overí, že dáta boli skutočne skopírované a prenesené príjemcovi.
 Neblokujúca send operácia zvyčajne beží paralelne s vykonávaným programom.
-Podobne aj neblokujúce volanie \texttt{recv} inicializuje recv operáciu, ale nedokončí ju. Na dokončenie potrebuje separátne volanie \texttt{recv complete},
+Podobne aj neblokujúce volanie recv inicializuje recv operáciu, ale nedokončí ju. Na dokončenie potrebuje separátne volanie recv complete,
 ktoré zaručí, že dáta boli prenesené do recv buffera. Neblokujúca recv operácia podobne ako send pokračuje paralelne so zvyškom programu.
 
-\begin{lstlisting}[language=c, caption={Neblokujúca komunikácia}, label={mpi:2}]
+\begin{lstlisting}[language=c, caption={Neblokujúca komunikácia}, label={mpi:2}, numbers=left]
 MPI_Request request[2];
 if (rank == 0) {
     char msg1[] = "Hello, ", msg2[] = "MPI";
@@ -693,18 +687,18 @@ if (rank == 0) {
 }
 \end{lstlisting}
 
-Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcej komunikácie. V tomto príklade ako send operácia slúži funkcia \texttt{MPI\_Isend}.
-Proces nula \texttt{(rank == 0)} pošle najprv správu \texttt{msg1} a následne správu \texttt{msg2}.
+Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcej komunikácie. V tomto príklade ako send operácia slúži funkcia \textit{MPI\_Isend}.
+Proces nula \textit{(rank == 0)} pošle najprv správu \textit{msg1} a následne správu \textit{msg2}.
 Obe volania sú neblokujúce, to znamená, že program nečaká
-a pokračuje funkciou \texttt{zlozity\_vypocet}. Po dokončení výpočtu čaká na doručenie správ.
+a pokračuje funkciou \textit{zlozity\_vypocet}. Po dokončení výpočtu čaká na doručenie správ.
 Tento krok je dôležitý, pretože ak by sme nečakali na dokončenie prenosu správy, premenné msg1 a msg2 by už viacej nemuseli byť validné,
 za predpokladu že vyjdeme z if konštrukcie.
-V prípade procesu jedna \texttt{(rank == 1)} príjemca inicializuje neblokujúce volanie \texttt{MPI\_Irecv} a pokračuje funkciou \texttt{iny\_vypocet}.
-Po dokončení výpočtu skontroluje či už boli dáta prijaté volaním \texttt{MPI\_Waitall}.
+V prípade procesu jedna \textit{(rank == 1)} príjemca inicializuje neblokujúce volanie \textit{MPI\_Irecv} a pokračuje funkciou \textit{iny\_vypocet}.
+Po dokončení výpočtu skontroluje či už boli dáta prijaté volaním \textit{MPI\_Waitall}.
 Na tomto volaní čaká v prípade ak dáta ešte neboli prijaté.
 Tento krok je pre príjemcu dôležitý, pretože mu zaručuje, že dáta boli prijaté a môže ich použiť.
 
-Výstupom tohto programu môže byť \textquote{\texttt{Hello, MPI}} alebo aj \textquote{\texttt{MPIHello, }}, pretože poradie vykonania operácií nie je zaručené.
+Výstupom tohto programu môže byť \textquote{\textit{Hello, MPI}} alebo aj \textquote{\textit{MPIHello, }}, pretože poradie vykonania operácií nie je zaručené.
 Správne poradie správ by sme docielili rôznymi tagmi pre správy msg1 a msg2.
 % \subsection{Kolektívna komunikácia}
 \subsection{Dynamická alokácia}
@@ -712,7 +706,7 @@ V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo vä�
 Ak by v tomto príklade odosielateľ poslal dlhšiu správu ako je príjemca schopný prijať, tak by tento program zlyhal.
 
 Riešením tohto problému je dynamická alokácia pamäte pre prijaté správy. Aby sme mohli pamäť dynamicky alokovať, potrebujeme vedieť
-koľko dát sa nám snaží odosielateľ poslať. To môžeme zistiť pomocou štruktúry \texttt{MPI\_Status} a volaní \texttt{MPI\_Probe, MPI\_Get\_count}.
+koľko dát sa nám snaží odosielateľ poslať. To môžeme zistiť pomocou štruktúry \textit{MPI\_Status} a volaní \textit{MPI\_Probe, MPI\_Get\_count}.
 Kód procesu jedna z príkladu \ref{mpi:1} by sme mohli nahradiť nasledovne:
 \begin{lstlisting}[language=c]
 MPI_Status status;
@@ -731,7 +725,7 @@ free(buf);
 Odosielateľ musí dátové štruktúry pred komunikáciou rozložiť na primitívne typy. Spôsob ako sa dáta rozložia je medzi odosielateľom a príjemcom vopred dohodnutý.
 Príjemca po prijatí dát znovuposkladá dátové štruktúry do pôvodného stavu. Tomuto procesu sa hovorí serializácia dát.
 
-\acrshort{mpi} rieši tento problém napríklad volaniami \texttt{MPI\_Type\_create\_struct, MPI\_Pack}.
+\acrshort{mpi} rieši tento problém napríklad volaniami \textit{MPI\_Type\_create\_struct, MPI\_Pack}.
 Avšak tieto volania častokrát vyžadujú príliš nízkoúrovňové programovanie.
 
 %\subsection{Boost MPI}
@@ -754,7 +748,6 @@ Avšak tieto volania častokrát vyžadujú príliš nízkoúrovňové programov
 \section{Vývojové prostredie}
 Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie vývojové prostredie pre ďalších lúštiteľov a programátorov,
 ktorí budú pri svojej práci využívať grid.
-
 Takéto prostredie by malo poskytnúť spoločné stavebné bloky, ktoré by si riešitelia medzi sebou mohli navzájom zdieľať.
 Stavebné bloky by mohli zahŕňať napríklad implementácie šifier, ohodnocovacích funkcií alebo prácu so súbormi.
 Ďalšou spoločnou črtou je vytváranie projektov, ktoré by malo byť čo najviac automatické a malo by generovať štruktúru priečinkov a základných súborov.
@@ -811,12 +804,12 @@ Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
     |- ...
 \end{lstlisting}
 
-Skript \texttt{build.sh} vytvára projekty do podpriečinku \texttt{project}. Každý projekt po vytvorení obsahuje automaticky generované súbory:
-\texttt{CMakeLists.txt}, binárny spustiteľný súbor (po kompilácii), \texttt{.pbs} súbor a \texttt{main.cpp} v priečinku \texttt{src}.
-Do priečinku \texttt{src} by sa mali umiestňovať zdrojové súbory špecifické pre daný projekt.
-Ostatné zdrojové kódy, ktoré nesúvisia s daným projektom by mali ísť do modulov (priečinok \texttt{module}).
-Priečinok \texttt{module} slúži na zdieľanie zdrojových kódov (modulov) medzi projektami.
-Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižníc od tretích strán.
+Skript \textit{build.sh} vytvára projekty do podpriečinku \textit{project}. Každý projekt po vytvorení obsahuje automaticky generované súbory:
+\textit{CMakeLists.txt}, binárny spustiteľný súbor (po kompilácii), \textit{.pbs} súbor a \textit{main.cpp} v priečinku \textit{src}.
+Do priečinku \textit{src} by sa mali umiestňovať zdrojové súbory špecifické pre daný projekt.
+Ostatné zdrojové kódy, ktoré nesúvisia s daným projektom by mali ísť do modulov (priečinok \textit{module}).
+Priečinok \textit{module} slúži na zdieľanie zdrojových kódov (modulov) medzi projektami.
+Posledným priečinkom je \textit{vendor}, ktorý slúži na uchovávanie knižníc od tretích strán.
 \subsection{Technológie}
 % zvolené technológie:
 % Linux
@@ -826,15 +819,15 @@ Posledným priečinkom je \texttt{vendor}, ktorý slúži na uchovávanie knižn
 % boost(serializácia, mpi(mvapich, openmpi), automatické stiahnutie a buildovanie)
 % build.sh
 % git
-V tejto práci sme si zvolili ako programovací jazyk \texttt{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandardnú knižnicu.
+V tejto práci sme si zvolili ako programovací jazyk \textit{C++}, ktorý je dostatočne rýchly a poskytuje bohatú štandardnú knižnicu.
 Tento programovací jazyk sa taktiež vyučuje na Fakulte elektrotechniky a informatiky a je veľmi rozšírený v industriálnej sfére.
 
-Keďže \acrshort{mpi} štandard od verzie 3.0 nepodporuje C++ volania \cite{mpi3-1},
+Keďže \acrshort{mpi} štandard od verzie 3.0 nepodporuje \textit{C++} volania \cite{mpi3-1},
 budeme používať knižnicu Boost a jej \acrshort{mpi} nadstavbu. Z Boost knižnice tiež využijeme modul serialization pre dátovú serializáciu.
 
 Vrámci gridu hpc.stuba.sk nemáme k dispozícii knižnicu boost. Tiež nemáme možnosť inštalovať žiadne ďalšie knižnice,
 a preto sa pred prvou kompiláciou knižnica Boost stiahne a automaticky skompiluje pre dané prostredie.
-Kompilácia prebieha iba jedenkrát a knižnica sa uloží do priečinku vendor/boost\_<verzia>.
+Kompilácia prebieha iba jedenkrát a knižnica sa uloží do priečinku \textit{vendor/boost\_<verzia>}.
 
 Ako buildovací systém sme použili cmake.
 Cmake je multiplatformový, open-source nástroj, ktorý sa používa na buildovanie a testovanie softvéru \cite{cmake-doc}.
@@ -842,41 +835,41 @@ Používa jednoduché konfiguračné súbory CMakeLists.txt, ktorých úlohou je
 Taktiež záhŕňa podporu viacerých \textquote{projektov} vrámci jedného repozitáru.
 Ďalšou výhodou je, že môže byť použitý v kombinácii s takmer ľubovolným grafickým vývojovým prostredím.
 
-Na správu zdrojových kódov sme použili systém \texttt{git}, pretože archiváciu a správu zdrojových kódov považujeme za veľmi dôležitú.
+Na správu zdrojových kódov sme použili systém \textit{git}, pretože archiváciu a správu zdrojových kódov považujeme za veľmi dôležitú.
 Zdrojové kódy tohto projektu sú dostupné na githube \url{https://github.com/melias122/grid}.
 
 Okrem archivácie zdrojových kódov považujeme za dôležité aj to, ako je zdrojový kód naformátovaný.
-Na formátovanie zdrojových súborov sme použili nástroj \texttt{clang-format}.
+Na formátovanie zdrojových súborov sme použili nástroj \textit{clang-format}.
 
 \subsection{build.sh}
-Základným príkazom celého prostredia je skript \texttt{build.sh} v kombinácii s buildovacím nástrojom cmake.
-Skript \texttt{build.sh} sa používa na vytváranie nových projektov, kompilovanie,
+Základným príkazom celého prostredia je skript \textit{build.sh} v kombinácii s buildovacím nástrojom cmake.
+Skript \textit{build.sh} sa používa na vytváranie nových projektov, kompilovanie,
 synchronizáciu s gridom a na spúšťanie projektov v lokálnom prostredí, ale aj na gride.
-Základné operácie tohto príkazu \texttt{build.sh} sú:
+Základné operácie tohto príkazu \textit{build.sh} sú:
 \begin{itemize}
 \item
-  \texttt{-b/-{}-build}, tento argument skompiluje všetky projekty a moduly nachádzajúce sa v priečinkoch project, module do priečinku \texttt{.build}.
-  Taktiež skompiluje všetky potrebné závislosti a sformátuje zdrojové kódy, v prípade existencie nástroja \texttt{clang-format}.
-  Tento mód kombinuje príkazy: module (kap. \ref{kap:module}), clang-format, cmake a make.
+  \texttt{-b/-{}-build}, tento argument skompiluje všetky projekty a moduly nachádzajúce sa v priečinkoch \textit{project}, \textit{module} do priečinku \textit{.build}.
+  Taktiež skompiluje všetky potrebné závislosti a sformátuje zdrojové kódy, v prípade existencie nástroja \textit{clang-format}.
+  Tento mód kombinuje príkazy: \textit{module} (kap. \ref{kap:module}), \textit{clang-format}, \textit{cmake} a \textit{make}.
 \item
   \texttt{-h/-{}-help} argument vypíše návod ako pracovať s týmto príkazom.
 \item
   \texttt{-r/-{}-run [projekt]} spustí projekt, ktorý je zadaný ako ďalší argument tohto príkazu.
-  Názov projektu sa musí zhodovať s niektorým vytvoreným projektom z priečinku \texttt{project}.
+  Názov projektu sa musí zhodovať s niektorým vytvoreným projektom z priečinku \textit{project}.
   Hlavou myšlienkou tohto arugmentu je, že by mal zjednocovať spúštanie projektov rovnako v lokálnom prostredí ale aj na gride.
-  Príkaz v tomto móde parsuje main.cpp v priečinku projektu, z ktorého sa snaží získať nastavenia nodes, ppn, walltime a queue.
-  Na základe týchto nastavení pred každým spustením upraví .pbs súbor.
+  Príkaz v tomto móde parsuje \textit{main.cpp} v priečinku projektu, z ktorého sa snaží získať nastavenia \textit{nodes}, \textit{ppn}, \textit{walltime} a \textit{queue}.
+  Na základe týchto nastavení pred každým spustením upraví \textit{.pbs} súbor.
   V prípade, že používame tento mód v lokálnom prostredí,
-  príkaz použije nastavenia ako argumenty pre \texttt{mpirun} na simulovanie gridového prostredia.
+  príkaz použije nastavenia ako argumenty pre \textit{mpirun} na simulovanie gridového prostredia.
 \item
-  \texttt{-n/-{}-new-project [projekt]} vytvorí projekt do priečinku project.
-  Tento príkaz automaticky vytvára základné súbory pre projekt, ktorými sú: main.cpp, a .pbs súbor, CMakeLists.txt, .gitignore.
+  \texttt{-n/-{}-new-project [projekt]} vytvorí projekt do priečinku \textit{project}.
+  Tento príkaz automaticky vytvára základné súbory pre projekt, ktorými sú: \textit{main.cpp}, a \textit{.pbs} súbor, \textit{CMakeLists.txt}, \textit{.gitignore}.
 \item
-  \texttt{-{}-sync} zosynchronizuje lokálny projekt na grid do priečinku \texttt{/work/\$USER/grid}.
-  Priečinok work bol zvolený narozdiel od home, pretože nekladie žiadne obmedzenia na počet súborov.
+  \texttt{-{}-sync} zosynchronizuje lokálny projekt na grid do priečinku \textit{/work/\$USER/grid}.
+  Priečinok work bol zvolený narozdiel od \textit{home}, pretože nekladie žiadne obmedzenia na počet súborov.
   Tento príkaz nemá deštruktívny charakter, nezmazáva žiadne súbory.
-  Na použitie tohto módu je potrebné mať vytvorený súbor \texttt{.username}, ktorý musí obsahovať login do gridu.
-  V prípade, že tento súbor neexistuje, príkaz build.sh v tomto móde upozorní používateľa aby si ho vytvoril.  
+  Na použitie tohto módu je potrebné mať vytvorený súbor \textit{.username}, ktorý musí obsahovať login do gridu.
+  V prípade, že tento súbor neexistuje, príkaz \textit{build.sh} v tomto móde upozorní používateľa aby si ho vytvoril.  
 \end{itemize}
 
 \subsection{PGA modul}
@@ -903,7 +896,7 @@ Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lll@{}}
 \toprule
-Operácia           & Typ                 & Popis                                                                        \\ \midrule
+\textbf{Operácia}           & \textbf{Typ}                 & \textbf{Popis}                                                                        \\ \midrule
 \textbf{Select}    & Elitism(n)          & Vyberie n najlepších jedincov                                                \\
                    & Random(n)           & Náhodne zvolí n jedincov                                                     \\
                    & Tournament(n)       & n-krát zvolí 2 jedincov a vyberie lepšieho                                   \\
@@ -921,13 +914,13 @@ Operácia           & Typ                 & Popis                               
 
 
 Základné stavebné bloky GA v našej implementácii sú:
-\paragraph{Genes} Obsahuje jednotlivé gény a predtavuje kľúč šifry. Z implentačného hľadiska sme zvolili reprezentáciu pomocou \texttt{std::string}.
-Výhodou tejto reprezentácie je jednoduchosť a aj o niečo lepší výkon, napríklad oproti \texttt{std::vector}.
+\paragraph{Genes} Obsahuje jednotlivé gény a predtavuje kľúč šifry. Z implentačného hľadiska sme zvolili reprezentáciu pomocou \textit{std::string}.
+Výhodou tejto reprezentácie je jednoduchosť a aj o niečo lepší výkon, napríklad oproti \textit{std::vector}.
 \paragraph{Chromosome} Je tvorený z génov a má skóre. Ohodnocovanie génov prebieha v našom modeli pomocou fitness funkcie a aj šifrovacej funkcie.
 \paragraph{Generator} Generuje gény pre chromozóm. Gény sú generované z abecedy podľa vopred určeného modelu.
 Generator je interface a teda umožňuje rôzne implementácie, pre rôzne reprezentácie génov.
-Pre monoalfabetickú substitúciu sme napríklad vytvorili \texttt{ShuffleGenerator}, ktorý generuje náhodné permutácie zo zadanej abecedy.
-\paragraph{Population} Obsahuje chromozómy a je reprezentovaná pomocou \texttt{std::vector}.
+Pre monoalfabetickú substitúciu sme napríklad vytvorili \textit{ShuffleGenerator}, ktorý generuje náhodné permutácie zo zadanej abecedy.
+\paragraph{Population} Obsahuje chromozómy a je reprezentovaná pomocou \textit{std::vector}.
 \paragraph{Cipher} Interface, ktorý definuje šifru pomocou dešifrovacej funkcie.
 \paragraph{Fitness} Interface, ktorý definuje vyhodnocovaciu funkciu.
 \paragraph{Migrator} Abstraktná trieda, ktorá definuje migračnú logiku a vytvára topológie.
@@ -936,65 +929,65 @@ Pre monoalfabetickú substitúciu sme napríklad vytvorili \texttt{ShuffleGenera
 \paragraph{Schema} Popisuje genetický algoritmus.
 Obsahuje počet iterácií, veľkosť počiatočnej populácie, generátor, lúštenú šifru, fitness funkciu a migrátor v prípade, že používame PGA.
 Schéma tiež umožňuje pridávať operácie.
-Operácia je dvojica zložená z výberu (Select) a genetickej operácie (Mutation, Crossover).
+Operácia je dvojica zložená z výberu (\textit{Select}) a genetickej operácie (\textit{Mutation}, \textit{Crossover}).
 Dostupné operácie môžeme vidieť v tabuľke \ref{tab:ops}.
 
 \subsubsection{Genetický algoritmus}
 Genetický algoritmus v module PGA je implementovaný nasledovne:
 \begin{lstlisting}[language={c++}, caption={Genetický algoritmus}, numbers=left]
-  Population GeneticAlgorithm::run(int id, const Scheme &scheme) {
+Population GeneticAlgorithm::run(int id, const Scheme &scheme) {
     Population pop;
     for (int i = 0; i < scheme.initialPopulation; i++) {
-      pop.emplace_back(scheme.generator, scheme.cipher, scheme.fitness);
+        pop.emplace_back(scheme.generator, scheme.cipher, scheme.fitness);
     }
     for (int i = 1; i <= scheme.iterations; i++) {
-      if (scheme.migrator) {
-        scheme.migrator->migrate(id, i, pop);
-      }
-      Population newpop;
-      for (const std::vector<Operation> &ops : scheme.operations) {
-        Population subpop = pop;
-        for (const Operation &op : ops) {
-          
-          subpop = op.select->select(subpop);
-          op.geneticOperation->apply(subpop);
-          
-          for (Chromosome &c : subpop) {
-            c.calculateScore(scheme.cipher, scheme.fitness, scheme.cache);
-          }
+        if (scheme.migrator) {
+            scheme.migrator->migrate(id, i, pop);
         }
-        append(newpop, subpop);
-      }
-      pop.swap(newpop);
+        Population newpop;
+        for (const std::vector<Operation> &ops : scheme.operations) {
+            Population subpop = pop;
+            for (const Operation &op : ops) {
+          
+                subpop = op.select->select(subpop);
+                op.geneticOperation->apply(subpop);
+          
+                for (Chromosome &c : subpop) {
+                    c.calculateScore(scheme.cipher, scheme.fitness, scheme.cache);
+                }
+            }
+            append(newpop, subpop);
+        }
+        pop.swap(newpop);
     }
     std::sort(pop.begin(), pop.end(), Chromosome::byBestScore());
     return pop;
 }
 \end{lstlisting}
-Základom tohto GA je trieda \texttt{Scheme}, ktorá definuje štruktúru genetického algoritmu. V prípade, že používame migračný model, algroritmus musí mať unikátne id.
-Na riadku 2 až 5 algoritmus vytvorí jednotlivé chromozómy populácie veľkosti initialPopulation. Gény výtvára generátor a skóre je vypočítané pomocou šifry a fitness funkcie.
-Ak je migrátor definovaný v schéme, tak na riadku 7-9 vykonáme migráciu populácie. Migračná logika sa odohráva vo vnútri migrátora a migrovaní jedinci sa pridajú do aktuálnej populácie. Následne sa na aktuálnu populáciu na riadkoch 10 až 21 budú vykonávať operácie podľa vytvorenej schémy. Operácie môžu mať aj podoperácie a vytvárajú tak akúsi reťaz operácií. Na riadku 12 sa vytvorí kópia pôvodnej populácie, na ktorú sa aplikuje reťaz operácii. Riadok 13 prechádza cez jednotlivé operácie. Vždy sa vykoná najprv výber (Select) a na vybratú subpopuláciu je aplikovaná genetická operácia kríženia alebo mutácie (riadok 15 a 16). Tejto subpopulácii sa preráta skóre. V tomto modeli musíme rátať skóre pri každej subpopulácii, pretože niektorá operácia, napríklad swap, mohla zmeniť gény, a teda aj skóre jedinca, ktoré by mohlo byť použité v ďalšom výbere. Riadok 22 zjednocuje jednotlivé subpopulácie a na riadku 24 sa aktuálna populácia vymení za novú. Po prejdení všetkých iterácií už len algoritmus zoradí jedincov podľa najlepšieho skóre a vráti výslednú populáciu.
+Základom tohto GA je trieda \textit{Scheme}, ktorá definuje štruktúru genetického algoritmu. V prípade, že používame migračný model, algroritmus musí mať unikátne \textit{id}.
+Na riadku 2 až 5 algoritmus vytvorí jednotlivé chromozómy populácie veľkosti \textit{initialPopulation}. Gény výtvára generátor a skóre je vypočítané pomocou šifry a fitness funkcie.
+Ak je migrátor definovaný v schéme, tak na riadku 7-9 vykonáme migráciu populácie. Migračná logika sa odohráva vo vnútri migrátora a migrovaní jedinci sa pridajú do aktuálnej populácie. Následne sa na aktuálnu populáciu na riadkoch 10 až 21 budú vykonávať operácie podľa vytvorenej schémy. Operácie môžu mať aj podoperácie a vytvárajú tak akúsi reťaz operácií. Na riadku 12 sa vytvorí kópia pôvodnej populácie, na ktorú sa aplikuje reťaz operácii. Riadok 13 prechádza cez jednotlivé operácie. Vždy sa vykoná najprv výber (\textit{Select}) a na vybratú subpopuláciu je aplikovaná genetická operácia kríženia alebo mutácie (riadok 15 a 16). Tejto subpopulácii sa preráta skóre. V tomto modeli musíme rátať skóre pri každej subpopulácii, pretože niektorá operácia, napríklad \textit{Swap}, mohla zmeniť gény, a teda aj skóre jedinca, ktoré by mohlo byť použité v ďalšom výbere. Riadok 22 zjednocuje jednotlivé subpopulácie a na riadku 24 sa aktuálna populácia vymení za novú. Po prejdení všetkých iterácií už len algoritmus zoradí jedincov podľa najlepšieho skóre a vráti výslednú populáciu.
 
-Pomocou triedy Scheme by sme mohli vytvoriť jednoduchú schému GA, napríklad takto:
+Pomocou triedy \textit{Scheme} by sme mohli vytvoriť jednoduchú schému GA, napríklad takto:
 \begin{lstlisting}[language={c++}, numbers={left}]
-  ShuffleGenerator gen(alpha);
-  Monoalphabetic cipher(ciphertext);
-  L1DistanceBigrams fitness(bigrams);
-  Scheme s(10000, 30, &gen, &cipher, &fitness);
-  s.addOperations(new Select::Elitism(1), new Mutation::Swap(1));
-  auto subop = s.addOperations(new Select::Elitism(2), new Crossover::SinglePoint(2));
-  subop.emplace_back(new Select::Interface, new Mutation::WithProbability(0.25));
-  ...
+ShuffleGenerator gen(alpha);
+Monoalphabetic cipher(ciphertext);
+L1DistanceBigrams fitness(bigrams);
+Scheme s(10000, 30, &gen, &cipher, &fitness);
+s.addOperations(new Select::Elitism(1), new Mutation::Swap(1));
+auto subop = s.addOperations(new Select::Elitism(2), new Crossover::SinglePoint(2));
+subop.emplace_back(new Select::Interface, new Mutation::WithProbability(0.25));
+... // dalsie operacie
 \end{lstlisting}
-V tomto príklade by sme vytvorili ShuffleGenerator z danej abecedy alpha; monoalfabetickú šifru s ciphertextom, ktorý chceme lúštiť; bigramovú fitness funkciu s referenčnými hodnotami bigrams. Schéma s má 10000 iterácií GA, počiatočná populácia má veľkosť 30 jedincov. Schéma obsahuje dve zreťazenia operácií. Prvé zreťazenie je na riadku 5, kde sa vyberie jeden elitný jedinec, na ktorého je aplikovaná operácia Swap. Druhé zreťazenie je na riadku 6 a 7, kde sa z populácie vyberú dvaja elitní jedinci, ktorí sa skrížia a vytvoria dvoch potomkov. Na riadku 7 potom pridáme suboperáciu. Výber len skopíruje populáciu, na ktorú sa aplikuje mutácia.
+V tomto príklade by sme vytvorili \textit{ShuffleGenerator} z danej abecedy \textit{alpha}; monoalfabetickú šifru s \textit{ciphertextom}, ktorý chceme lúštiť; bigramovú fitness funkciu s referenčnými hodnotami \textit{bigrams}. Schéma s má \textit{10000} iterácií GA, počiatočná populácia má veľkosť \textit{30} jedincov. Schéma obsahuje dve zreťazenia operácií. Prvé zreťazenie je na riadku 5, kde sa vyberie jeden elitný jedinec, na ktorého je aplikovaná operácia \textit{Swap}. Druhé zreťazenie je na riadku 6 a 7, kde sa z populácie vyberú dvaja elitní jedinci, ktorí sa skrížia a vytvoria dvoch potomkov. Na riadku 7 potom pridáme suboperáciu. Výber len skopíruje populáciu, na ktorú sa aplikuje mutácia.
 Jednotlivých podoperácií ako aj zreťazení môžeme vytvárať ľubovolne veľa.
 
 \subsubsection{Serializácia chromozómov}
 Ako už bolo spomenuté v kapitole \ref{kap:serialize}, pri MPI komunikácii častokrát potrebujeme vymienať aj zložené dátové typy ako štrukúry, triedy, vektory a iné.
 Pri implementácii PGA migrátora sme narazili na tento problém. Keď nastane čas migrácie, jednotlivé ostrovy si medzi sebou potrebujú vymeniť časť populácie.
-Aby migrátor mohol posielať a aj prijímať vektory chromozómov (populácie). Do triedy Chromosome sme museli implementovať serializačnú procedúru, čo bolo vďaka použitiu Boost knižnice veľmi jednoduché.
+Aby migrátor mohol posielať a aj prijímať vektory chromozómov (populácie). Do triedy \textit{Chromosome} sme museli implementovať serializačnú procedúru, čo bolo vďaka použitiu Boost knižnice veľmi jednoduché.
 
-Na nasledujúcich riadkoch môžeme vidieť ako vyzerala trieda Choromosome pred úpravou potrebnou na serializáciu:
+Na nasledujúcich riadkoch môžeme vidieť ako vyzerala trieda \textit{Choromosome} pred úpravou potrebnou na serializáciu:
 \begin{lstlisting}[language={c++}, numbers={left}]
 class Chromosome {
 public:
@@ -1006,7 +999,7 @@ private:
 using Population = std::vector<Chromosome>;
 \end{lstlisting}
 
-Ďalše riadky zobrazujú triedu Chromosome po úprave na serializáciu aj s potrebnými include súbormi z knižnice Boost.
+Ďalše riadky zobrazujú triedu \textit{Chromosome} po úprave na serializáciu aj s potrebnými include súbormi z knižnice Boost.
 \begin{lstlisting}[language={c++}, numbers={left}]
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/string.hpp>
@@ -1018,8 +1011,7 @@ public:
 private:
     friend class boost::serialization::access;
     template <class Archive>
-    void serialize(Archive &ar, const unsigned int version)
-    {
+    void serialize(Archive &ar, const unsigned int version) {
         ar &m_genes;
         ar &m_score;
     }
@@ -1028,7 +1020,7 @@ private:
 };
 using Population = std::vector<Chromosome>;
 \end{lstlisting}
-Hlavnou myšlienkou tohto riešenia je sprístupnenie privátnych premenných a funkcie serialize triedy Chromosome. To sme dosiahli pridaním riadku 9.
+Hlavnou myšlienkou tohto riešenia je sprístupnenie privátnych premenných a funkcie serialize triedy \textit{Chromosome}. To sme dosiahli pridaním riadku 9.
 Na riadku 10 až 15 je uvedený kód serializácie, ktorý je veľmi jednoduchý aj pre elegantnosť Boost knižnice, v ktorej je už serializácia pre stringy, vektory aj primitívne typy implementovaná.
 
 \subsubsection{Mpi migrátor a topológie}
@@ -1036,54 +1028,54 @@ Aby sme boli schopní vytvoriť PGA, potrebujeme okrem genetického algoritmu ne
 
 Vytváranie topológií sa nám podarilo zovšeobecniť nasledovným spôsobom:
 \begin{lstlisting}[language=c++, caption={Abstraktná trieda Migrator}, numbers={left}]
-  class Migrator {
+class Migrator {
     public:
     Migrator(int migrationTime);
     virtual void migrate(int senderId, int itteration, Population &population) = 0;
     // sender -> receiver
     void addMigration(int senderId, int receiverId, Migration::Type t, int n)
     // ...
-  };
+};
 \end{lstlisting}
-Migrator je abstraktná trieda, ktorá definuje interface migrate a pomocnú funkciu addMigration na vytváranie topológií.
+\textit{Migrator} je abstraktná trieda, ktorá definuje interface \textit{migrate} a pomocnú funkciu \textit{addMigration} na vytváranie topológií.
 Ideou tohto modelu je, že každý GA migruje v rovnakom čase.
-Funkcia addMigration vytvára migračné väzby typu odosielateľ (senderId) posiela príjemcovi (receiverId) n jedincov typu t.
+Funkcia \textit{addMigration} vytvára migračné väzby typu odosielateľ (\textit{senderId}) posiela príjemcovi (\textit{receiverId}) \textit{n} jedincov typu \textit{t}.
 Pričom typ t môže byť napríklad: najlepší, najhorší, náhodný a iné. Pre príjemcu samozrejme platí, že očakáva migráciu rovnakého typu.
-Interface migrate musí  byť implementovaný pre konkrétny PGA Migrator. Konkrétne implementácie môžu zahŕňať napríklad: thready, \acrshort{mpi}, \acrshort{omp}, a ďalšie.
+Interface \textit{migrate} musí  byť implementovaný pre konkrétny PGA \textit{Migrator}. Konkrétne implementácie môžu zahŕňať napríklad: thready, \acrshort{mpi}, \acrshort{omp}, a ďalšie.
 Pomocou Migrator-a by sme mohli vytvoriť napríklad topológiu f z obrázku \ref{img:topology}, ktorá by obsahovala 5 ostrovov.
 \begin{lstlisting}[language={c++}, numbers=left]
-  int size = 5;
-  Migrator m;
-  for (int i = 0; i <= size - 2; i += 2) {
+int size = 5;
+Migrator m;
+for (int i = 0; i <= size - 2; i += 2) {
     m.addMigration(i + 1, 0, Migration::Type::Best, 1);
     for (int j = 1; j <= size - 2; j += 2) {
-      m.addMigration(i + 2, j, Migration::Type::Best, 1);
+        m.addMigration(i + 2, j, Migration::Type::Best, 1);
     }
-  }
+}
 \end{lstlisting}
 
 V tejto práci sme implementovali \acrshort{mpi} migrátor nasledovným spôsobom:
 \begin{lstlisting}[language=c++, caption={Kód MpiMigrator-a}, numbers={left}, label={lst:mpi-mig}]
-  void MpiMigrator::migrate(int senderId, int itteration, Population &population)
-  {
+void MpiMigrator::migrate(int senderId, int itteration, Population &population)
+{
     // nonblocking send
     for (const Migration &m : p_senderMigrations[senderId]) {
-      Population pop = m.select(p);
-      mpi::request r = comm.isend<Population>(m.receiverId(), 0, pop);
+        Population pop = m.select(p);
+        mpi::request r = comm.isend<Population>(m.receiverId(), 0, pop);
     }
     // recv
     for (const int &id : p_receiverMigrations[senderId]) {
-      Population pop;
-      comm.recv<Population>(id, 0, pop);
-      append(p, pop);
+        Population pop;
+        comm.recv<Population>(id, 0, pop);
+        append(p, pop);
     }
     // wait for non blocking send
     for (auto &r : request) {
-      r.wait();
+        r.wait();
     }
-  }
+}
 \end{lstlisting}
-MpiMigrátor pošle niektorých jedincov populácie vopred zadaného typu podľa vytvorenej migračnej schémy (riadok 4-7).
+\textit{MpiMigrator} pošle niektorých jedincov populácie vopred zadaného typu podľa vytvorenej migračnej schémy (riadok 4-7).
 Posielanie v tomto prípade nesmie byť blokujúce, pretože by sa každý odosielateľ snažil iba posielať, ale nikto by nič neprijímal, čo by znamenalo deadlock.
 Naopak prijímanie blokujúce byť môže (riadok 9-13). Migrátor príjme nových jedincov ak existuje k nemu priradená väzba.
 Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie neblokujúcich volaní (riadok 15-17).
@@ -1094,157 +1086,160 @@ Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softv
 
 \subsubsection{Lokálny vývoj}
 \label{subsec:local-dev}
-Na lokálny vývoj sme použili linuxový operačný systém Ubuntu 16.04 LTS, ktorý poskytuje všetky potrebné nástroje na vývoj.
-Podobné kroky by však mali platiť aj na iných linuxových operačných systémoch, prípadne MacOS alebo Windows 10,
-ktorý v najnovších verziách podporuje \texttt{bash} a balíčkový systém \texttt{apt} \cite{bash-on-win}.
+Na lokálny vývoj sme použili linuxový operačný systém \textit{Ubuntu 16.04 LTS}, ktorý poskytuje všetky potrebné nástroje na vývoj.
+Podobné kroky by však mali platiť aj na iných linuxových operačných systémoch, prípadne \textit{MacOS} alebo \textit{Windows 10},
+ktorý v najnovších verziách podporuje \textit{bash} a balíčkový systém \textit{apt} \cite{bash-on-win}.
 
-Prvým krokom je nainštalovanie potrebných balíčkov príkazom \texttt{apt}.
+Prvým krokom je nainštalovanie potrebných balíčkov príkazom \textit{apt}.
 \begin{lstlisting}
-  sudo apt install build-essential libmpich-dev git cmake clang-format
+sudo apt install build-essential libmpich-dev git cmake clang-format
 \end{lstlisting}
 
 Druhý krok je naklonovanie git repozitára. Tento krok môžeme preskočiť ak používame zdrojové súbory priložené k tejto práci.
 \begin{lstlisting}
-  git clone git@github.com:melias122/grid.git
+git clone git@github.com:melias122/grid.git
 \end{lstlisting}
 
 V treťom kroku sa prepneme do repozitára a skompilujeme celý projekt.
-Ešte pred kompiláciou musíme vytvoriť súbor \texttt{.project-id}, ktorý musí obsahovať
-identifikátor pre náš projekt, v opačnom prípade nás na to upozorní príkaz build.sh.
-Prvýkrát môže byť kompilovanie časovo náročnejšie, pretože sa musí stiahnuť a skompilovať knižnica boost s príslušnými modulmi. 
+Ešte pred kompiláciou musíme vytvoriť súbor \textit{.project-id}, ktorý musí obsahovať
+identifikátor pre náš projekt, v opačnom prípade nás na to upozorní príkaz \textit{build.sh}.
+Prvýkrát môže byť kompilovanie časovo náročnejšie, pretože sa musí stiahnuť a skompilovať knižnica Boost s príslušnými modulmi. 
 \begin{lstlisting}
-  # prepnutie sa do repozitara
-  cd grid/
+# prepnutie sa do repozitara
+cd grid/
 
-  # vytvorenie id projektu
-  echo 3ANTAL-2016 > .project-id
+# vytvorenie id projektu
+echo 3ANTAL-2016 > .project-id
 
-  # kompilacia projektu a zavislosti
-  ./build.sh -b
+# kompilacia projektu a zavislosti
+./build.sh -b
 \end{lstlisting}
 
 V štvrtom kroku by sme mali mať celý repozitár úspešne skompilovaný a môžeme založiť nový projekt.
-V prípade, že niečo neprebehlo dobre, môžeme všetko vrátiť do pôvodného stavu príkazom \texttt{git clean -xdf}, alebo projekt zmazať a začať od kroku jeden.
+V prípade, že niečo neprebehlo dobre, môžeme všetko vrátiť do pôvodného stavu príkazom \textit{git clean -xdf}, alebo projekt zmazať a začať od kroku jeden.
 Na vytvorenie nového projektu nám stačí zadať:
 \begin{lstlisting}
-  # vytvorenie noveho projektu s nazvom HelloGrid
-  ./build.sh -n HelloGrid
+# vytvorenie noveho projektu s nazvom HelloGrid
+./build.sh -n HelloGrid
 \end{lstlisting}
-Čo vytvorí nasledovnú štruktúru v priečinku projekt:
+Čo vytvorí nasledovnú štruktúru v priečinku \textit{project}:
 \begin{lstlisting}
-  project/CMakeLists.txt
-  project/HelloGrid/CMakeLists.txt
-  project/HelloGrid/HelloGrid.pbs
-  project/HelloGrid/.gitignore
-  project/HelloGrid/src
-  project/HelloGrid/src/main.cpp
+project/CMakeLists.txt
+project/HelloGrid/CMakeLists.txt
+project/HelloGrid/HelloGrid.pbs
+project/HelloGrid/.gitignore
+project/HelloGrid/src
+project/HelloGrid/src/main.cpp
 \end{lstlisting}
-Dôležité súbory pre kompilačný systém sú všetky CMakeLists.txt súbory, bez ktorých sa projekt neskomkpiluje.
-V prípade, že by sme chceli pridať ďalší .cpp súbor, môžeme ho pridať do priečinku \texttt{HelloGrid/src} a následne ho musíme pridať do
-súboru \texttt{CMakeLists.txt}, v ktorom existuje odkaz kam pridať zdrojový súbor.
+Dôležité súbory pre kompilačný systém sú všetky \textit{CMakeLists.txt} súbory, bez ktorých sa projekt neskomkpiluje.
+V prípade, že by sme chceli pridať ďalší \textit{.cpp} súbor, môžeme ho pridať do priečinku \textit{HelloGrid/src} a následne ho musíme pridať do
+súboru \textit{CMakeLists.txt}, v ktorom existuje odkaz kam pridať zdrojový súbor.
 
 \begin{lstlisting}[language=c++, caption={HelloGrid/src/main.cpp}, numbers=left]
-  // Project HelloGrid
-  //
-  // nodes defines number of nodes to use
-  // ppn defines number of proccesors to use
-  // total cores = nodes * ppn
-  // nodes = 1
-  // ppn = 2
-  //
-  // queue defines queue for this project
-  // available queues are: serial, parallel, debug, gpu
-  // queue = parallel
-  //
-  // walltime defines time to run on grid. Format is hh:mm:ss
-  // walltime = 24:00:00
-  //
-  // Variables above are used for ../HelloGrid.pbs
-  // Edit them as needed, but do not delete them!
-  // Notice that gpus are not supported yet.
-  
-  #include <iostream>
-  #include "MpiApp.h"
-  using namespace std;
-  int main(int argc, char **argv) {
-      MpiApp app(argc, argv);
-      println("Hello, " << "MpiApp");
-      return 0;
-  }
-\end{lstlisting}
-Parametre nodes a ppn sú dôležité pre spustenie programu na lokálnom počítači. Zvyšné parametre, queue a walltime sa prejavia až pri spustení na gride.
+// Project HelloGrid
+//
+// nodes defines number of nodes to use
+// ppn defines number of proccesors to use
+// total cores = nodes * ppn
+// nodes = 1
+// ppn = 2
+//
+// queue defines queue for this project
+// available queues are: serial, parallel, debug, gpu
+// queue = parallel
+//
+// walltime defines time to run on grid. Format is hh:mm:ss
+// walltime = 24:00:00
+//
+// Variables above are used for ../HelloGrid.pbs
+// Edit them as needed, but do not delete them!
+// Notice that gpus are not supported yet.
 
-Zmeňme riadok 6 na \texttt{nodes = 2}, riadok 11 na \texttt{queue = debug}, riadok 14 na \texttt{walltime = 00:01:00}
+#include <iostream>
+#include "MpiApp.h"
+using namespace std;
+int main(int argc, char **argv) {
+    MpiApp app(argc, argv);
+    println("Hello, " << "MpiApp");
+    return 0;
+}
+\end{lstlisting}
+Parametre \textit{nodes} a \textit{ppn} sú dôležité pre spustenie programu na lokálnom počítači. Zvyšné parametre, \textit{queue} a \textit{walltime} sa prejavia až pri spustení na gride.
+Zmeňme riadok 6 na \textit{nodes = 2}, riadok 11 na \textit{queue = debug}, riadok 14 na \textit{walltime = 00:01:00}
 a nahraďme funkciu main nasledovne:
-\begin{lstlisting}
-  int main(int argc, char **argv) {
-      MpiApp app(argc, argv);
-      if (app.rank() == 0) {
-          string msg;
-          for (int i = 1; i < app.size(); i++) {
-              app.recv(i, 0, msg);
-              println(msg);
-          }
-      } else {
-          string msg("hello my number is " + to_string(Rand.Int(0, 100)));
-          app.send(0, 0, msg);
-      }
-      return 0;
-  }  
+\begin{lstlisting}[numbers=left]
+int main(int argc, char **argv) {
+    MpiApp app(argc, argv);
+    if (app.rank() == 0) {
+        string msg;
+        for (int i = 1; i < app.size(); i++) {
+            app.recv(i, 0, msg);
+            println(msg);
+        }
+    } else {
+        string msg("hello my number is " + to_string(Rand.Int(0, 100)));
+        app.send(0, 0, msg);
+    }
+    return 0;
+}  
 \end{lstlisting}
 Proces 0 v tomto príklade príjme tri správy od procesov 1, 2, 3, ktoré posielajú náhodné číslo medzi 0 a 100.
-Teraz môžeme projekt HelloGrid skompilovať a následne spustiť pomocou príkazov:
+
+Teraz môžeme projekt \textit{HelloGrid} skompilovať a následne spustiť pomocou príkazov:
 \begin{lstlisting}
-  # skompiloje projekt HelloGrid a vsetky zavislosti
-  ./build.sh -b
+# skompiloje projekt HelloGrid a vsetky zavislosti
+./build.sh -b
 
-  # spustenie programu HelloGrid
-  ./build.sh -r HelloGrid
+# spustenie programu HelloGrid
+./build.sh -r HelloGrid
 
-  # priklad vystupu programu HelloGrid
-  hello my number is 26
-  hello my number is 62
-  hello my number is 73
+# priklad vystupu programu HelloGrid
+hello my number is 26
+hello my number is 62
+hello my number is 73
 \end{lstlisting}
 
 \subsubsection{Spustenie na gride hpc.stuba.sk}
 Aby sme boli schopní použiť program vytvorený v kapitole \ref{subsec:local-dev}, musíme najprv celý projekt skopírovať na grid hpc.stuba.sk.
-Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne, napríklad pomocou programu rsync, scp
-alebo môžeme použiť systém git, prípadne iný program na kopírovanie.
+Možností ako skopírovať projekt je viacero. Môžeme ho skopírovať manuálne, napríklad pomocou programu \textit{rsync}, \textit{scp}
+alebo môžeme použiť systém \textit{git}, prípadne iný program na kopírovanie.
 Pri manuálnom kopírovaní si treba dať pozor na to, aby sme neskopírovali priečinky a súbory, ktoré závisia od lokálneho prostredia.
-Sú to hlavne súbory z predchádzajúcich kompilácií a priečinky: .build a vendor/boost. Odporúčame preto použiť príkaz build.sh a jeho argument -{}-sync.
-Nachádzame sa v priečinku \texttt{\~/grid} a repozitáre môžeme zosynchronizovať pomocou: 
+Sú to hlavne súbory z predchádzajúcich kompilácií a priečinky: \textit{.build} a \textit{vendor/boost}. Odporúčame preto použiť príkaz \textit{build.sh} a jeho argument \textit{-{}-sync}.
+Nachádzame sa v priečinku \textit{\$HOME/grid} na lokálnom počítači a repozitár zosynchronizujeme pomocou: 
 \begin{lstlisting}
-  ./build.sh --sync
+./build.sh --sync
 \end{lstlisting}
-Príkaz ./build.sh -{}-sync skopíruje cely projekt ~/grid na server hpc.stuba.sk do priečinku /work/3xelias/grid.
-Taktiež skopíruje .project-id a vynechá všetky súbory viazané na lokálne prostredie.
-Po skopírovaní súborov sa môžeme prihlásiť pomocou ssh.
+Príkaz \textit{./build.sh -{}-sync} skopíruje cely projekt na server hpc.stuba.sk do priečinku
+\\ \textit{/work/3xelias/grid}.
+Taktiež skopíruje \textit{.project-id} a vynechá všetky súbory viazané na lokálne prostredie.
+
+Po skopírovaní súborov sa môžeme prihlásiť pomocou \textit{ssh}.
 \begin{lstlisting}
-  # prihlasenie do gridu
-  ssh 3xelias@login.hpc.stuba.sk
+# prihlasenie do gridu
+ssh 3xelias@login.hpc.stuba.sk
 
-  # prepnutie sa do priecinku kam sme skopirovali projekt
-  cd /work/3xelias/grid
+# prepnutie sa do priecinku kam sme skopirovali projekt
+cd /work/3xelias/grid
 
-  # skompilovanie projektu
-  ./build.sh -b
+# skompilovanie projektu
+./build.sh -b
 
-  # pridanie programu do vypoctovej fronty
-  ./build.sh -r project/HelloGrid
+# pridanie programu do vypoctovej fronty
+./build.sh -r project/HelloGrid
 \end{lstlisting}
-V tomto prípade neuvidíme žiadny výstup. Výstup si môžeme pozrieť až po zaradení programu do fronty a po jeho skončení, čo by malo v prípade, že sme použili debug frontu takmer okamžité. Výstup môžeme nájsť po skončení programu v priečinku project/HelloGrid. 
-Sú to súbory HelloGrid s príponou .o<id\_procesu> pre štandardný výstup a .e<id\_procesu> pre chybový výstup.
+V tomto prípade neuvidíme žiadny výstup. Výstup si môžeme pozrieť až po zaradení programu do fronty a po jeho skončení, čo by malo v prípade, že sme použili \textit{debug} frontu takmer okamžité. Výstup môžeme nájsť po skončení programu v priečinku \textit{project/HelloGrid}. 
+Sú to súbory \textit{HelloGrid} s príponou \textit{.o<id\_procesu>} pre štandardný výstup a \textit{.e<id\_procesu>} pre chybový výstup.
+
 Výstupy si môžeme stiahnuť na lokálny počítač pomocou:
 \begin{lstlisting}
-  # exit z gridu
-  exit
+# exit z gridu
+exit
   
-  # na lokalnom pocitaci v priecinku ~/grid
-  ./build.sh --sync
+# na lokalnom pocitaci v priecinku $HOME/grid
+./build.sh --sync
 \end{lstlisting}
 Tentokrát, ak sme nespravili žiadnu zmenu na lokálnom počítači, tak sa neskopíruje nič,
-ale stiahnu sa výstupy z programu HelloGrid do priečinku \texttt{project/HelloGrid}.
+ale stiahnu sa výstupy z programu \textit{HelloGrid} do priečinku \textit{project/HelloGrid}.
 
 \section{Experiment s GA}
 V našej práci sme sa rozhodli vyskúšať experiment s genetickými algoritmami, ktoré lúštia monoalfabetickú substitúciu.
@@ -1257,7 +1252,6 @@ Naším zámerom bolo preskúmať viacero parametrov, ktoré by sme mohli neskô
 Medzi skúmané parametre patrili: veľkosť počiatočnej populácie, počet iterácií genetického algoritmu a kombinácie rôznych operácií (schémy).
 Veľkosť počiatočnej populácie, ktorú sme skúmali bola v počte 10, 20, 50 a 100 chromozómov. Počet iterácii bol 10000 a 50000. 
 Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
-
 
 \begin{table}[!htbp]
 \centering
@@ -1294,10 +1288,10 @@ Zvolené schémy môžeme vidieť v tabuľke \ref{tab:schemy}.
 \end{table}
 
 Prvým stĺpcom tabuľky je názov samotnej schémy. Ďalšie stĺpce tabuľky predstavujú zreťazenie jednotlivých operácií. Riadky schémy predstavujú aplikovanie jednotlivých reťazcov operácií na populáciu z predchádzajúcej generácie.
-Všimnime si napríklad schému \textbf{J}.
+Všimnime si napríklad schému \textit{J}.
 Prvou operáciou v prvom riadku tejto schémy je výber elitného jedinca, ktorý postupuje do novej generácie.
 V druhom riadku je tak isto zvolený jeden elitný jedinec, ale tentokrát je nad ním vykonaná operácia mutácie, ktorá jeden krát zamení pozície dvoch náhodne vybraných génov.
-V treťom riadku schémy \texttt{J} sa \texttt{((n-2)/2)}-krát vykoná náhodný výber, ktorého výstupom sú dvaja jedinci. Títo jedinci postupujú do operácie kríženia, ktorej výsledkom sú dvaja noví potomkovia, nad ktorými sa vykoná operácia swap.
+V treťom riadku schémy \textit{J} sa \textit{((n-2)/2)}-krát vykoná náhodný výber, ktorého výstupom sú dvaja jedinci. Títo jedinci postupujú do operácie kríženia, ktorej výsledkom sú dvaja noví potomkovia, nad ktorými sa vykoná operácia swap.
 
 Úspešnosť jednotlivých schém bola vyhodnocovaná nad textami od dĺžky 50 po 2000 s nárastom o 50 znakov,
 pričom z každej dĺžky sme mali k dispozícii 100 rôznych textov.
@@ -1323,43 +1317,45 @@ V prípade, že hlavný proces už nemá čo poslať, čaká na všetky pracovn�
 Pracovný proces sa snaží získať prácu od hlavného procesu tak,
 že mu najprv pošle svoje id a potom čaká kým mu hlavný proces pridelí prácu (parametre), alebo zruší jeho činnosť.
 
-\begin{lstlisting}[language=c++, caption={Pseudokód ditribúcie parametrov GA}]
-  void run_master(mpi::comm &comm) {
+\begin{lstlisting}[language=c++, caption={Pseudokód ditribúcie parametrov GA}, numbers=left]
+void run_master(mpi::comm &comm)
+{
     for (int itteration : {10000, 50000} ) {
-      for (int populationSize : {10, 20, 50 , 100}) {
-        for (int textsize = 50; textsize <= 2000; textsize += 50) {
-          for (int text = 1; text <= 100; text++) {
-            string pt = read_plaintext();
-            string ct = read_ciphertext();
-            Data data;
-            comm.recv(mpi::any_source, 0, data);
-            // copy data
-            data.itteration = itteration;
-            ...
-            comm.send(data.workerId, 1, data);
-          }
-        }
-      } 
+        for (int populationSize : {10, 20, 50 , 100}) {
+            for (int textsize = 50; textsize <= 2000; textsize += 50) {
+                for (int text = 1; text <= 100; text++) {
+                    string pt = read_plaintext();
+                    string ct = read_ciphertext();
+                    Data data;
+                    comm.recv(mpi::any_source, 0, data);
+                    // copy data
+                    data.itteration = itteration;
+                    ...
+                    comm.send(data.workerId, 1, data);
+                }
+            }
+        } 
     }
     // shutdown workers
-  }
+}
 
-  void run_worker(int id, mpi::comm &comm) {
+void run_worker(int id, mpi::comm &comm)
+{
     // initialize
     while (1) {
-      Data data(id);
-      // nonblocking send 
-      comm.isend(master, 0, data);
-      comm.recv(master, 1, data);
-      if (!data.status) return;
-      // setup GA scheme
-      Scheme scheme = ...
-      for (schemeId &s : {A, B, C, ...}) {
-        GeneticAlgorithm::run(scheme);
-        // write best
-      }
+        Data data(id);
+        // nonblocking send 
+        comm.isend(master, 0, data);
+        comm.recv(master, 1, data);
+        if (!data.status) return;
+        // setup GA scheme
+        Scheme scheme = ...
+        for (schemeId &s : {A, B, C, ...}) {
+            GeneticAlgorithm::run(scheme);
+            // write best
+        }
     }
-  }
+}
 \end{lstlisting}
 \subsection{Výsledky}
 Experiment s GA bežal na gride hpc.stuba.sk 34 hodín.
@@ -1415,11 +1411,61 @@ Vyhodnocovanie PGA prebiehalo podobne ako v predchádzajúcom experimente. Vyhod
 
 \clearpage
 \subsection{Výsledky experimentu}
-Výsledky PGA a ich interpretácia.
-...
+\input{includes/plot/CJ_10_b_3}
+\input{includes/plot/CJ_10_d_3}
+\input{includes/plot/CJ_10_e_3}
+\input{includes/plot/CJ_10_f_3}
 
-%% Zaver
-%%
-%% Spolupráca s Petrom Javorkom
-%% Spotrebovaný čas/peniaze
+\input{includes/plot/CJ_10_b_3}
+\input{includes/plot/CJ_20_b_5}
+\input{includes/plot/CJ_50_b_11}
+\input{includes/plot/CJ_100_b_3}
 
+\input{includes/plot/CJ_10_b_11.tex}
+\input{includes/plot/CJ_10_b_3.tex}
+\input{includes/plot/CJ_10_b_5.tex}
+\input{includes/plot/CJ_10_d_11.tex}
+\input{includes/plot/CJ_10_d_3.tex}
+\input{includes/plot/CJ_10_d_5.tex}
+\input{includes/plot/CJ_10_e_11.tex}
+\input{includes/plot/CJ_10_e_3.tex}
+\input{includes/plot/CJ_10_e_5.tex}
+\input{includes/plot/CJ_10_f_11.tex}
+\input{includes/plot/CJ_10_f_3.tex}
+\input{includes/plot/CJ_10_f_5.tex}
+\input{includes/plot/CJ_100_b_11.tex}
+\input{includes/plot/CJ_100_b_3.tex}
+\input{includes/plot/CJ_100_b_5.tex}
+\input{includes/plot/CJ_100_d_11.tex}
+\input{includes/plot/CJ_100_d_3.tex}
+\input{includes/plot/CJ_100_d_5.tex}
+\input{includes/plot/CJ_100_e_11.tex}
+\input{includes/plot/CJ_100_e_3.tex}
+\input{includes/plot/CJ_100_e_5.tex}
+\input{includes/plot/CJ_100_f_11.tex}
+\input{includes/plot/CJ_100_f_3.tex}
+\input{includes/plot/CJ_100_f_5.tex}
+\input{includes/plot/CJ_20_b_11.tex}
+\input{includes/plot/CJ_20_b_3.tex}
+\input{includes/plot/CJ_20_b_5.tex}
+\input{includes/plot/CJ_20_d_11.tex}
+\input{includes/plot/CJ_20_d_3.tex}
+\input{includes/plot/CJ_20_d_5.tex}
+\input{includes/plot/CJ_20_e_11.tex}
+\input{includes/plot/CJ_20_e_3.tex}
+\input{includes/plot/CJ_20_e_5.tex}
+\input{includes/plot/CJ_20_f_11.tex}
+\input{includes/plot/CJ_20_f_3.tex}
+\input{includes/plot/CJ_20_f_5.tex}
+\input{includes/plot/CJ_50_b_11.tex}
+\input{includes/plot/CJ_50_b_3.tex}
+\input{includes/plot/CJ_50_b_5.tex}
+\input{includes/plot/CJ_50_d_11.tex}
+\input{includes/plot/CJ_50_d_3.tex}
+\input{includes/plot/CJ_50_d_5.tex}
+\input{includes/plot/CJ_50_e_11.tex}
+\input{includes/plot/CJ_50_e_3.tex}
+\input{includes/plot/CJ_50_e_5.tex}
+\input{includes/plot/CJ_50_f_11.tex}
+\input{includes/plot/CJ_50_f_3.tex}
+\input{includes/plot/CJ_50_f_5.tex}

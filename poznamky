@@ -1,0 +1,55 @@
+- podakovanie: pridat podakovanie gridu
+- obrazky caption premenovat. napr:
+  Schema A -> Geneticky algoritmus, schema A
+  		   || Zavislost uspesnosti lustenia od dlzky ZT (10000 iteracii, 10 jedincov)
+- disky -> dostupne umiestnenia pre pouzivatela na hpc.stuba.sk
+- zoznam skratiek, zjednotit velke male pismena skratiek
+- vyhodit zoznam vypisov, dat prec caption
+- pridat PGA, GA skratku
+- kap 1. Tato kapitola sa zao bera ...
+  - tato kapitola bola vypracova na zaklada ks a ev
+  - prvy odsek citacia
+
+- kap 1.2 na kryptoanalyzu ks sa da pouzit stat analyza textu
+- substitucno-permutacne sif. vyhodit "ktora sa aplikuje na cely blok"
+
+- 1.3.2
+  - ine typy slovnikovych utov?
+  - eugen dizertacka kap 2.5.1 (na uim/studium/archivprac)
+
+2.2
+ - ssh <user>@login.hpc.stuba.sk
+
+4.0 navrh a implementacia
+4.1 druhy odsek pridat spoiler, co to vlastne je struktura prostredia. wrapper, zdrojaky, skripty...
+4.3 pridat od pociatocnych nastveni prostredia, vyvoja na lokanom prostredi az po spustenie na gride.. nieco take. mozno flow diagram
+
+main.cpp spomenut komenty a parsovanie..
+
+- do prilohy na CD (az po zviazani)
+  - flow ako pracovat s gridom
+  - step by step
+  - gnuplot
+
+- pri url pouzit v citacii \<
+
+- ruzova vyhodit
+
+- citacie cely odsek
+
+
+
+v novom
+- uvod
+  v durhe kap. -> sa budeme snazit -> si predstavime
+  v piatej kapitole vykoname -> zmenit
+1.3.4
+	Generacia -> poradove cislo "vypoctoveho" cyklu
+	ucelova fun. -> vyhodit "ulohou ucelovej funkc.. alebo prepisat"
+	obrazok vytvorene na zaklade ev citatcia
+5.2
+	na obrazku 3 mozeme vidiet -> pre najmesnsie skumane vysledky, pop a itt
+	zo schemy B vidiet, ze bez absencie selekneho tlaku nekonvergie z k lepsiemu vysledku
+	schema C vyhodit roznorodost
+	na dalsich orb schem E F.. prinasa pri pouziti tychto schcem ... t.z. ze tieto parametre neovlplyvnuju tieto schemy az tak...
+	ukoncit -> z nasich vysledkov vyplyva ze schemy C E J dosahuju nalespei vysledky pre monoalfa sub. okre toho odporucame populaciiu aspon 20 a aspon 10000 iteracii
