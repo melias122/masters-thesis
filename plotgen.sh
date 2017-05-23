@@ -33,7 +33,7 @@ plot "${data}_A" $lines dt 1 title 'A', \\
      "${data}_J" $lines dt 5 title 'J'
 
 \end{gnuplot}
-\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (${i} iterácii, ${j} jedincov)}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (${i} iterácií, ${j} jedincov)}
 \label{schema:ga_${i}_${j}}
 \end{figure}
 EOF
@@ -52,7 +52,7 @@ set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Počet iterácii/veľkosť populácie'
+set key samplen 3 spacing 1 font ',10' left title 'Počet iterácií/veľkosť populácie'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť schémy (%)"

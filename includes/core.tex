@@ -233,7 +233,7 @@ Niektoré uvedieme v experimentálnej časti tejto práce.
 
 \subsubsection{Paralelné genetické algoritmy}
 \acrfull{pga} možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zvýšiť výkonnosť aj efektivitu genetických algoritmov.
-PGA prinášajú výhody v porovnaní s GA, ktoré sú: paralelné hľadanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, schopnosť nájsť lepšie riešenia, schopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému. \cite{pea}
+PGA prinášajú výhody v porovnaní s GA, ktoré sú: paralelné hľadanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, schopnosť nájsť lepšie riešenia, schopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému.
 
 Štruktúra topológie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
 Perióda migrácie by nemala byť veľmi krátka a migračné väzby by nemali byť príliš početné, pretože sa môže stať, že sa celý PGA bude správať ako keby bol jednou veľkou populáciou.
@@ -579,7 +579,7 @@ Táto operácia definuje takzvaný \textit{send buffer}. \textit{Send buffer} je
 odosielateľa, v ktorom sa nachádzajú dáta na odoslanie.
 \textit{Send buffer} je v tomto prípade premenná \textit{msg} nachádzajúca sa v pamäti procesu nula.
 Prvé tri argumenty \textit{send} operácie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
-Ďalšie tri parametre \textit{send} operácie definujú príjmatela správy.
+Ďalšie tri parametre \textit{send} operácie definujú prijímateľa správy.
 Proces jedna \textit{(rank == 1)}, prijme správu s \textit{receive} operáciou \textit{MPI\_Recv}.
 Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \textit{receive buffera}.
 V tomto príklade je \textit{receive buffer} premenná \textit{msg} v pamäťovom priestore procesu jedna.
@@ -591,7 +591,7 @@ Program z výpisu \ref{mpi:1} môžeme skompilovať a následne spustiť v dvoch
 mpicc main.c -o p2p
 mpirun -n 2 ./p2p
 \end{lstlisting}
-Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \textit{Hello, MPI}. Program \textit{mpicc} slúži ako wrapper pre kompilátor \textit{gcc}. Jeho úlohou je linkovanie knižnice \textit{mpi}. Program \textit{mpirun} slúži na spúštanie \textit{mpi} programov.
+Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \textit{Hello, MPI}. Program \textit{mpicc} slúži ako wrapper pre kompilátor \textit{gcc}. Jeho úlohou je linkovanie knižnice \textit{mpi}. Program \textit{mpirun} slúži na spúšťanie \textit{mpi} programov.
 
 \subsection{Blokujúca komunikácia}
 Obe \acrshort{mpi} volania vo výpise \ref{mpi:1} boli blokujúce.
@@ -842,12 +842,12 @@ Taktiež záhŕňa podporu viacerých \textquote{projektov} vrámci jedného rep
 Ďalšou výhodou je, že môže byť použitý v kombinácii s takmer ľubovolným grafickým vývojovým prostredím.
 
 Na správu zdrojových kódov sme použili systém \textit{git}, pretože archiváciu a správu zdrojových kódov považujeme za veľmi dôležitú.
-Zdrojové kódy tohto projektu sú dostupné v prílohe tejto práce ale tiež na githube \url{https://github.com/melias122/grid}.
+Zdrojové kódy tohto projektu sú dostupné v prílohe tejto práce, ale tiež na githube \url{https://github.com/melias122/grid}.
 
 Okrem archivácie zdrojových kódov považujeme za dôležité aj to, ako je zdrojový kód naformátovaný.
 Na formátovanie zdrojových súborov sme použili nástroj \textit{clang-format}.
 
-\subsection{build.sh}
+\subsection{Skript build.sh}
 Základným príkazom celého prostredia je skript \textit{build.sh} v kombinácii s buildovacím nástrojom cmake.
 Skript \textit{build.sh} sa používa na vytváranie nových projektov, kompilovanie,
 synchronizáciu s gridom a na spúšťanie projektov v lokálnom prostredí, ale aj na gride.
@@ -1083,7 +1083,7 @@ void MpiMigrator::migrate(int senderId, int itteration, Population &population)
 }
 \end{lstlisting}
 \textit{MpiMigrator} pošle niektorých jedincov populácie vopred zadaného typu podľa vytvorenej migračnej schémy (riadok 4-7).
-Trieda \textit{Migration} na riadku 4, je pomocná trieda, ktorá v sebe uchováva väzby medzi jednotlivými uzlami a uskutočňuje výber jedincov.
+Trieda \textit{Migration} na riadku 4 je pomocná trieda, ktorá v sebe uchováva väzby medzi jednotlivými uzlami a uskutočňuje výber jedincov.
 Posielanie v tomto prípade nesmie byť blokujúce, pretože by sa každý odosielateľ snažil iba posielať, ale nikto by nič neprijímal, čo by znamenalo deadlock.
 Naopak prijímanie blokujúce byť môže (riadok 9-13). Migrátor príjme nových jedincov ak existuje k nemu priradená väzba.
 Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie neblokujúcich volaní (riadok 15-17).
@@ -1091,7 +1091,7 @@ Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na 
 \subsection{Príklad použitia}
 Táto kapitola by mala slúžiť ako manuál pre ďalších používateľov.
 Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru od počiatočných nastavení prostredia,
-vývoja v lokálnom prostredí až po spustenie na gride.
+vývoja v lokálnom prostredí, až po spustenie na gride.
 
 \subsubsection{Lokálny vývoj}
 \label{subsec:local-dev}
@@ -1173,7 +1173,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 \end{lstlisting}
-Komentáre v súbore \textit{main.cpp} slúžia pre parsovanie do \textit{HelloGrid.pbs} súboru.
+Komentáre v súbore \textit{main.cpp} slúžia na parsovanie pre parametre \textit{HelloGrid.pbs} súboru.
 Jednotlivé parametre \textit{nodes} a \textit{ppn} sú dôležité pre spustenie programu na lokálnom počítači. Zvyšné parametre, \textit{queue} a \textit{walltime} sa prejavia až pri spustení na gride.
 Zmeňme riadok 6 na \textit{nodes = 2}, riadok 11 na \textit{queue = debug}, riadok 14 na \textit{walltime = 00:01:00}
 a nahraďme funkciu main nasledovne:
@@ -1368,7 +1368,7 @@ void run_worker(int id, mpi::comm &comm)
     }
 }
 \end{lstlisting}
-\subsection{Výsledky}
+\subsection{Výsledky experimentu}
 Experiment s GA bežal na gride hpc.stuba.sk 34 hodín.
 Použitých bolo pritom 96 výpočtových uzlov, čo zjavne urýchlilo celý experiment.
 Spolu bolo treba 320000 spustení genetického algoritmu.
@@ -1392,9 +1392,9 @@ Zo schémy B na obrázku \ref{schema:ga_B} možno vidieť, že bez absencie sele
 Ako sme už poznamenali, schéma C (obrázok \ref{schema:ga_C}) dosahuje prekvapivé výsledky aj napriek tomu, že neobsahuje výber elitných jedincov. K dosahovaniu vysokej úspešnosti jej pomáha najmä veľkosť populácie, avšak ako možno vidieť z grafu tejto schémy, napríklad zväčšenie populácie z 50 a 100 jedincov už neprinieslo o toľko lepšie výsledky.
 \input{includes/plot/C}
 
-Na ďalších obrázkoch schém E (obrázok \ref{schema:ga_E}) a J (obrázok \ref{schema:ga_J}) môžeme vidieť, že zväčšenie počtu iterácií GA ako aj veľkosti populácie prináša pri použití týchto schém iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii vyplýva, že zlepšenie sa pohybuje okolo 10\%.
+Na ďalších obrázkoch schém E (obrázok \ref{schema:ga_E}) a J (obrázok \ref{schema:ga_J}) môžeme vidieť, že zväčšenie počtu iterácií GA ako aj veľkosti populácie prináša pri použití týchto schém iba mierne zlepšenie úspešnosti. Z grafov týchto funkcií vyplýva, že zlepšenie sa pohybuje okolo 10\%.
 
-Z našich výsledkov vyplýva, že schémy C, E a J dosahujú najlepší výsledok pri lúštení monoalfabetickej substitúcie, okrem toho odporúčame aspoň 20 jedincov a aspon 10000 iterácií GA. Zvyšné výsledky z tohto experimentu sa nachádzajú v prílohe tejto práce.
+Z našich výsledkov vyplýva, že schémy C, E a J dosahujú najlepší výsledok pri lúštení monoalfabetickej substitúcie, okrem toho odporúčame aspoň 20 jedincov a aspoň 10000 iterácií GA. Zvyšné výsledky tohto experimentu sa nachádzajú v prílohe tejto práce.
 
 \input{includes/plot/E}
 \input{includes/plot/J}
@@ -1417,14 +1417,14 @@ Vyhodnocovanie PGA prebiehalo podobne ako v predchádzajúcom experimente. Vyhod
 
 \clearpage
 \subsection{Výsledky experimentu}
-Experiment s PGA bežal približne dva aj pól týždňa. K vykonaniu tohto experimentu bolo treba 7884000 spustení jednotlivých GA.
+Experiment s PGA bežal približne dva aj pol týždňa. K vykonaniu tohto experimentu bolo treba 7884000 spustení jednotlivých GA.
 
 Na obrázkoch \ref{schema:cj_10_b_3} a \ref{schema:cj_10_d_3} môžeme vidieť výsledky z experimentu pre topológie \textit{b} a \textit{d}.
 Z týchto výsledkov vyplýva, že v nami riešenom experimente nezáleží na topológii PGA. Avšak oproti GA výsledky dosahujú lepšiu úspešnosť. V prípade schém \textit{E} a \textit{J} dosahujeme 80\% úspešnosť už pri textoch dĺžky 250 znakov a takmer 100\% úspešnosť pre texty dlhšie ako 1000 znakov. Schéma \textit{C} dosahuje asi o 10\%
 lepšiu úspešnosť pre PGA. Ostatné výsledky sú veľmi podobné a sú priložené ako príloha k tejto práci.
 
 Z výsledkov na obrázkoch \ref{schema:cj_20_b_3}, \ref{schema:cj_50_b_5} a \ref{schema:cj_100_b_11} vidieť, že veľkosť populácie pozitívne vplýva na výsledky PGA.
-Mierne zlepšuje výsledky a veľkosť topológie. Veľký rozdiel v úspešnosti môžeme vidieť medzi populáciou 20 (obrázok \ref{schema:cj_20_b_3}) a 50 (obrázok \ref{schema:cj_50_b_5}) najmä u schémy \textit{C}, ale aj prípade schém \textit {E} a {J}.
+Výsledky sú mierne zlepšené veľkosťou topológie. Veľký rozdiel v úspešnosti môžeme vidieť medzi populáciou 20 (obrázok \ref{schema:cj_20_b_3}) a 50 (obrázok \ref{schema:cj_50_b_5}) najmä v schéme \textit{C}, ale aj v prípade schém \textit {E} a {J}.
 
 \input{includes/plot/CJ_10_b_3}
 \input{includes/plot/CJ_10_d_3}
