@@ -1,11 +1,11 @@
 \begin{figure}[!htbp]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 15cm, 8cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Schéma/migračný čas'
+set key samplen 3 spacing 1 font ',10' right bottom title 'Schéma/migračný čas'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť (%)"
@@ -15,9 +15,13 @@ plot "data/pga/C_10_b_3_1000.data" smooth csplines dt 1 title 'C/1k', \
      "data/pga/C_10_b_3_10000.data" smooth csplines dt 3 title 'C/10k', \
      "data/pga/J_10_b_3_1000.data" smooth csplines dt 4 title 'J/1k', \
      "data/pga/J_10_b_3_5000.data" smooth csplines dt 5 title 'J/5k', \
-     "data/pga/J_10_b_3_10000.data" smooth csplines dt 1 title 'J/10k'
+     "data/pga/J_10_b_3_10000.data" smooth csplines dt 1 title 'J/10k', \
+	 "data/pga/E_10_b_3_1000.data" smooth csplines dt 2 title 'E/1k', \
+     "data/pga/E_10_b_3_5000.data" smooth csplines dt 3 title 'E/5k', \
+     "data/pga/E_10_b_3_10000.data" smooth csplines dt 4 title 'E/10k'
+	 
 
 \end{gnuplot}
-\caption{Topológia b/3, Veľkosť populácie 10}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (topológia b/3, 10 jedincov)}
 \label{schema:cj_10_b_3}
 \end{figure}

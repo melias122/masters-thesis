@@ -12,11 +12,11 @@ plot() {
 \def\svgwidth{\columnwidth}
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 16cm, 10cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Schema'
+set key samplen 3 spacing 1 font ',10' left title 'Schéma'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť schémy (%)"
@@ -33,7 +33,7 @@ plot "${data}_A" $lines dt 1 title 'A', \\
      "${data}_J" $lines dt 5 title 'J'
 
 \end{gnuplot}
-\caption{Počet iterácii: ${i}, počiatočná populácia: ${j}}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (${i} iterácii, ${j} jedincov)}
 \label{schema:ga_${i}_${j}}
 \end{figure}
 EOF
@@ -48,7 +48,7 @@ plot2() {
 \begin{figure}[!htbp]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 15cm, 8cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
@@ -67,7 +67,7 @@ plot "data/ga/10000_10_${i}" $lines dt 1 title '10k/10', \\
      "data/ga/50000_100_${i}" $lines dt 3 title '50k/100'
 
 \end{gnuplot}
-\caption{Schéma: ${i}}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (schéma ${i})}
 \label{schema:ga_${i}}
 \end{figure}
 EOF
@@ -84,6 +84,7 @@ plot3() {
     local lines="smooth csplines"
     local c="data/pga/C_${x}"
 	local j="data/pga/J_${x}"
+	local e="data/pga/E_${x}"
 
 	# echo "$x"
 	
@@ -91,11 +92,11 @@ plot3() {
 \begin{figure}[!htbp]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 15cm, 8cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Schéma/migračný čas'
+set key samplen 3 spacing 1 font ',10' right bottom title 'Schéma/migračný čas'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť (%)"
@@ -105,10 +106,14 @@ plot "${c}_1000.data" $lines dt 1 title 'C/1k', \\
      "${c}_10000.data" $lines dt 3 title 'C/10k', \\
      "${j}_1000.data" $lines dt 4 title 'J/1k', \\
      "${j}_5000.data" $lines dt 5 title 'J/5k', \\
-     "${j}_10000.data" $lines dt 1 title 'J/10k'
+     "${j}_10000.data" $lines dt 1 title 'J/10k', \\
+	 "${e}_1000.data" $lines dt 2 title 'E/1k', \\
+     "${e}_5000.data" $lines dt 3 title 'E/5k', \\
+     "${e}_10000.data" $lines dt 4 title 'E/10k'
+	 
 
 \end{gnuplot}
-\caption{Topológia ${top}/${vt}, Veľkosť populácie ${vp}}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (topológia ${top}/${vt}, ${vp} jedincov)}
 \label{schema:cj_${x}}
 \end{figure}
 EOF

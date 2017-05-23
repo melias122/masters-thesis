@@ -2,11 +2,11 @@
 \def\svgwidth{\columnwidth}
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 16cm, 10cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
-set key samplen 3 spacing 1 font ',10' left title 'Schema'
+set key samplen 3 spacing 1 font ',10' left title 'Schéma'
 
 set xlabel "Počet znakov zašifrovaného textu"
 set ylabel "Úspešnosť schémy (%)"
@@ -23,6 +23,6 @@ plot "data/ga/10000_50_A" smooth csplines dt 1 title 'A', \
      "data/ga/10000_50_J" smooth csplines dt 5 title 'J'
 
 \end{gnuplot}
-\caption{Počet iterácii: 10000, počiatočná populácia: 50}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (10000 iterácii, 50 jedincov)}
 \label{schema:ga_10000_50}
 \end{figure}

@@ -1,7 +1,7 @@
 \begin{figure}[!htbp]
 \centering
 \begin{gnuplot}[terminal=pdf,terminaloptions=color]
-set terminal pdf enhanced size 15cm, 8cm
+set terminal pdf enhanced size 15cm, 9cm
 set xrange [0:2000]
 set yrange [0:1]
 
@@ -20,6 +20,6 @@ plot "data/ga/10000_10_I" smooth csplines dt 1 title '10k/10', \
      "data/ga/50000_100_I" smooth csplines dt 3 title '50k/100'
 
 \end{gnuplot}
-\caption{Schéma: I}
+\caption{Závislosť úspešnosti lúštenia od dĺžky ZT (schéma I)}
 \label{schema:ga_I}
 \end{figure}

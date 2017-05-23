@@ -3,7 +3,7 @@
 # 750 6 745 50 E b 10000
 for i in 3 5 11; do
     for p in 10 20 50 100; do
-    	for s in J C; do
+    	for s in J C E; do
 	    for t in b d e f; do
 		for mt in 1000 5000 10000; do
 
