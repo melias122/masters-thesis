@@ -1,6 +1,7 @@
 \section{Klasické šifry}
-V tejto kapitole sa budeme zaoberať históriou a stručným prehľadom klasických šifier.
-Spomenieme si aj niektoré základné útoky na klasické šifry. 
+Táto kapitola sa zaoberá históriou a stručným prehľadom klasických šifier.
+Spomenieme si aj niektoré základné útoky na klasické šifry.
+Táto kapitola bola vypracovaná na základe literatúry \cite{ks}, \cite{ev} a \cite{pea}.
 
 \subsection{História}
 História klasických šifier a utajovania písomného textu je pravdepodobne tak stará ako samotné písmo.
@@ -9,7 +10,7 @@ Feničania.
 V niektorých prípadoch predstavovalo už použitie písma utajenie samotného textu.
 Príkladom môžu byť egyptské hieroglyfy alebo klinové písmo používané v Mezopotámii.
 Iným príkladom môžu byť semitské jazyky, ktoré sú charakteristické používaním iba spoluhlások bez použitia samohlások,
-pretože tie zaviedli až Aramejci a po nich následné Gréci, aby pomocou nich boli schopní rozlíšiť jazyky \cite{ks}.
+pretože tie zaviedli až Aramejci a po nich následné Gréci, aby pomocou nich boli schopní rozlíšiť jazyky.
 Aj diakritika ako taká, má schopnosť rozlišovať významy slov, čo si ale až do 15. storočia nikto nevšímal,
 až pokiaľ ju Arabi nezačali používať pri kryptoanalýze rôznych šifier.
 
@@ -26,7 +27,7 @@ V Európe vďaka rozšíreniu abecedy začali vznikať aj prvé šifry, medzi kt
 Iným príkladom môže byť transpozičná šifra \textit{Skytalé}, ktorá bola používaná v Sparte.
 
 Pád Rímskej ríše spôsobil úpadok kryptografie, ktorý trval až do obdobia stredoveku. Typickým znakom kryptografie v tomto období bolo
-napríklad písanie odzadu alebo vertikálne, používanie cudzích jazykov, alebo vynechávanie samohlások \cite{ks}.
+napríklad písanie odzadu alebo vertikálne, používanie cudzích jazykov, alebo vynechávanie samohlások.
 
 V stredoveku kvôli bojom medzi pápežmi Ríma a Avignonu, bola kryptografia zdokonalená a začali sa používať rôzne kódy a nomenklátory.
 Ich charakteristickým znakom bolo zamieňanie písmen alebo nahradzovanie mien a titulov osôb v správach.
@@ -34,22 +35,22 @@ V tomto období zabezpečovanie utajenia správ pokročilo až na takú úroveň
 
 V prvej polovici 20. storočia ľudia, ktorí pracovali v oblasti utajovanej komunikácie verili, že na to, aby bola zabezpečená utajovaná komunikácia musí byť utajený kľúč a okrem neho aj šifrovací algoritmus. Toto ale odporovalo Kerckhoffovmu princípu, ktorý hovorí že: \textquote{Bezpečnosť šifrovacieho algoritmu musí závisieť výlučne na utajení kľúča a nie algoritmu}. Okrem toho sformuloval aj niekoľko požiadaviek na kryptografický systém, medzi ktoré patria:
 \begin{enumerate}
-\item systém musí byť teoreticky, alebo aspoň prakticky bezpečný
-\item narušenie systému nesmie priniesť ťažkosti odosielateľovi a adresátovi
-\item kľúč musí byť ľahko zapamätateľný a ľahko vymeniteľný
-\item zašifrovaná správa musí byť prenášateľná telegrafom
-\item šifrovacia pomôcka musí byť ľahko prenosná a ovládateľná jedinou osobou
-\item systém musí byť jednoduchý, bez dlhého zoznamu pravidiel, nevyžadujúci nadmerné sústredenie
+\item Systém musí byť teoreticky, alebo aspoň prakticky bezpečný.
+\item Narušenie systému nesmie priniesť ťažkosti odosielateľovi a adresátovi.
+\item Kľúč musí byť ľahko zapamätateľný a ľahko vymeniteľný.
+\item Zašifrovaná správa musí byť prenášateľná telegrafom.
+\item Šifrovacia pomôcka musí byť ľahko prenosná a ovládateľná jedinou osobou.
+\item Systém musí byť jednoduchý, bez dlhého zoznamu pravidiel, nevyžadujúci nadmerné sústredenie.
 \end{enumerate}
 Tieto princípy sú popísané v pôvodnej publikácii od Kerckhoffa \cite{kerckhoff}.
 
 Existovala ale aj iná skupina vedcov, medzi ktorých patril aj Lester S. Hill, ktorý si uvedomoval, že kryptológia je úzko spätá s matematikou.
 V roku 1941 si na Hillových prácach zakladal A. Adrian Albert, ktorý pochopil, že v šifrovaní je možné použiť viacero algebraických štruktúr.
-Neskôr toto všetko usporiadal a zdokonalil Claude E. Shannon, čo možno považovať za ukončenie éry klasických šifier \cite{ks}.
+Neskôr toto všetko usporiadal a zdokonalil Claude E. Shannon, čo možno považovať za ukončenie éry klasických šifier.
 
 % \todo{Možno pridať/spomenúť steganografiu.}
 
-\subsection{Charakteristika}
+\subsection{Charakteristika klasických šifier}
 Na rozdiel od moderných šifier, ktoré sa používajú dnes, sú tie klasické rozdielne v niektorých hlavných črtách.
 Môžeme spomenúť niekoľko rozdielov:
 \begin{itemize}
@@ -58,9 +59,9 @@ Môžeme spomenúť niekoľko rozdielov:
 \item Utajuje sa algoritmus a aj kľúč a neuplatňuje sa Kerckhoffov princíp.
 \item Na rozdiel od moderných šifier sa používajú malé abecedy.
 \item V klasických šifrách je otvorený text, zašifrovaný text a kľúč v abecede reálneho jazyka, pričom v moderných šifrách sa používa binárne kódovanie.
-\item Na klasické šifry sa zväčša dá použiť štatistická analýza. 
+\item Na klasické šifry sa zväčša dá použiť štatistická analýza textu. 
 \end{itemize}
-Zo spomenutých charakteristík existujú aj výnimky. Napríklad pri Vigenerovej šifre sa algoritmus neutajoval. To platí aj pre Vernamovu šifru, ktorá okrem toho používa navyše binárne znaky. Vernamova šifra je perfektne bezpečná v podľa Shannonovej teórie \cite{ks}.
+Zo spomenutých charakteristík existujú aj výnimky. Napríklad pri Vigenerovej šifre sa algoritmus neutajoval. To platí aj pre Vernamovu šifru, ktorá okrem toho používa navyše binárne znaky. Vernamova šifra je perfektne bezpečná v podľa Shannonovej teórie.
 
 Klasické šifry môžeme rozdeliť do niekoľkých základných kategórií:
 \begin{itemize}
@@ -74,15 +75,15 @@ Klasické šifry môžeme rozdeliť do niekoľkých základných kategórií:
 
 \item \textbf{Transpozičné šifry.}
   Transpozičné šifry sú vlastne blokové šifry, ktoré pri šifrovaní a dešifrovaní aplikujú pevne zvolenú permutáciu na každý blok
-  otvoreného, zašifrovaného textu. Od polyalfabetickej šifry sa líši v poradí vykonávania operácií.
+  otvoreného, zašifrovaného textu.
   
 \item \textbf{Homofónne šifry.}
   Homofónne šifry sú šifry, ktoré majú znáhodnený zašifrovaný text. Tieto šifry sa snažia zabrániť frekvenčnej analýze textu. 
   
 \item \textbf{Substitučno-permutačné šifry.}
   Ak aplikujeme viacero substitučných a permutačných šifier na otvorený text, tak hovoríme o substitučno-permutačných šifrách.
-  Šifrovanie prebieha tak, že sa blok otvoreného textu rozdelí na menšie bloky, na ktoré je potom aplikovaná substitúcia a permutácia,
-  ktorá sa aplikuje na celý blok. Substitúcia zabezpečuje konfúziu a permutácia difúziu.
+  Šifrovanie prebieha tak, že sa blok otvoreného textu rozdelí na menšie bloky, na ktoré je potom aplikovaná substitúcia a permutácia.
+  Substitúcia zabezpečuje konfúziu a permutácia difúziu.
   
 \end{itemize}
 
@@ -90,7 +91,7 @@ Klasické šifry môžeme rozdeliť do niekoľkých základných kategórií:
 Počítače a lúštenie šifier sú v dnešnej dobe neoddeliteľnou súčasťou. Výkon počítačov vplyvom Mooreovho zákona \footnote{Moorov zákon je empirické pravidlo, ktoré hovorí, že zložitosť integrovaných obvodov sa zdvojnásobuje každých 18 až 24 mesiacov, pričom cena ostáva konštantná.} neustále narastá,
 čo má za následok vznik nových metód, ktoré sa snažia využiť dostupný výkon.
 
-\textquote{Výpočtový výkon súčasných počítačov môže byť použitý na vykonanie čiastočnej, alebo až úplnej kryptoanlýzy klasických šifier} \cite{ks}.
+\textquote{Výpočtový výkon súčasných počítačov môže byť použitý na vykonanie čiastočnej, alebo až úplnej kryptoanlýzy klasických šifier}.
 Takúto automatizovanú kryptoanalýzu môžeme rozdeliť do troch kategórií:
 \begin{enumerate}
 \item
@@ -132,10 +133,6 @@ WFDEPYTPSTDEZCTNVJNSDTQTPCYLRCTOP
 kluc 2
 VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
 XGEFQZUQTUEFADUOWKOTEURUQDZMSDUPQ
- 
-kluc 3
-VECDOXSORSCDYBSMUIMRCSPSOBXKQBSNO
-YHFGRAVRUVFGBEVPXLPUFVSVREANTEVQR
 
 ... // dalsie kluce 4..26
 \end{lstlisting}
@@ -146,16 +143,12 @@ Po prezretí všetkých možností by sme zistili, že kľúč 16 sa dešifruje 
 Slovníkový útok narozdiel od útoku hrubou silou skúša iba niektoré možnosti z vopred pripraveného slovníka kľúčov.
 
 Ukážme si ako by v princípe mohol fungovať slovníkový útok na šifru Vigenere.
-Nech zašifrovaný text je \textit{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textit{ABC, SOMAR, HESLO, ...}.
+Nech zašifrovaný text je \textit{SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW}. Útočník má k dispozícii slovník slov \textit{ABC, HESLO, ...}.
 
 \begin{lstlisting}
-kluc: JANO
+kluc: ABC
 SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
 JYXQJUZIJWMJXCJVFQAHQMKFJYEEIFCTN
-
-kluc: SOMAR
-SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
-AKYEBCYKSFHJUCFRAENEHYLTBGDGROXTK
 
 kluc: HESLO
 SYKESUMWSWZXGCWJOQNVZMXTSYRSRFPHW
@@ -188,10 +181,9 @@ z problémovej oblasti. V tomto prípade reťazec predstavuje dešifrovací kľ�
 
 \paragraph{Populácia} je skupina reťazcov zvoleného počtu. Veľkosť populácie sa počas riešenia genetického algoritmu môže meniť.
 
-\paragraph{Generácia} predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne môže reprezentovať poradové číslo cyklu.
+\paragraph{Generácia} predstavuje populáciu GA v niektorej výpočtovej fáze, prípadne môže reprezentovať poradové číslo výpočtového cyklu.
 
 \paragraph{Účelová funkcia} vypočítava skóre každého jedinca v populácii a je mierou toho, čo chceme maximalizovať, prípadne minimalizovať.
-Úlohou účelovej funkcie je nájsť globálny extrém.
 
 \paragraph{Fitness} je v evolučných výpočtoch pojem predstavujúci mieru úspešnosti jedincov.
 V prípade maximalizačnej úlohy je to najväčšia hodnota účelovej funkcie. Naopak, v prípade minimalizačnej úlohy je to najmenšia hodnota.
@@ -210,7 +202,7 @@ Krížením vznikajú noví, odlišní potomkovia, ktorí nesú niektoré znaky 
 Skôr než sa GA začne realizovať, treba určiť spôsob zakódovania parameterov jednotlivých objektov.
 Pri klasických šifrách sa gény zvyčajne reprezentujú pomocou abecedných znakov alebo čísiel.
 Ďalším krokom je určiť prehľadávaný priestor a následne formulovať účelovú funkciu. Dôležité je takisto určiť veľkosť populácie,
-ktorá sa doporučuje v rozsahu od 10 do 100 jedincov \cite{ev}.
+ktorá sa doporučuje v rozsahu od 10 do 100 jedincov.
 Pri malých populáciách býva nedostatočný priestor pre rôznorodosť (diverzitu) genetických informácií,
 naopak pri veľkých populáciách sa už nedosahuje lepší efekt.
 
@@ -218,7 +210,7 @@ naopak pri veľkých populáciách sa už nedosahuje lepší efekt.
   \centering
 %  \def\svgwidth{\columnwidth}
   \input{ga.pdf_tex}
-  \caption{Štruktúra GA}
+  \caption{Štruktúra GA (vytvorené na základe \cite{ev})}
   \label{img:ga}
 \end{figure}
 
@@ -236,18 +228,26 @@ Potomkovia vytvoria skupinu $ C $, ktorá pokračuje do operácie mutácie.
 \paragraph{Mutácia} spôsobí, že náhodne zvoleným jedincom zmenia niektoré náhodne zvolené gény a vznikne populácia $ D $.
 \paragraph{Nová populácia} $ P_{k+1} $ vzniká zjednotením populácií $ A \cup D $. Genetický algoritmus pokračuje bodom 2.
   
-Predstavená schéma je len príklad ako by GA mohol vyzerať, v skutočnosti však môžeme uvažovať o viacerých kritériách, ktoré vplývajú na GA.
+Predstavená schéma je len príklad ako by GA mohol vyzerať, v skutočnosti však môžeme uvažovať o viacerých nastaveniach, ktoré vplývajú na GA.
 Niektoré uvedieme v experimentálnej časti tejto práce.
 
+\subsubsection{Paralelné genetické algoritmy}
+\acrfull{pga} možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zvýšiť výkonnosť aj efektivitu genetických algoritmov.
+PGA prinášajú výhody v porovnaní s GA, ktoré sú: paralelné hľadanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, schopnosť nájsť lepšie riešenia, schopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému. \cite{pea}
+
+Štruktúra topológie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
+Perióda migrácie by nemala byť veľmi krátka a migračné väzby by nemali byť príliš početné, pretože sa môže stať, že sa celý PGA bude správať ako keby bol jednou veľkou populáciou.
+
 \section{Grid}
-Jedným z cieľov práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
+Jedným z cieľov tejto práce je preskúmať možnosti aplikovania útokov na klasické šifry v gridovom prostredí.
 Grid môžeme chápať ako skupinu počítačov, uzlov, spojenú pomocou siete \acrfull{lan}, prípadne inou sieťovou technológiou.
 Jednotlivé uzly môžu, ale nemusia byť geograficky oddelené.
 Účelom takýchto počítačov je poskytnúť veľký výpočtový výkon, ktorý je použitý na riešenie špecifických úloh.
+Vrámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex.
 
 \subsection{hpc.stuba.sk}
-Vrámci Slovenskej technickej univerzity (STU), Centra výpočtovej techniky (CVT) sa nachádza superpočítač IBM iDataPlex, ktorý pozostáva z 52 výpočtových uzlov.
-Každý výpočtový uzol má nasledovnú konfiguráciu:
+Superpočítač IBM iDataPlex pozostáva z 52 výpočtových uzlov.
+Každý výpočtový uzol má nasledovnú konfiguráciu \cite{hpc}:
 \begin{itemize}
 \item \acrshort{cpu}: 2 x 6 jadrový Intel Xeon X5670 2.93GHz
 \item \acrshort{ram}: 48GB (24GB na procesor)
@@ -259,7 +259,7 @@ Každý výpočtový uzol má nasledovnú konfiguráciu:
 Spolu máme k dispozícii 624 \acrshort{cpu}, 3584 cuda jadier, 2,5TB \acrshort{ram} , 104TB lokálneho úložného priestoru a ďalších 115TB zdielaného úložiska.
 Výpočtový výkon dosahuje 6,76 TFLOPS a maximálny príkon aj spolu s chladením je 40kW \cite{hpc}.
 
-V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne úlohu.
+V tabuľke \ref{tab:filesystem} môžeme vidieť dostupné diskové umiestnenia pre každého používateľa, prípadne spustenú úlohu.
 Umiestnenie \textit{/home/\$USER} je domovským priečinkom každého používateľa.
 Jedno z obmedzení tohto umiestnenia je, že môže obsahovať maximálne osemdesiattisíc súborov a priečinkov.
 Taktiež má značne obmedzenú kapacitu, čo sa nemusí hodiť pre každý typ úlohy.
@@ -279,7 +279,7 @@ V prípade použitia tohto umiestnenia si treba dať pozor na zmazanie dát, kto
 \texttt{/scratch/\$PBS\_JOBID} & nie                  & ihneď            & 1.6TB             & nie                 \\
 \texttt{/work/\$USER}          & nie                  & áno              & 56TB              & nie                 \\ \bottomrule
 \end{tabular}
-\caption{Disky}
+\caption{Dostupné umiestnenia pre používateľa na hpc.stuba.sk}
 \label{tab:filesystem}
 \end{table}
 
@@ -290,7 +290,7 @@ pridávať ďalších riešiteľov, prezerať si štatistiky a grafy.
 Dôležitou funkciou webového rozhrania je zmena hesla používateľa a pridanie \acrshort{ssh} verejného kľúča, pomocou ktorého sa prihlasujeme bez zadávania hesla.
 
 \subsection{Príkazy}
-Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \textit{ssh login@hpc.stuba.sk} a následným zadaním hesla v prípade,
+Do gridu sa môžeme prihlásiť cez \acrshort{ssh} zadaním príkazu \textit{ssh <username>@login.hpc.stuba.sk} a následným zadaním hesla v prípade,
 ak nepoužívame prihlasovanie pomocou verejného kľúča.
 Ak sa pripájame mimo univerzitnej siete STU, na prihlásenie musíme použiť \acrshort{vpn}.
 Po pripojení máme k dispozícii štandardnú linuxovú konzolu, ktorá ale obsahuje niekoľko špecifických príkazov pre daný grid.
@@ -323,7 +323,7 @@ fftw3/intel-3.3.3           mvapich2/1.9(default)       openmpi/2.1.0
 fluent/15.0.7               mvapich2/2.0                openmpi/intel-1.10.4
 \end{lstlisting}
 
-Pre načítanie modulov zadáme \textit{module load modul1 modul2 ...}, aktuálne používané moduly zobrazíme pomocou
+Pre načítanie modulov zadáme \textit{module load <modul1> <modul2> ...}, aktuálne používané moduly zobrazíme pomocou
 \textit{module list} a odstrániť ich môžeme príkazom \textit{module purge}.
 Podrobnejšie voľby príkazu \textit{module} sa môžeme dozvedieť z manuálových stránok.
 
@@ -362,6 +362,11 @@ Posledný riadok tabuľky príkazu \textit{qstat -u 3xelias} popisuje nami spust
 Dôležité sú pre nás predovšetkým stĺpce \texttt{Time}, \texttt{Job ID}.
 Posledný stĺpec \texttt{Time} hovorí o tom ako dlho je už naša úloha spustená, druhý stĺpec \texttt{Time} deklaruje maximálny možný čas,
 ktorý má úloha PGA vyhradený. Hodnoty zo stĺpca \texttt{Job ID} môžeme použiť do príkazu \textit{qsig} pre vynútené ukončenie úlohy.
+Ukončiť úlohu príkazom \textit{qsig} by sme mohli napríklad:
+\begin{lstlisting}
+# ukoncenie ulohy
+qsig 115275
+\end{lstlisting}
 \subsubsection{qfree}
 Ak si chceme zobraziť aktuálne vyťaženie gridu, môžeme tak urobiť príkazom \textit{qfree}.
 %\begin{figure}[!h]
@@ -424,7 +429,7 @@ serial                & 240 hodín                                   & 1        
 \label{tab:fronty}
 \end{table}
 
-\subsection{Príklad sériovej úlohy}
+\subsubsection{Príklad sériovej úlohy}
 
 \begin{lstlisting}[language=bash, caption={uloha1.pbs}, label={pbs:1}, numbers=left]
 #!/bin/bash
@@ -466,7 +471,7 @@ Poukážme na jednotlivé riadky skriptu:
 \end{itemize}
 Úlohu môže zaradiť do fronty príkazom \textit{qsub uloha1.pbs}.
 
-\subsection{Príklad paralelnej úlohy}
+\subsubsection{Príklad paralelnej úlohy}
 \begin{lstlisting}[language=bash, caption={uloha2.pbs}, label={pbs:2}, numbers=left]
 #!/bin/bash
 
@@ -520,7 +525,7 @@ Podobne ako v predchádzajúcom príklade sériovej úlohy si popíšeme niektor
 Message passing je forma programovania, ktorá sa používa pri paralelnom programovaní či už na viacjadrových procesoroch alebo v gridovom prostredí.
 V takejto forme programovania môže byť program rozdelený na viacero logických blokov alebo procesov.
 Takýchto procesov môže byť viac ako počet dostupných \acrshort{cpu}, avšak zvyčajne by mal byť tento počet rovnaký.
-Procesy môžu vykonávať rozličné úlohy a môžu bežať na rozličných, geograficky oddelených \acrshort{cpu}.
+Procesy môžu vykonávať rozličné úlohy a môžu bežať na rozličných, geograficky oddelených \acrshort{cpu}. \cite{mpibook}
 
 Procesy medzi sebou komunikujú posielaním správ.
 Správy zvyčajne reprezentujú nejaké dáta, ale môžu slúžiť aj na synchronizáciu.
@@ -529,7 +534,7 @@ Táto forma programovania zaznamenala veľký rozmach hlavne v deväťdesiatych 
 keď takmer každý predajca paralelných systémov ponúkal vlastnú implementáciu message passing prostredia.
 
 Následkom týchto udalostí vzniklo \acrfull{mpi} Forum, čo bola skupina viac ako osemdesiat ľudí zo štyridsiatich rôznych organizácií,
-ktoré predstavovali predajcov paralelných systémov, používateľov ale aj výskumné laboratóriá a univerzity \cite{mpibook}.
+ktoré predstavovali predajcov paralelných systémov, používateľov ale aj výskumné laboratóriá a univerzity. \cite{mpibook}
 
 Úlohou \acrshort{mpi} fóra bolo zjednotiť message passing systémy a navrhnúť nový systém.
 Systém by mal podporovať komplexné dátové štruktúry, bezpečnú komunikáciu a byť dostatočne modulárny.
@@ -570,14 +575,14 @@ int main(int argc, char **argv) {
 \end{lstlisting}
 
 V tomto príklade proces nula \textit{(rank == 0)} pošle správu procesu prostredníctvom send operácie \textit{MPI\_SEND}.
-Táto operácia definuje takzvaný \textit{send buffer}. Send buffer je miesto v pamäti
+Táto operácia definuje takzvaný \textit{send buffer}. \textit{Send buffer} je miesto v pamäti
 odosielateľa, v ktorom sa nachádzajú dáta na odoslanie.
-Send buffer je v tomto prípade premenná \textit{msg} nachádzajúca sa v pamäti procesu nula.
-Prvé tri argumenty send operácie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
-Ďalšie tri parametre send operácie definujú príjmatela správy.
+\textit{Send buffer} je v tomto prípade premenná \textit{msg} nachádzajúca sa v pamäti procesu nula.
+Prvé tri argumenty \textit{send} operácie špecifikujú dáta pre príjemcu. Táto správa bude obsahovať pole charov, respektíve string.
+Ďalšie tri parametre \textit{send} operácie definujú príjmatela správy.
 Proces jedna \textit{(rank == 1)}, prijme správu s \textit{receive} operáciou \textit{MPI\_Recv}.
 Správa je prijatá na základe zadaných parametrov a dáta sú uložené do \textit{receive buffera}.
-V tomto príklade je receive buffer premenná \textit{msg} v pamäťovom priestore procesu jedna.
+V tomto príklade je \textit{receive buffer} premenná \textit{msg} v pamäťovom priestore procesu jedna.
 Prvé tri parametre definujú dáta, ktoré chce príjemca prijať. Ďalšie tri parametre slúžia na zvolenie správy od odosielateľa.
 Posledný parameter sa používa na získanie informácií o prijatej správe. V tomto príklade tento parameter ignorujeme.
 
@@ -586,10 +591,10 @@ Program z výpisu \ref{mpi:1} môžeme skompilovať a následne spustiť v dvoch
 mpicc main.c -o p2p
 mpirun -n 2 ./p2p
 \end{lstlisting}
-Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \textit{Hello, MPI}.
+Výsledkom programu a komunikácie týchto dvoch procesov bude, že proces jedna vypíše \textit{Hello, MPI}. Program \textit{mpicc} slúži ako wrapper pre kompilátor \textit{gcc}. Jeho úlohou je linkovanie knižnice \textit{mpi}. Program \textit{mpirun} slúži na spúštanie \textit{mpi} programov.
 
 \subsection{Blokujúca komunikácia}
-Obe \acrshort{mpi} volania v príklade \ref{mpi:1} boli blokujúce.
+Obe \acrshort{mpi} volania vo výpise \ref{mpi:1} boli blokujúce.
 To znamená, že odosielateľ čaká na volaní \textit{MPI\_Send} dovtedy, kým príjemca správu prijme.
 To isté platí aj pre príjemcu, ktorý čaká na volaní funkcie \textit{MPI\_Recv}  až kým nedostane správu od odosielateľa.
 
@@ -603,13 +608,13 @@ int tag,
 MPI_Comm comm)
 \end{lstlisting}
 
-Vo výpise \ref{mpi:send} vidíme definíciu volania \textit{MPI\_Send}. Prvým argumentom funkcie je \textit{adresa} receive buffera,
+Vo výpise \ref{mpi:send} vidíme definíciu volania \textit{MPI\_Send}. Prvým argumentom funkcie je \textit{adresa receive buffera},
 ďalší argument je dĺžka buffera (\textit{count}), ktorá musí byť celé kladné číslo.
 V prípade, že táto podmienka nie je splnená MPI volanie vráti chybu. Typ buffera špecifikujeme pomocou argumentu \textit{datatype}.
 Niektoré základné dátové typy môžeme vidieť v tabuľke \ref{tab:mpi-datatypes}.
 Ďalšie tri argumenty slúžia na definovanie príjemcu. Pomocou parametra \textit{dest} môžeme zvoliť komu je správa adresovaná.
 V prípade, že si odosielateľ a príjemca vymieňajú viac správ rôzneho typu alebo rôzneho obsahu, potrebujeme tieto správy nejako odlíšiť.
-Na odlíšenie správ slúži argument \textit{tag}. Tag musí byť kladné celé číslo. V príklade \ref{mpi:1} sme ako tag použili nulu,
+Na odlíšenie správ slúži argument \textit{tag}. \textit{Tag} musí byť kladné celé číslo. V príklade výpisu \ref{mpi:1} sme ako \textit{tag} použili nulu,
 avšak mohli sme použiť aj inú hodnotu. Posledným argumentom je \textit{comm}, ktorý slúži na definovanie komunikačnej skupiny.
 Základná komunikačná skupina je svet (\textit{MPI\_COMM\_WORLD}), kde si všetci môžu vymieňať správy.
 \acrshort{mpi} štandard zahŕňa aj vytváranie vlastných podskupín komunikátorov, napríklad pomocou volania \textit{MPI\_Comm\_create\_group} \cite{mpi3-1}.
@@ -626,8 +631,8 @@ MPI_Status *status)
 \end{lstlisting}
 
 \acrshort{mpi} volanie \textit{MPI\_Recv} používa veľmi podobnú syntax ako \textit{MPI\_Send}. Prvé tri argumenty sú identické.
-Argument source, v prípade funkcie \textit{MPI\_Recv}, definuje rank odosielateľa. Ďalším rozdielom je argument \textit{status},
-ktorý sa používa na získanie informácií o prijatej správe, alebo môže byť aj ignorovaný ako v príklade \ref{mpi:1}.
+Argument \textit{source}, v prípade funkcie \textit{MPI\_Recv}, definuje rank odosielateľa. Ďalším rozdielom je argument \textit{status},
+ktorý sa používa na získanie informácií o prijatej správe, alebo môže byť aj ignorovaný ako v príklade výpisu \ref{mpi:1}.
 Štruktúra \textit{MPI\_Status} obsahuje 3 hlavné informácie: rank odosielateľa, tag správy a dĺžku správy.
 
 \begin{table}[!h]
@@ -655,18 +660,18 @@ MPI\_BYTE                 & char                   \\ \bottomrule
 
 \subsection{Neblokujúca komunikácia}
 Výkonnosť programov môže byť v mnohých prípadoch vylepšená prekrývaním blokujúcich volaní.
-Jedným z možných spôsobov ako toto dosiahnuť je použitie threadov \cite{mpi3-1}.
-Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcich volaní.
+Jedným z možných spôsobov ako toto dosiahnuť je použitie threadov .
+Alternatívny spôsob ako zlepšiť výkon programu môže byť použitie neblokujúcich volaní. \cite{mpi3-1}
 
 Pri neblokujúcej komunikácii si môžeme zadefinovať štyri rôzne neblokujúce operácie: \textit{send} pre posielanie,
 \textit{recv} pre prijímanie, \textit{send complete} pre dokončenie posielania a \textit{recv complete} pre dokončenie prijatia.
-Neblokujúce volanie send spustí send operáciu, ale nedokončí ju.
-Toto volanie inicializuje skopírovanie do send buffera ale samotné kopírovanie nedokončí.
-Na dokončenie operácie send je potrebné ďalšie volanie send complete,
+Neblokujúce volanie \textit{send} spustí \textit{send} operáciu, ale nedokončí ju.
+Toto volanie inicializuje skopírovanie do \textit{send buffera} ale samotné kopírovanie nedokončí.
+Na dokončenie operácie \textit{send} je potrebné ďalšie volanie \textit{send complete},
 ktoré overí, že dáta boli skutočne skopírované a prenesené príjemcovi.
-Neblokujúca send operácia zvyčajne beží paralelne s vykonávaným programom.
-Podobne aj neblokujúce volanie recv inicializuje recv operáciu, ale nedokončí ju. Na dokončenie potrebuje separátne volanie recv complete,
-ktoré zaručí, že dáta boli prenesené do recv buffera. Neblokujúca recv operácia podobne ako send pokračuje paralelne so zvyškom programu.
+Neblokujúca \textit{send} operácia zvyčajne beží paralelne s vykonávaným programom.
+Podobne aj neblokujúce volanie \textit{recv} inicializuje \textit{recv} operáciu, ale nedokončí ju. Na dokončenie potrebuje separátne volanie \textit{recv complete},
+ktoré zaručí, že dáta boli prenesené do \textit{recv buffera}. Neblokujúca \textit{recv} operácia podobne ako \textit{send} pokračuje paralelne so zvyškom programu.
 
 \begin{lstlisting}[language=c, caption={Neblokujúca komunikácia}, label={mpi:2}, numbers=left]
 MPI_Request request[2];
@@ -687,11 +692,11 @@ if (rank == 0) {
 }
 \end{lstlisting}
 
-Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcej komunikácie. V tomto príklade ako send operácia slúži funkcia \textit{MPI\_Isend}.
+Vo výpise \ref{mpi:2} môžeme vidieť príklad neblokujúcej komunikácie. V tomto príklade ako \textit{send} operácia slúži funkcia \textit{MPI\_Isend}.
 Proces nula \textit{(rank == 0)} pošle najprv správu \textit{msg1} a následne správu \textit{msg2}.
 Obe volania sú neblokujúce, to znamená, že program nečaká
 a pokračuje funkciou \textit{zlozity\_vypocet}. Po dokončení výpočtu čaká na doručenie správ.
-Tento krok je dôležitý, pretože ak by sme nečakali na dokončenie prenosu správy, premenné msg1 a msg2 by už viacej nemuseli byť validné,
+Tento krok je dôležitý, pretože ak by sme nečakali na dokončenie prenosu správy, premenné \textit{msg1} a \textit{msg2} by už viacej nemuseli byť validné,
 za predpokladu že vyjdeme z if konštrukcie.
 V prípade procesu jedna \textit{(rank == 1)} príjemca inicializuje neblokujúce volanie \textit{MPI\_Irecv} a pokračuje funkciou \textit{iny\_vypocet}.
 Po dokončení výpočtu skontroluje či už boli dáta prijaté volaním \textit{MPI\_Waitall}.
@@ -699,10 +704,10 @@ Na tomto volaní čaká v prípade ak dáta ešte neboli prijaté.
 Tento krok je pre príjemcu dôležitý, pretože mu zaručuje, že dáta boli prijaté a môže ich použiť.
 
 Výstupom tohto programu môže byť \textquote{\textit{Hello, MPI}} alebo aj \textquote{\textit{MPIHello, }}, pretože poradie vykonania operácií nie je zaručené.
-Správne poradie správ by sme docielili rôznymi tagmi pre správy msg1 a msg2.
+Správne poradie správ by sme docielili rôznymi \textit{tagmi} pre správy \textit{msg1} a \textit{msg2}.
 % \subsection{Kolektívna komunikácia}
 \subsection{Dynamická alokácia}
-V príklade \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo väčšine prípadov nepraktické a často môže viesť k chybám.
+Vo výpise \ref{mpi:1} sme použili staticky alokovanú pamäť, čo je vo väčšine prípadov nepraktické a často môže viesť k chybám.
 Ak by v tomto príklade odosielateľ poslal dlhšiu správu ako je príjemca schopný prijať, tak by tento program zlyhal.
 
 Riešením tohto problému je dynamická alokácia pamäte pre prijaté správy. Aby sme mohli pamäť dynamicky alokovať, potrebujeme vedieť
@@ -745,7 +750,7 @@ Avšak tieto volania častokrát vyžadujú príliš nízkoúrovňové programov
 %}
 %\end{lstlisting}
 
-\section{Vývojové prostredie}
+\section{Návrh a implementácia}
 Jedným zo základných cieľov tejto práce je poskytnúť jednoduchšie vývojové prostredie pre ďalších lúštiteľov a programátorov,
 ktorí budú pri svojej práci využívať grid.
 Takéto prostredie by malo poskytnúť spoločné stavebné bloky, ktoré by si riešitelia medzi sebou mohli navzájom zdieľať.
@@ -756,20 +761,21 @@ Keďže vývoj priamo na gride v konzolovom prostredí je nepraktický, vývoj v
 základné požiadavky:
 \begin{itemize}
 \item
-  Automatické vytvorenie projektu
+  Automatické vytvorenie projektu.
 \item
-  Lokálny vývoj a testovanie
+  Lokálny vývoj a testovanie.
 \item
-  Zdieľanie modulov medzi projektami
+  Zdieľanie modulov medzi projektami.
 \item
-  Automatické generovanie a úprava skriptov pre gridové prostredie
+  Automatické generovanie a úprava skriptov pre gridové prostredie.
 \item
-  Jednoduchá synchronizácia s gridom hpc.stuba.sk
+  Jednoduchá synchronizácia s gridom hpc.stuba.sk.
 \end{itemize}
 
 % flow diagram?
 \subsection{Štruktúra prostredia}
 V tejto kapitole si definujeme štruktúru prostredia a význam jednotlivých priečinkov a súborov.
+Toto prostredie obsahuje skripty a zdrojové kódy potrebné pre vývoj v lokálnom prostredí ale aj na gride. 
 
 Na nasledujúcom výpise môžeme vidieť štruktúru navrhnutého prostredia:
 % tree -L 3 | sed "s/├/|/g" | sed 's/│/|/g' | sed 's/└/|/g' | sed 's/──/-/g'
@@ -836,7 +842,7 @@ Taktiež záhŕňa podporu viacerých \textquote{projektov} vrámci jedného rep
 Ďalšou výhodou je, že môže byť použitý v kombinácii s takmer ľubovolným grafickým vývojovým prostredím.
 
 Na správu zdrojových kódov sme použili systém \textit{git}, pretože archiváciu a správu zdrojových kódov považujeme za veľmi dôležitú.
-Zdrojové kódy tohto projektu sú dostupné na githube \url{https://github.com/melias122/grid}.
+Zdrojové kódy tohto projektu sú dostupné v prílohe tejto práce ale tiež na githube \url{https://github.com/melias122/grid}.
 
 Okrem archivácie zdrojových kódov považujeme za dôležité aj to, ako je zdrojový kód naformátovaný.
 Na formátovanie zdrojových súborov sme použili nástroj \textit{clang-format}.
@@ -873,14 +879,15 @@ Základné operácie tohto príkazu \textit{build.sh} sú:
 \end{itemize}
 
 \subsection{PGA modul}
+V tejto kapitole si ukážeme implementačné časti PGA modulu, ktorý sme integrovali a rozširovali v tomto vývojovom prostredí.
 Základnú implementáciu GA poskytol vedúci práce Ing. Eugen Antal, PhD.
-Táto implementácia bola ďalej nami rozvíjaná a do značnej miery upravená, niektoré časti kódu boli prepísané, avšak základná idea ostala.
+Táto implementácia bola ďalej nami rozvíjaná a do značnej miery upravená, niektoré časti kódu boli prepísané, avšak základná idea ostala zachovaná.
 % Doimplementovali sme niektoré genetické operácie kríženia: single point crossover, uniform crossover.
 
 \begin{figure}[!htbp]
   \centering
   \input{pga.pdf_tex}
-  \caption{Štruktúra PGA s migračným modelom}
+  \caption{Štruktúra PGA s migračným modelom (vytvorené na základe \cite{pea})}
   \label{img:pga}
 \end{figure}
 
@@ -897,13 +904,13 @@ Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
 \begin{tabular}{@{}lll@{}}
 \toprule
 \textbf{Operácia}           & \textbf{Typ}                 & \textbf{Popis}                                                                        \\ \midrule
-\textbf{Select}    & Elitism(n)          & Vyberie n najlepších jedincov                                                \\
-                   & Random(n)           & Náhodne zvolí n jedincov                                                     \\
-                   & Tournament(n)       & n-krát zvolí 2 jedincov a vyberie lepšieho                                   \\
-                   & Worst(n)            & Vyberie n najhoších jedincov                                                 \\ \midrule
+\textbf{Select}    & Elitism(n)          & Vyberie n najlepších jedincov.                                                \\
+                   & Random(n)           & Náhodne zvolí n jedincov.                                                     \\
+                   & Tournament(n)       & N-krát zvolí 2 jedincov a vyberie lepšieho.                                   \\
+                   & Worst(n)            & Vyberie n najhoších jedincov.                                                 \\ \midrule
 \textbf{Crossover} & SinglePoint(1 || 2) & Zvolí nádhoný bod a skríži 2 rodičov. Vráti 1 alebo 2 potomkov.              \\
                    & Uniform(1 || 2)     & Zvolí niekoľko náhodných bodov a skríži 2 rodičov. Vráti 1 alebo 2 potomkov. \\ \midrule
-\textbf{Mutation}  & Swap(n)             & n-krát vymení 2 rôzne gény.                                                  \\
+\textbf{Mutation}  & Swap(n)             & N-krát vymení 2 rôzne gény.                                                  \\
                    & SwapAll             & Zmení všetky gény jedinca.                                                   \\
                    & WithProbability(p)  & S pravdepodobnosťou p zmení náhodný gén.                                     \\ \bottomrule
 \end{tabular}%
@@ -916,7 +923,7 @@ Procesu výmeny jedincov medzi jednotlivými GA hovoríme migrácia.
 Základné stavebné bloky GA v našej implementácii sú:
 \paragraph{Genes} Obsahuje jednotlivé gény a predtavuje kľúč šifry. Z implentačného hľadiska sme zvolili reprezentáciu pomocou \textit{std::string}.
 Výhodou tejto reprezentácie je jednoduchosť a aj o niečo lepší výkon, napríklad oproti \textit{std::vector}.
-\paragraph{Chromosome} Je tvorený z génov a má skóre. Ohodnocovanie génov prebieha v našom modeli pomocou fitness funkcie a aj šifrovacej funkcie.
+\paragraph{Chromosome} Je tvorený z génov a uchováva hodnotu skóre. Ohodnocovanie génov prebieha v našom modeli pomocou fitness funkcie a aj šifrovacej funkcie.
 \paragraph{Generator} Generuje gény pre chromozóm. Gény sú generované z abecedy podľa vopred určeného modelu.
 Generator je interface a teda umožňuje rôzne implementácie, pre rôzne reprezentácie génov.
 Pre monoalfabetickú substitúciu sme napríklad vytvorili \textit{ShuffleGenerator}, ktorý generuje náhodné permutácie zo zadanej abecedy.
@@ -966,7 +973,7 @@ Population GeneticAlgorithm::run(int id, const Scheme &scheme) {
 \end{lstlisting}
 Základom tohto GA je trieda \textit{Scheme}, ktorá definuje štruktúru genetického algoritmu. V prípade, že používame migračný model, algroritmus musí mať unikátne \textit{id}.
 Na riadku 2 až 5 algoritmus vytvorí jednotlivé chromozómy populácie veľkosti \textit{initialPopulation}. Gény výtvára generátor a skóre je vypočítané pomocou šifry a fitness funkcie.
-Ak je migrátor definovaný v schéme, tak na riadku 7-9 vykonáme migráciu populácie. Migračná logika sa odohráva vo vnútri migrátora a migrovaní jedinci sa pridajú do aktuálnej populácie. Následne sa na aktuálnu populáciu na riadkoch 10 až 21 budú vykonávať operácie podľa vytvorenej schémy. Operácie môžu mať aj podoperácie a vytvárajú tak akúsi reťaz operácií. Na riadku 12 sa vytvorí kópia pôvodnej populácie, na ktorú sa aplikuje reťaz operácii. Riadok 13 prechádza cez jednotlivé operácie. Vždy sa vykoná najprv výber (\textit{Select}) a na vybratú subpopuláciu je aplikovaná genetická operácia kríženia alebo mutácie (riadok 15 a 16). Tejto subpopulácii sa preráta skóre. V tomto modeli musíme rátať skóre pri každej subpopulácii, pretože niektorá operácia, napríklad \textit{Swap}, mohla zmeniť gény, a teda aj skóre jedinca, ktoré by mohlo byť použité v ďalšom výbere. Riadok 22 zjednocuje jednotlivé subpopulácie a na riadku 24 sa aktuálna populácia vymení za novú. Po prejdení všetkých iterácií už len algoritmus zoradí jedincov podľa najlepšieho skóre a vráti výslednú populáciu.
+Ak je migrátor definovaný v schéme, tak na riadku 7-9 vykonáme migráciu populácie. Migračná logika sa odohráva vo vnútri migrátora a migrovaní jedinci sa pridajú do aktuálnej populácie. Následne sa na aktuálnu populáciu na riadkoch 10 až 21 budú vykonávať operácie podľa vytvorenej schémy. Operácie môžu mať aj podoperácie a vytvárajú tak akúsi reťaz operácií. Na riadku 12 sa vytvorí kópia pôvodnej populácie, na ktorú sa aplikuje reťaz operácii. Riadok 13 prechádza cez jednotlivé operácie. Vždy sa vykoná najprv výber (\textit{Select}) a na vybratú subpopuláciu je aplikovaná genetická operácia kríženia alebo mutácie (riadok 15 a 16). Tejto subpopulácii sa vyráta skóre. V tomto modeli musíme rátať skóre pri každej subpopulácii, pretože niektorá operácia, napríklad \textit{Swap}, mohla zmeniť gény, a teda aj skóre jedinca, ktoré by mohlo byť použité v ďalšom výbere. Riadok 22 zjednocuje jednotlivé subpopulácie a na riadku 24 sa aktuálna populácia vymení za novú. Po prejdení všetkých iterácií už len algoritmus zoradí jedincov podľa najlepšieho skóre a vráti výslednú populáciu.
 
 Pomocou triedy \textit{Scheme} by sme mohli vytvoriť jednoduchú schému GA, napríklad takto:
 \begin{lstlisting}[language={c++}, numbers={left}]
@@ -1076,13 +1083,15 @@ void MpiMigrator::migrate(int senderId, int itteration, Population &population)
 }
 \end{lstlisting}
 \textit{MpiMigrator} pošle niektorých jedincov populácie vopred zadaného typu podľa vytvorenej migračnej schémy (riadok 4-7).
+Trieda \textit{Migration} na riadku 4, je pomocná trieda, ktorá v sebe uchováva väzby medzi jednotlivými uzlami a uskutočňuje výber jedincov.
 Posielanie v tomto prípade nesmie byť blokujúce, pretože by sa každý odosielateľ snažil iba posielať, ale nikto by nič neprijímal, čo by znamenalo deadlock.
 Naopak prijímanie blokujúce byť môže (riadok 9-13). Migrátor príjme nových jedincov ak existuje k nemu priradená väzba.
 Prijatých jedincov potom zaradí do aktuálnej populácie a nakoniec čaká na dokončenie neblokujúcich volaní (riadok 15-17).
 
 \subsection{Príklad použitia}
 Táto kapitola by mala slúžiť ako manuál pre ďalších používateľov.
-Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru.
+Postupne si prejdeme všetky kroky potrebné k použitiu nami vytvoreného softvéru od počiatočných nastavení prostredia,
+vývoja v lokálnom prostredí až po spustenie na gride.
 
 \subsubsection{Lokálny vývoj}
 \label{subsec:local-dev}
@@ -1164,7 +1173,8 @@ int main(int argc, char **argv) {
     return 0;
 }
 \end{lstlisting}
-Parametre \textit{nodes} a \textit{ppn} sú dôležité pre spustenie programu na lokálnom počítači. Zvyšné parametre, \textit{queue} a \textit{walltime} sa prejavia až pri spustení na gride.
+Komentáre v súbore \textit{main.cpp} slúžia pre parsovanie do \textit{HelloGrid.pbs} súboru.
+Jednotlivé parametre \textit{nodes} a \textit{ppn} sú dôležité pre spustenie programu na lokálnom počítači. Zvyšné parametre, \textit{queue} a \textit{walltime} sa prejavia až pri spustení na gride.
 Zmeňme riadok 6 na \textit{nodes = 2}, riadok 11 na \textit{queue = debug}, riadok 14 na \textit{walltime = 00:01:00}
 a nahraďme funkciu main nasledovne:
 \begin{lstlisting}[numbers=left]
@@ -1187,7 +1197,7 @@ Proces 0 v tomto príklade príjme tri správy od procesov 1, 2, 3, ktoré posie
 
 Teraz môžeme projekt \textit{HelloGrid} skompilovať a následne spustiť pomocou príkazov:
 \begin{lstlisting}
-# skompiloje projekt HelloGrid a vsetky zavislosti
+# skompiluje projekt HelloGrid a vsetky zavislosti
 ./build.sh -b
 
 # spustenie programu HelloGrid
@@ -1298,6 +1308,7 @@ pričom z každej dĺžky sme mali k dispozícii 100 rôznych textov.
 Po celom behu GA bol vybratý najlepší jedinec reprezentujúci potencionálny kľúč,
 ktorým bol dešifrovaný zašifrovaný text, a jeho výsledok porovnaný s pôvodným otvoreným textom.
 Ako ohodnocovacia funkcia bola použitá bigramová funkcia, ktorá vypočítavala manhatanovskú vzdialenosť.
+Táto funkcia bola zvolená ako východisková, pretože skúmanie rôznych fitness funkcií je veľmi rozsiahle a je nad rámec tejto práce.
 
 \subsection{Distribúcia parametrov}
 Aby sme mohli využiť celú výpočtovú silu ktorú nám gridové prostredie ponúka a aby sme sa zároveň vyhli opakovanému spúšťaniu každej schémy,
@@ -1362,7 +1373,7 @@ Experiment s GA bežal na gride hpc.stuba.sk 34 hodín.
 Použitých bolo pritom 96 výpočtových uzlov, čo zjavne urýchlilo celý experiment.
 Spolu bolo treba 320000 spustení genetického algoritmu.
 
-Na obrázku \ref{schema:ga_10000_10} môžeme vidieť jeden z výsledkov genetického algoritmu.
+Na obrázku \ref{schema:ga_10000_10} môžeme vidieť výsledky genetického algoritmu pre najmenšie skúmané nastavenia 10000 iterácií a 10 jedincov.
 Ako možno vidieť z grafu, najhoršie výsledky dosiahla schéma B, ktorá je zložená z náhodného výberu a jedného swapu. Táto schéma sa správa podľa našich očakávaní. Náhodnosť spôsobuje vysokú mieru diverzity.
 O niečo lepšie, ale podobné výsledky dosahujú schémy A a D, ktoré sa správajú veľmi náhodne a neprinášajú lepšie výsledky.
 Prekvapivé výsledky prináša schéma C, v ktorej vidieť vysokú mieru selektívneho tlaku, avšak táto schéma, ako vidieť z grafu, uviazne v nejakom lokálnom extréme.
@@ -1375,27 +1386,22 @@ Na ďalšom obrázku \ref{schema:ga_10000_50} môžeme vidieť GA s počiatočno
 Podľa našich očakávaní boli dosiahnuté najlepšie výsledky s nastavením genetického algoritmu pri 50000 iterácií a s počiatočnou populáciou veľkosti 100 jedincov (obrázok \ref{schema:ga_50000_100}). Lepšie výsledky boli dosiahnuté najmä pri kratších textoch a mierne zlepšenie môžeme vidieť aj pri dlhších textoch. Treba však poznamenať, že GA pri taktom nastavení beží značne dlhšie a dobré výsledky sa dajú dosiahnuť aj s menším počtom iterácií a menšou populáciou. 
 \input{includes/plot/50000_100}
 
-Zo schémy B na obrázku \ref{schema:ga_B} možno vidieť, že náhodne zvolení jedinci prinášajú do GA diverzitu.
+Zo schémy B na obrázku \ref{schema:ga_B} možno vidieť, že bez absencie selektívneho tlaku GA nekonverguje k lepším výsledkom.
 \input{includes/plot/B}
 
-Ako sme už poznamenali, schéma C (obrázok \ref{schema:ga_C}) dosahuje prekvapivé výsledky aj napriek tomu, že neobsahuje výber elitných jedincov. K dosahovaniu vysokej úspešnosti jej pomáha najmä veľkosť populácie, avšak ako možno vidieť z grafu tejto schémy, napríklad zväčšenie populácie z 50 a 100 jedincov už neprinieslo o toľko lepšie výsledky, a je možné, že príliš veľká populácia by tejto schéme mohla aj uškodiť pôsobením väčšej rôznorodosti.
+Ako sme už poznamenali, schéma C (obrázok \ref{schema:ga_C}) dosahuje prekvapivé výsledky aj napriek tomu, že neobsahuje výber elitných jedincov. K dosahovaniu vysokej úspešnosti jej pomáha najmä veľkosť populácie, avšak ako možno vidieť z grafu tejto schémy, napríklad zväčšenie populácie z 50 a 100 jedincov už neprinieslo o toľko lepšie výsledky.
 \input{includes/plot/C}
 
-Na ďalších obrázkoch schém E (obrázok \ref{schema:ga_E}) a F (obrázok \ref{schema:ga_F}) môžeme vidieť, že zväčšenie počtu iterácií GA ako aj veľkosti populácie prináša pri lúštení monoalfabetickej substitúcie iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii vyplýva, že zlepšenie sa pohybuje okolo 10\%.
+Na ďalších obrázkoch schém E (obrázok \ref{schema:ga_E}) a J (obrázok \ref{schema:ga_J}) môžeme vidieť, že zväčšenie počtu iterácií GA ako aj veľkosti populácie prináša pri použití týchto schém iba mierne zlepšenie úspešnosti. Z grafov týchto funkcii vyplýva, že zlepšenie sa pohybuje okolo 10\%.
+
+Z našich výsledkov vyplýva, že schémy C, E a J dosahujú najlepší výsledok pri lúštení monoalfabetickej substitúcie, okrem toho odporúčame aspoň 20 jedincov a aspon 10000 iterácií GA. Zvyšné výsledky z tohto experimentu sa nachádzajú v prílohe tejto práce.
+
 \input{includes/plot/E}
 \input{includes/plot/J}
 
-Zvyšné výsledky z tohto experimentu vidieť v prílohe B tejto práce.
-
 \clearpage
 \section{Experiment s PGA}
-Ďalší experiment, ktorý sme vykonali, bol experiment s paralelnými genetickými algoritmami. PGA možno chápať ako ďalšiu úroveň paralelnej organizácie populácie, ktorá ma za cieľ zvýšiť výkonnosť aj efektivitu genetických algoritmov \cite{pea}.
-PGA prinášajú výhody v porovnaní s GA, ktoré podľa \cite{pea} sú: paralelné hľadanie vo veľkom mnohodimenzionálnom priestore potenciálnych riešení, lepšia možnosť vnútornej organizácie v porovnaní s GA, vyššia efektivita pri rovnakom počte vyhodnotení účelovej funkcie v porovnaní s GA, schopnosť nájsť lepšie riešenia, schopnosť uvolniť sa zo stagnácie v lokálnom extréme a smerovať ku globálnemu extrému.
-
-Štruktúra topológie medzi populáciami môže byť rôzna. Jednotlivé populácie medzi sebou nemusia byť všetky previazané.
-Niektoré vybrané topológie z \cite{pea} môžeme vidieť na obrázku \ref{img:topology}.
-Perióda migrácie by nemala byť veľmi krátka a migračné väzby by nemali byť príliš početné, pretože sa môže stať, že sa celý PGA bude správať ako keby bol jednou veľkou populáciou.
-
+Ďalší experiment, ktorý sme vykonali, bol experiment s paralelnými genetickými algoritmami.
 V tomto experimente sme sa zamerali na skúmanie rôznych topológií s rôznym tvarom, počtom ostrovov a migračných časov. Ako schémy sme použili C, E a F z prechádzajúceho experimentu.
 Z obrázku \ref{img:topology} boli zvolené topológie b, d, e, f. Počet ostrovov bol zvolený 3, 5 a 11. Pre veľkosti 3 a 11 bola topológia b mierne upravená.
 V prípade 3 ostrovov mala schéma b trojuholníkový tvar a v prípade 11 ostrovov bol k 4 a 6 uzlu pridaný ďalší štvorec.
@@ -1405,67 +1411,25 @@ Vyhodnocovanie PGA prebiehalo podobne ako v predchádzajúcom experimente. Vyhod
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\textwidth]{img/topology.png}
-  \caption{Topológie paralelných genetických algoritmov}
+  \caption{Topológie paralelných genetických algoritmov \cite{pea}}
   \label{img:topology}
 \end{figure}
 
 \clearpage
 \subsection{Výsledky experimentu}
+Experiment s PGA bežal približne dva aj pól týždňa. K vykonaniu tohto experimentu bolo treba 7884000 spustení jednotlivých GA.
+
+Na obrázkoch \ref{schema:cj_10_b_3} a \ref{schema:cj_10_d_3} môžeme vidieť výsledky z experimentu pre topológie \textit{b} a \textit{d}.
+Z týchto výsledkov vyplýva, že v nami riešenom experimente nezáleží na topológii PGA. Avšak oproti GA výsledky dosahujú lepšiu úspešnosť. V prípade schém \textit{E} a \textit{J} dosahujeme 80\% úspešnosť už pri textoch dĺžky 250 znakov a takmer 100\% úspešnosť pre texty dlhšie ako 1000 znakov. Schéma \textit{C} dosahuje asi o 10\%
+lepšiu úspešnosť pre PGA. Ostatné výsledky sú veľmi podobné a sú priložené ako príloha k tejto práci.
+
+Z výsledkov na obrázkoch \ref{schema:cj_20_b_3}, \ref{schema:cj_50_b_5} a \ref{schema:cj_100_b_11} vidieť, že veľkosť populácie pozitívne vplýva na výsledky PGA.
+Mierne zlepšuje výsledky a veľkosť topológie. Veľký rozdiel v úspešnosti môžeme vidieť medzi populáciou 20 (obrázok \ref{schema:cj_20_b_3}) a 50 (obrázok \ref{schema:cj_50_b_5}) najmä u schémy \textit{C}, ale aj prípade schém \textit {E} a {J}.
+
 \input{includes/plot/CJ_10_b_3}
 \input{includes/plot/CJ_10_d_3}
-\input{includes/plot/CJ_10_e_3}
-\input{includes/plot/CJ_10_f_3}
 
-\input{includes/plot/CJ_10_b_3}
-\input{includes/plot/CJ_20_b_5}
-\input{includes/plot/CJ_50_b_11}
-\input{includes/plot/CJ_100_b_3}
+\input{includes/plot/CJ_20_b_3}
+\input{includes/plot/CJ_50_b_5}
+\input{includes/plot/CJ_100_b_11}
 
-\input{includes/plot/CJ_10_b_11.tex}
-\input{includes/plot/CJ_10_b_3.tex}
-\input{includes/plot/CJ_10_b_5.tex}
-\input{includes/plot/CJ_10_d_11.tex}
-\input{includes/plot/CJ_10_d_3.tex}
-\input{includes/plot/CJ_10_d_5.tex}
-\input{includes/plot/CJ_10_e_11.tex}
-\input{includes/plot/CJ_10_e_3.tex}
-\input{includes/plot/CJ_10_e_5.tex}
-\input{includes/plot/CJ_10_f_11.tex}
-\input{includes/plot/CJ_10_f_3.tex}
-\input{includes/plot/CJ_10_f_5.tex}
-\input{includes/plot/CJ_100_b_11.tex}
-\input{includes/plot/CJ_100_b_3.tex}
-\input{includes/plot/CJ_100_b_5.tex}
-\input{includes/plot/CJ_100_d_11.tex}
-\input{includes/plot/CJ_100_d_3.tex}
-\input{includes/plot/CJ_100_d_5.tex}
-\input{includes/plot/CJ_100_e_11.tex}
-\input{includes/plot/CJ_100_e_3.tex}
-\input{includes/plot/CJ_100_e_5.tex}
-\input{includes/plot/CJ_100_f_11.tex}
-\input{includes/plot/CJ_100_f_3.tex}
-\input{includes/plot/CJ_100_f_5.tex}
-\input{includes/plot/CJ_20_b_11.tex}
-\input{includes/plot/CJ_20_b_3.tex}
-\input{includes/plot/CJ_20_b_5.tex}
-\input{includes/plot/CJ_20_d_11.tex}
-\input{includes/plot/CJ_20_d_3.tex}
-\input{includes/plot/CJ_20_d_5.tex}
-\input{includes/plot/CJ_20_e_11.tex}
-\input{includes/plot/CJ_20_e_3.tex}
-\input{includes/plot/CJ_20_e_5.tex}
-\input{includes/plot/CJ_20_f_11.tex}
-\input{includes/plot/CJ_20_f_3.tex}
-\input{includes/plot/CJ_20_f_5.tex}
-\input{includes/plot/CJ_50_b_11.tex}
-\input{includes/plot/CJ_50_b_3.tex}
-\input{includes/plot/CJ_50_b_5.tex}
-\input{includes/plot/CJ_50_d_11.tex}
-\input{includes/plot/CJ_50_d_3.tex}
-\input{includes/plot/CJ_50_d_5.tex}
-\input{includes/plot/CJ_50_e_11.tex}
-\input{includes/plot/CJ_50_e_3.tex}
-\input{includes/plot/CJ_50_e_5.tex}
-\input{includes/plot/CJ_50_f_11.tex}
-\input{includes/plot/CJ_50_f_3.tex}
-\input{includes/plot/CJ_50_f_5.tex}

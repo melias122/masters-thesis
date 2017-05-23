@@ -4,7 +4,7 @@
 %% vom prostredí. Tematikou paralelných výpočtov sa zaoberala aj práca [1], z ktorej sme
 %% čerpali niekoľko základných poznatkov o paralelných genetických algoritmoch. Ďalším cie-
 
-Ambíciou diplomovej práce bolo vytvorenie nástrojov na kryptoanalýzu klasických šifier v gridovom prostredí SIVVP.
+Cieľom diplomovej práce bolo vytvorenie nástrojov na kryptoanalýzu klasických šifier v gridovom prostredí SIVVP.
 Tento krok bol úspešne zrealizovaný. Vytvorili sme vývojové prostredie, ktoré zjednodušuje prácu a vývoj v lokálnom prostredí
 a prostredníctvom ktorého je možné: vytvárať projekty,  synchronizovať ich s gridom a spúšťať lokálne a tiež na gride.
 V nami vyvinutom vývojovom prostredí sme vytvorili modul pre paralelné genetické algoritmy,
@@ -18,9 +18,13 @@ dĺžky 500 znakov a viac ako 90\% úspešnosť pri textoch dlhších ako 1000 z
 Schémy z prvého experimentu sme použili v nasledujúcom experimente s PGA.
 Na týchto schémach sme skúmali vplyv štyroch rôznych topológií a troch migračných časov, a ich úspešnosť pri lúštení
 monoalfabetickej substitúcie.
-TODO: vysledky
+Expriment trval približne dva aj pól týždna.
+Podľa experimentov sme zisli, že rôzne topológie nemajú takmer žiadny vplyv na zvýšenie úspešnosti riešenia monoalfabetickej substitúcie.
+Na úspešnosť riešenia vplýva najmä veľkosť populácie a mierne aj veľkosť topológie.     
+Úspešnosť riešenia pomocou PGA dosahovala pre texty dĺzky 500 a viac znakov takmer 100\%, ale lepšie výsledky boli dosiahnuté aj pri kratších textoch.
 
-
+Počas vytvárania tejto práce sme spolupracovali s Bc. Petrom Javorkom, ktorému sme ingtegrovali jeho riešenie na grid pomocou nami vytvoreného softvéru.
+Na experimenty sme spotrebovali takmer 70000 procesorových hodín, čo by nás stálo približne 700 eur.
 %% Zaver
 %%
 %% Spolupráca s Petrom Javorkom
