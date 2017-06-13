@@ -1,0 +1,39 @@
+1)
+- predstavenie sa
+
+2)
+- rozpravanie o gride
+- porovnanie s prvym top500.
+- TFlop 10^12 istrukcii za sec
+
+3)
+Vramci STU sa nachadza spominany grid, ktory moze sluzit ako pomocka pre pracu vyskumnikov a studentov. Momentalne sa nom riesi niekolko projektov a je vyuzity vacsinou do 50% svojho vykonu. Tento projekt je financovany z prostredkov Europskej unie a vsetok vypoctovy cas na nom straveny je zadarmo.
+
+4)
+Za zimny semester bolo mojou ulohou analyzovat problem paralelnych vypoctov spojenych s historickymi/klasikymi siframi. K tomu patrilo aj zoznamenie sa s gridovym prostredim a nastudovanie si tutorialov zo stranky gridu. Grid bezi na Linuxe a pripajam sa k nemu pomocou VPN a SSH.
+
+Dalej som si musel nastudovat paralelne problemy. Ako ich identifikovat, ako ich riesit, ake technologie sa v sucasnosti pouzivaju. 
+
+Vykonal som aj prvy experiment s bruteforce utokom, ktory generoval hesla.
+
+5)
+Paralelizmus alebo paralelne pocitanie mozeme definovat ako subezne vykonavanie viacerych uloh. Vela problemov moze byt rozdelenych na mensie casti a tie potom mozu byt vykonavane nezavisle na sebe. Paralelizmus mozeme potom dalej delit na sofverovy, hardverovy, alebo aj ine.
+
+S paralalezmon uzko suvisi aj sychronizacia jednotlivych uloh. Ulohy mozu byt sychronizovane pomocou mutexov, semaforov, barier, alebo synchronou komukaciou.
+
+Existuju dva druhy komunikacie. Synchronna (blokujuca) a asynchronna (neblokujuca). Procesy/ulohy medzi sebou nemusia komunikovat. potom sa jedna o cisto paralelny vypocet, ale vo vacsine pripadov medzi sebou potrebuju komunikovat a vymienat si data. Treba zobrat do uvahy ze komunikacia ma svoju cenu v podobe oneskorenia a priepustnosti
+
+K navrhu paralelnych programov patri ich studium a pochopenie, ale aj problemy spojene s rozdelovanim uloh (load-balancing), synchronizacia, debugovanie, analyza vykonu samotmeho programu (perfomance analysis, tunning).
+
+6)
+Vysledkom mojej prace by mal byt framework, pomocka pre programatorov/vyskumnikov. Bude naprogramovany pomocou C++ a OpenMPI. Bude poskytovat skript pre generovanie projektov a ich spustanie, kvoli zjednoduseniu prace s gridom. A taktiez bude poskytovat zakladne stavebne bloky pre tvorbu paralelnych programov. 
+
+Prikladom je Runner, co je jednoduchy interfejs, ktory staci implementovat a moze sluzit napriklad na bruteforce.
+
+Communicator zase zabezpecuje komunikaciu medzi jednotlivymi ulohami.
+
+7)
+Plan na letny semester je dokoncenie frameworku. S jeho pomocou implementovat slovnikovy utok a experiment s paralelnymi genetickymi algoritmami.
+
+8)
+Dakujem za pozornost
